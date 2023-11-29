@@ -4,28 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.gls.gemini</groupId>
-        <artifactId>gemini-parent</artifactId>
+        <groupId>com.gls.gemini.starter</groupId>
+        <artifactId>gemini-starter</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gls.gemini.starter</groupId>
-    <artifactId>gemini-starter</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>core</module>
-        <module>json</module>
-        <module>redis</module>
-    </modules>
+    <groupId>com.gls.gemini.starter.redis</groupId>
+    <artifactId>gemini-starter-redis</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>com.gls.gemini.starter.json</groupId>
+            <artifactId>gemini-starter-json</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 

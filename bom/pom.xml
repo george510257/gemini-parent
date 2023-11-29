@@ -46,6 +46,16 @@
                 <artifactId>gemini-starter-core</artifactId>
                 <version>${gemini-starter.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.gls.gemini.starter.json</groupId>
+                <artifactId>gemini-starter-json</artifactId>
+                <version>${gemini-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gls.gemini.starter.redis</groupId>
+                <artifactId>gemini-starter-redis</artifactId>
+                <version>${gemini-starter.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
