@@ -35,6 +35,10 @@
         <spring-shell.version>3.1.6</spring-shell.version>
         <timefold-solver.version>1.3.0</timefold-solver.version>
         <vaadin.version>24.2.4</vaadin.version>
+
+        <gemini-bom.version>1.0-SNAPSHOT</gemini-bom.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <hutool.version>5.8.23</hutool.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -122,12 +126,23 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <dependency>
                 <groupId>com.gls.gemini</groupId>
                 <artifactId>gemini-bom</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>${gemini-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
