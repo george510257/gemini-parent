@@ -14,11 +14,19 @@ import java.time.ZoneId;
 import java.util.Locale;
 import java.util.TimeZone;
 
+/**
+ * Jackson 配置
+ */
 @AutoConfiguration
 @ConditionalOnClass(ObjectMapper.class)
 @AutoConfigureBefore(JacksonAutoConfiguration.class)
 public class JacksonConfig {
 
+    /**
+     * Jackson 全局配置
+     *
+     * @return 自定义配置类
+     */
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizer() {
         return builder -> {
