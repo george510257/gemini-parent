@@ -11,6 +11,10 @@
 
     <groupId>com.gls.gemini.sdk</groupId>
     <artifactId>gemini-sdk</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>core</module>
+    </modules>
 
 
 </project>

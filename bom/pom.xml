@@ -8,5 +8,46 @@
     <artifactId>gemini-bom</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>pom</packaging>
+
+    <properties>
+        <gemini-boot.version>0.0.1-SNAPSHOT</gemini-boot.version>
+        <gemini-common.version>0.0.1-SNAPSHOT</gemini-common.version>
+        <gemini-sdk.version>0.0.1-SNAPSHOT</gemini-sdk.version>
+        <gemini-starter.version>0.0.1-SNAPSHOT</gemini-starter.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- gemini-boot -->
+            <dependency>
+                <groupId>com.gls.gemini.boot.core</groupId>
+                <artifactId>gemini-boot-core</artifactId>
+                <version>${gemini-boot.version}</version>
+            </dependency>
+
+            <!-- gemini-common -->
+            <dependency>
+                <groupId>com.gls.gemini.common.core</groupId>
+                <artifactId>gemini-common-core</artifactId>
+                <version>${gemini-common.version}</version>
+            </dependency>
+
+            <!-- gemini-sdk -->
+            <dependency>
+                <groupId>com.gls.gemini.sdk.core</groupId>
+                <artifactId>gemini-sdk-core</artifactId>
+                <version>${gemini-sdk.version}</version>
+            </dependency>
+
+            <!-- gemini-starter -->
+            <dependency>
+                <groupId>com.gls.gemini.starter.core</groupId>
+                <artifactId>gemini-starter-core</artifactId>
+                <version>${gemini-starter.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
 </project>

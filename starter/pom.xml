@@ -11,6 +11,10 @@
 
     <groupId>com.gls.gemini.starter</groupId>
     <artifactId>gemini-starter</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>core</module>
+    </modules>
 
 
 </project>

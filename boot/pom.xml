@@ -11,6 +11,10 @@
 
     <groupId>com.gls.gemini.boot</groupId>
     <artifactId>gemini-boot</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>core</module>
+    </modules>
 
 
 </project>
