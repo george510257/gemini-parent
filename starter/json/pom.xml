@@ -12,5 +12,14 @@
     <groupId>com.gls.gemini.starter.json</groupId>
     <artifactId>gemini-starter-json</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+    </dependencies>
 </project>
