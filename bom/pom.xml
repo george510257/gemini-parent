@@ -47,8 +47,18 @@
                 <version>${gemini-starter.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.gls.gemini.starter.dynamic.datasource</groupId>
+                <artifactId>gemini-starter-dynamic-datasource</artifactId>
+                <version>${gemini-starter.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.gls.gemini.starter.json</groupId>
                 <artifactId>gemini-starter-json</artifactId>
+                <version>${gemini-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gls.gemini.starter.mybatis</groupId>
+                <artifactId>gemini-starter-mybatis</artifactId>
                 <version>${gemini-starter.version}</version>
             </dependency>
             <dependency>

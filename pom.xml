@@ -39,6 +39,8 @@
         <gemini-bom.version>1.0-SNAPSHOT</gemini-bom.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <hutool.version>5.8.23</hutool.version>
+        <dynamic-datasource.version>4.2.0</dynamic-datasource.version>
+        <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -143,6 +145,16 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+                <version>${dynamic-datasource.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

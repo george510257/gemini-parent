@@ -12,4 +12,8 @@ public interface CommonConstants {
      * CPU核心数
      */
     Integer CPU_NUM = Runtime.getRuntime().availableProcessors();
+    /**
+     * 默认数据源名称
+     */
+    String DEFAULT_DATASOURCE_NAME = "master";
 }

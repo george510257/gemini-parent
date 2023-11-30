@@ -14,7 +14,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
+        <module>dynamic-datasource</module>
         <module>json</module>
+        <module>mybatis</module>
         <module>redis</module>
         <module>web</module>
     </modules>
