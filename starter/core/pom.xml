@@ -11,6 +11,12 @@
 
     <groupId>com.gls.gemini.starter.core</groupId>
     <artifactId>gemini-starter-core</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.gls.gemini.common.core</groupId>
+            <artifactId>gemini-common-core</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>
