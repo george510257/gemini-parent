@@ -56,6 +56,11 @@
                 <artifactId>gemini-starter-redis</artifactId>
                 <version>${gemini-starter.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.gls.gemini.starter.web</groupId>
+                <artifactId>gemini-starter-web</artifactId>
+                <version>${gemini-starter.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

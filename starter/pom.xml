@@ -16,6 +16,7 @@
         <module>core</module>
         <module>json</module>
         <module>redis</module>
+        <module>web</module>
     </modules>
 
     <dependencies>
