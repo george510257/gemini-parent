@@ -1,6 +1,6 @@
 package com.gls.gemini.starter.core.config;
 
-import com.gls.gemini.starter.core.properties.ExecutorThreadPoolProperties;
+import com.gls.gemini.starter.core.properties.ThreadPoolProperties;
 import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,7 @@ public class ExecutorConfig implements AsyncConfigurer {
      * 线程池配置
      */
     @Resource
-    private ExecutorThreadPoolProperties executorThreadPoolProperties;
+    private ThreadPoolProperties threadPoolProperties;
 
     /**
      * 获取异步线程池
@@ -31,15 +31,15 @@ public class ExecutorConfig implements AsyncConfigurer {
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         // 核心线程大小 默认区 CPU 数量
-        taskExecutor.setCorePoolSize(executorThreadPoolProperties.getCorePoolSize());
+        taskExecutor.setCorePoolSize(threadPoolProperties.getCorePoolSize());
         // 最大线程大小 默认区 CPU * 2 数量
-        taskExecutor.setMaxPoolSize(executorThreadPoolProperties.getMaxPoolSize());
+        taskExecutor.setMaxPoolSize(threadPoolProperties.getMaxPoolSize());
         // 队列最大容量
-        taskExecutor.setQueueCapacity(executorThreadPoolProperties.getQueueCapacity());
+        taskExecutor.setQueueCapacity(threadPoolProperties.getQueueCapacity());
         taskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         taskExecutor.setWaitForTasksToCompleteOnShutdown(true);
-        taskExecutor.setAwaitTerminationSeconds(executorThreadPoolProperties.getAwaitTerminationSeconds());
-        taskExecutor.setThreadNamePrefix(executorThreadPoolProperties.getThreadNamePrefix());
+        taskExecutor.setAwaitTerminationSeconds(threadPoolProperties.getAwaitTerminationSeconds());
+        taskExecutor.setThreadNamePrefix(threadPoolProperties.getThreadNamePrefix());
         taskExecutor.initialize();
         return taskExecutor;
     }

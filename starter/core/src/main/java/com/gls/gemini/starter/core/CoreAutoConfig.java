@@ -1,6 +1,7 @@
 package com.gls.gemini.starter.core;
 
-import com.gls.gemini.starter.core.properties.ExecutorThreadPoolProperties;
+import com.gls.gemini.starter.core.properties.SnowflakeProperties;
+import com.gls.gemini.starter.core.properties.ThreadPoolProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan
-@EnableConfigurationProperties({ExecutorThreadPoolProperties.class})
+@EnableConfigurationProperties({SnowflakeProperties.class, ThreadPoolProperties.class})
 public class CoreAutoConfig {
 }
