@@ -12,5 +12,14 @@
     <groupId>com.gls.gemini.boot.core</groupId>
     <artifactId>gemini-boot-core</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.gls.gemini.sdk.core</groupId>
+            <artifactId>gemini-sdk-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gls.gemini.starter.web</groupId>
+            <artifactId>gemini-starter-web</artifactId>
+        </dependency>
+    </dependencies>
 </project>
