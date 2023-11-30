@@ -11,6 +11,11 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 @Configuration
 public class CoreConfig {
 
+    /**
+     * 国际化配置
+     *
+     * @return MessageSource
+     */
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
