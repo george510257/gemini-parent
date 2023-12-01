@@ -21,6 +21,11 @@
         <dependencies>
             <!-- gemini-boot -->
             <dependency>
+                <groupId>com.gls.gemini.boot.cloud</groupId>
+                <artifactId>gemini-boot-cloud</artifactId>
+                <version>${gemini-boot.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.gls.gemini.boot.core</groupId>
                 <artifactId>gemini-boot-core</artifactId>
                 <version>${gemini-boot.version}</version>
@@ -49,6 +54,11 @@
             <dependency>
                 <groupId>com.gls.gemini.starter.dynamic.datasource</groupId>
                 <artifactId>gemini-starter-dynamic-datasource</artifactId>
+                <version>${gemini-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gls.gemini.starter.jpa</groupId>
+                <artifactId>gemini-starter-jpa</artifactId>
                 <version>${gemini-starter.version}</version>
             </dependency>
             <dependency>

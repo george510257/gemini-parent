@@ -15,6 +15,7 @@
     <modules>
         <module>core</module>
         <module>dynamic-datasource</module>
+        <module>jpa</module>
         <module>json</module>
         <module>mybatis</module>
         <module>redis</module>
