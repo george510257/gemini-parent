@@ -1,6 +1,5 @@
 package com.gls.gemini.starter.dynamic.datasource.properties;
 
-
 import com.gls.gemini.common.core.constant.BaseProperties;
 import com.gls.gemini.common.core.constant.CommonConstants;
 import lombok.Data;

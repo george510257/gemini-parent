@@ -40,7 +40,7 @@
 
         <gemini-bom.version>1.0-SNAPSHOT</gemini-bom.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <hutool.version>5.8.23</hutool.version>
+        <hutool.version>5.8.24</hutool.version>
         <dynamic-datasource.version>4.2.0</dynamic-datasource.version>
         <mybatis-plus.version>3.5.4.1</mybatis-plus.version>
     </properties>

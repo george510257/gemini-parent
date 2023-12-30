@@ -6,7 +6,7 @@
 
 ## 项目结构
 
-``` lua
+``` 
 
 gemini-parent
 ├── gemini-bom -- 依赖管理
