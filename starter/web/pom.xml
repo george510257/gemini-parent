@@ -28,8 +28,8 @@
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>com.gls.gemini.common.bean</groupId>
+            <artifactId>gemini-common-bean</artifactId>
         </dependency>
     </dependencies>
 

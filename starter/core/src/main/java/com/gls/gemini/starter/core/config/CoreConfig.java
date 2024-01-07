@@ -39,7 +39,7 @@ public class CoreConfig {
      */
     @Bean
     public Snowflake snowflake(SnowflakeProperties snowflakeProperties) {
-        if (snowflakeProperties.isEnable()) {
+        if (snowflakeProperties.isEnabled()) {
             long dataCenterId = IdUtil.getDataCenterId(snowflakeProperties.getMaxDataCenterId());
             long workerId = IdUtil.getWorkerId(dataCenterId, snowflakeProperties.getMaxWorkerId());
             return IdUtil.getSnowflake(workerId, dataCenterId);

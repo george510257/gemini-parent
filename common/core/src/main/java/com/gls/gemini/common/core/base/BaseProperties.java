@@ -1,4 +1,4 @@
-package com.gls.gemini.common.core.constant;
+package com.gls.gemini.common.core.base;
 
 import lombok.Data;
 
@@ -14,7 +14,7 @@ public class BaseProperties implements Serializable {
     /**
      * 是否生效
      */
-    private boolean enable = true;
+    private boolean enabled = true;
     /**
      * 扩展属性
      */

@@ -37,6 +37,11 @@
                 <artifactId>gemini-common-core</artifactId>
                 <version>${gemini-common.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.gls.gemini.common.bean</groupId>
+                <artifactId>gemini-common-bean</artifactId>
+                <version>${gemini-common.version}</version>
+            </dependency>
 
             <!-- gemini-sdk -->
             <dependency>
