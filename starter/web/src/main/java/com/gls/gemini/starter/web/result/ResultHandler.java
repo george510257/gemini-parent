@@ -1,6 +1,7 @@
 package com.gls.gemini.starter.web.result;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.exceptions.ExceptionUtil;
 import com.gls.gemini.common.bean.domain.Result;
 import com.gls.gemini.common.bean.enums.ClientTypeEnums;
 import com.gls.gemini.common.bean.enums.ResultEnums;
@@ -8,10 +9,13 @@ import com.gls.gemini.common.core.constant.CommonConstants;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
@@ -83,5 +87,18 @@ public class ResultHandler implements ResponseBodyAdvice<Object> {
             return body;
         }
         return ResultEnums.SUCCESS.getResult(body);
+    }
+
+    /**
+     * 返回异常处理
+     */
+    @ExceptionHandler(ResultException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Result<String> resultExceptionHandler(ResultException e) {
+        log.error("ResultException: {}", e.getMessage(), e);
+        return ResultEnums.FAILED
+                .getResult(ExceptionUtil.stacktraceToString(e))
+                .setCode(e.getCode())
+                .setMessage(e.getMessage());
     }
 }
