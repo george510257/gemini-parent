@@ -5,16 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.gls.gemini</groupId>
-        <artifactId>gemini-parent</artifactId>
+        <artifactId>gemini-project</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gls.gemini.boot</groupId>
-    <artifactId>gemini-boot</artifactId>
+    <groupId>com.gls.gemini.sdk</groupId>
+    <artifactId>gemini-sdk</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
-        <module>cloud</module>
     </modules>
 
 

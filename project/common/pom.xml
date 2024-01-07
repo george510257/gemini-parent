@@ -5,32 +5,30 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.gls.gemini</groupId>
-        <artifactId>gemini-parent</artifactId>
+        <artifactId>gemini-project</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.gls.gemini.starter</groupId>
-    <artifactId>gemini-starter</artifactId>
+    <groupId>com.gls.gemini.common</groupId>
+    <artifactId>gemini-common</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>core</module>
-        <module>dynamic-datasource</module>
-        <module>jpa</module>
-        <module>json</module>
-        <module>mybatis</module>
-        <module>redis</module>
-        <module>web</module>
+        <module>bean</module>
     </modules>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
     </dependencies>
-
 </project>
