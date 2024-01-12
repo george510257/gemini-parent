@@ -13,7 +13,7 @@
     <artifactId>gemini-sdk</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>core</module>
+        <module>gemini-sdk-core</module>
     </modules>
 
 

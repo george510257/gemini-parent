@@ -13,8 +13,8 @@
     <artifactId>gemini-boot</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>core</module>
-        <module>cloud</module>
+        <module>gemini-boot-core</module>
+        <module>gemini-boot-cloud</module>
     </modules>
 
 

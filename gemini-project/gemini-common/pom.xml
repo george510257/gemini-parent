@@ -13,8 +13,8 @@
     <artifactId>gemini-common</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>core</module>
-        <module>bean</module>
+        <module>gemini-common-core</module>
+        <module>gemini-common-bean</module>
     </modules>
 
     <dependencies>

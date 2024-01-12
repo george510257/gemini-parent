@@ -13,13 +13,13 @@
     <artifactId>gemini-starter</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>core</module>
-        <module>dynamic-datasource</module>
-        <module>jpa</module>
-        <module>json</module>
-        <module>mybatis</module>
-        <module>redis</module>
-        <module>web</module>
+        <module>gemini-starter-core</module>
+        <module>gemini-starter-dynamic-datasource</module>
+        <module>gemini-starter-jpa</module>
+        <module>gemini-starter-json</module>
+        <module>gemini-starter-mybatis</module>
+        <module>gemini-starter-redis</module>
+        <module>gemini-starter-web</module>
     </modules>
 
     <dependencies>
