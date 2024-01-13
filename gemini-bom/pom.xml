@@ -6,17 +6,10 @@
     <parent>
         <groupId>com.gls.gemini</groupId>
         <artifactId>gemini-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <artifactId>gemini-bom</artifactId>
     <packaging>pom</packaging>
-
-    <properties>
-        <gemini-boot.version>0.0.1-SNAPSHOT</gemini-boot.version>
-        <gemini-common.version>0.0.1-SNAPSHOT</gemini-common.version>
-        <gemini-sdk.version>0.0.1-SNAPSHOT</gemini-sdk.version>
-        <gemini-starter.version>0.0.1-SNAPSHOT</gemini-starter.version>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -24,68 +17,68 @@
             <dependency>
                 <groupId>com.gls.gemini.boot.cloud</groupId>
                 <artifactId>gemini-boot-cloud</artifactId>
-                <version>${gemini-boot.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.gls.gemini.boot.core</groupId>
                 <artifactId>gemini-boot-core</artifactId>
-                <version>${gemini-boot.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <!-- gemini-common -->
             <dependency>
                 <groupId>com.gls.gemini.common.core</groupId>
                 <artifactId>gemini-common-core</artifactId>
-                <version>${gemini-common.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.gls.gemini.common.bean</groupId>
                 <artifactId>gemini-common-bean</artifactId>
-                <version>${gemini-common.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <!-- gemini-sdk -->
             <dependency>
                 <groupId>com.gls.gemini.sdk.core</groupId>
                 <artifactId>gemini-sdk-core</artifactId>
-                <version>${gemini-sdk.version}</version>
+                <version>${revision}</version>
             </dependency>
 
             <!-- gemini-starter -->
             <dependency>
                 <groupId>com.gls.gemini.starter.core</groupId>
                 <artifactId>gemini-starter-core</artifactId>
-                <version>${gemini-starter.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.gls.gemini.starter.dynamic.datasource</groupId>
                 <artifactId>gemini-starter-dynamic-datasource</artifactId>
-                <version>${gemini-starter.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.gls.gemini.starter.jpa</groupId>
                 <artifactId>gemini-starter-jpa</artifactId>
-                <version>${gemini-starter.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.gls.gemini.starter.json</groupId>
                 <artifactId>gemini-starter-json</artifactId>
-                <version>${gemini-starter.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.gls.gemini.starter.mybatis</groupId>
                 <artifactId>gemini-starter-mybatis</artifactId>
-                <version>${gemini-starter.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.gls.gemini.starter.redis</groupId>
                 <artifactId>gemini-starter-redis</artifactId>
-                <version>${gemini-starter.version}</version>
+                <version>${revision}</version>
             </dependency>
             <dependency>
                 <groupId>com.gls.gemini.starter.web</groupId>
                 <artifactId>gemini-starter-web</artifactId>
-                <version>${gemini-starter.version}</version>
+                <version>${revision}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.gls.gemini</groupId>
     <artifactId>gemini-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>gemini-parent</name>
     <description>gemini-parent</description>
@@ -20,6 +20,7 @@
     </modules>
     <properties>
         <java.version>17</java.version>
+        <revision>0.0.1-SNAPSHOT</revision>
         <hilla.version>2.1.9</hilla.version>
         <sentry.version>6.28.0</sentry.version>
         <solace-spring-cloud.version>3.0.0</solace-spring-cloud.version>
