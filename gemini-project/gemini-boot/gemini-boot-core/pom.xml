@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.gls.gemini.boot</groupId>
         <artifactId>gemini-boot</artifactId>
-        <version>${revision}</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.gls.gemini.boot.core</groupId>
