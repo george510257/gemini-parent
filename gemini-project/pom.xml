@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.gls.gemini</groupId>
         <artifactId>gemini-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>gemini-project</artifactId>
@@ -24,7 +24,7 @@
             <dependency>
                 <groupId>com.gls.gemini</groupId>
                 <artifactId>gemini-bom</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${revision}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
