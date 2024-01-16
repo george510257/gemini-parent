@@ -9,6 +9,7 @@ import java.io.Serializable;
  * 返回结果
  *
  * @param <T> 返回数据类型
+ * @author george
  */
 @Data
 @Accessors(chain = true)

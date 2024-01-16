@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * 客户端类型枚举
+ *
+ * @author george
  */
 @Getter
 @RequiredArgsConstructor
@@ -15,31 +17,31 @@ public enum ClientTypeEnums implements BaseEnums<ClientTypeEnums> {
      */
     UNKNOWN(0, ""),
     /**
-     * PC
+     * PC端
      */
     PC(1, "PC"),
     /**
-     * H5
+     * H5(移动端)
      */
     H5(2, "H5"),
     /**
-     * IOS
+     * IOS(移动端)
      */
     IOS(3, "IOS"),
     /**
-     * ANDROID
+     * ANDROID(移动端)
      */
     ANDROID(4, "ANDROID"),
     /**
-     * 微信小程序
+     * 微信小程序 (微信小程序)
      */
     WECHAT_MINI_PROGRAM(5, "WECHAT_MINI_PROGRAM"),
     /**
-     * 飞书小程序
+     * 飞书小程序 (飞书小程序)
      */
     FEISHU_MINI_PROGRAM(6, "FEISHU_MINI_PROGRAM"),
     /**
-     * 钉钉小程序
+     * 钉钉小程序 (钉钉小程序)
      */
     DINGDING_MINI_PROGRAM(7, "DINGDING_MINI_PROGRAM"),
     /**

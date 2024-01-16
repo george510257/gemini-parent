@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * 返回结果枚举
+ *
+ * @author george
  */
 @Getter
 @RequiredArgsConstructor
