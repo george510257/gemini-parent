@@ -27,7 +27,7 @@ public class CommonModule extends SimpleModule {
         this.addSerializer(LocalDate.class, new LocalDateSerializer(DatePattern.NORM_DATE_FORMATTER));
         // HH:mm:ss
         this.addSerializer(LocalTime.class, new LocalTimeSerializer(DatePattern.NORM_TIME_FORMATTER));
-        // Long 类型序列化
+        // Long 类型转换为 String 类型
         this.addSerializer(Long.class, ToStringSerializer.instance);
 
         // ======================= 时间反序列化规则 ==============================

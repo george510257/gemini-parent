@@ -1,8 +1,9 @@
 package com.gls.gemini.starter.json.config;
 
-import cn.hutool.core.date.DatePattern;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gls.gemini.starter.json.support.CommonModule;
+import com.gls.gemini.starter.json.support.DefaultDateFormat;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -30,10 +31,18 @@ public class JacksonConfig {
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizer() {
         return builder -> {
+            // 设置全局地区
             builder.locale(Locale.CHINA);
+            // 设置全局时区
             builder.timeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
-            builder.simpleDateFormat(DatePattern.NORM_DATETIME_PATTERN);
+            // 设置全局日期格式
+            builder.dateFormat(new DefaultDateFormat());
+            // 设置全局序列化模块
             builder.modules(new CommonModule());
+            // 反序列化时忽略未知属性
+            builder.failOnUnknownProperties(false);
+            // 序列化时忽略值为 null 的属性
+            builder.serializationInclusion(JsonInclude.Include.ALWAYS);
         };
     }
 }
