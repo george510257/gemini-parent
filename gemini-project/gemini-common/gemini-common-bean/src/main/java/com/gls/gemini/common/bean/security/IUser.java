@@ -1,4 +1,4 @@
-package com.gls.gemini.common.bean.user;
+package com.gls.gemini.common.bean.security;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.TimeZone;
 /**
  * 用户信息
  */
-public interface IUser extends Serializable {
+public interface IUser<R extends IRole<R>, P extends IPermission<P>, O extends IOrganization<O>> extends Serializable {
     /**
      * 获取id
      *
@@ -80,23 +80,37 @@ public interface IUser extends Serializable {
     TimeZone getTimeZone();
 
     /**
+     * 获取当前角色
+     *
+     * @return 当前角色
+     */
+    R getRole();
+
+    /**
+     * 获取当前组织
+     *
+     * @return 当前组织
+     */
+    O getOrganization();
+
+    /**
      * 获取用户角色列表
      *
      * @return 角色列表
      */
-    List<IRole> getRoles();
+    List<R> getRoles();
 
     /**
      * 获取用户权限列表
      *
      * @return 权限列表
      */
-    List<IPermission> getPermissions();
+    List<P> getPermissions();
 
     /**
      * 获取组织机构列表
      *
      * @return 组织机构列表
      */
-    List<IOrganization> getOrganizations();
+    List<O> getOrganizations();
 }

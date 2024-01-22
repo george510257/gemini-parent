@@ -1,6 +1,6 @@
-package com.gls.gemini.common.bean.user.impl;
+package com.gls.gemini.common.bean.security.impl;
 
-import com.gls.gemini.common.bean.user.IUser;
+import com.gls.gemini.common.bean.security.IUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -12,7 +12,7 @@ import java.util.TimeZone;
 @Data
 @Accessors(chain = true)
 @Schema(title = "用户信息", description = "用户信息")
-public class DefaultUser implements IUser {
+public class DefaultUser implements IUser<DefaultRole, DefaultPermission, DefaultOrganization> {
 
     @Schema(title = "用户ID", description = "用户ID")
     private Long id;
@@ -34,6 +34,12 @@ public class DefaultUser implements IUser {
     private Locale locale;
     @Schema(title = "时区", description = "时区")
     private TimeZone timeZone;
+
+    @Schema(title = "当前角色", description = "当前角色")
+    private DefaultRole role;
+    @Schema(title = "当前组织", description = "当前组织")
+    private DefaultOrganization organization;
+
     @Schema(title = "角色列表", description = "角色列表")
     private List<DefaultRole> roles;
     @Schema(title = "权限列表", description = "权限列表")
