@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ConfigurationProperties(prefix = CommonConstants.PROPERTIES_PREFIX_BASE + ".dynamic.datasource.provider")
+@ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".dynamic.datasource.provider")
 public class DataSourceProviderProperties extends BaseProperties {
 
     /**

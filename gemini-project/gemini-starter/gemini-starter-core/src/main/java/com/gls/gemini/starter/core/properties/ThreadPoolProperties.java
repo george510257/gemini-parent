@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ConfigurationProperties(prefix = CommonConstants.PROPERTIES_PREFIX_BASE + ".thread.pool")
+@ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".thread.pool")
 public class ThreadPoolProperties extends BaseProperties {
 
     /**

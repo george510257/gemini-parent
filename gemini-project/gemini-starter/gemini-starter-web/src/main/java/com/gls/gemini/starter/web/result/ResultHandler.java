@@ -3,9 +3,9 @@ package com.gls.gemini.starter.web.result;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import com.gls.gemini.common.bean.domain.Result;
-import com.gls.gemini.common.bean.enums.ClientTypeEnums;
 import com.gls.gemini.common.bean.enums.ResultEnums;
-import com.gls.gemini.common.core.constant.CommonConstants;
+import com.gls.gemini.common.core.constant.HeaderConstants;
+import com.gls.gemini.common.core.enums.ClientTypeEnums;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -74,7 +74,7 @@ public class ResultHandler implements ResponseBodyAdvice<Object> {
         log.info("resultHandler beforeBodyWrite");
 
         // 判断是否时feign调用
-        if (Optional.ofNullable(request.getHeaders().get(CommonConstants.CLIENT_TYPE_PARAM_NAME))
+        if (Optional.ofNullable(request.getHeaders().get(HeaderConstants.CLIENT_TYPE))
                 .filter(list -> list.contains(ClientTypeEnums.FEIGN.getValue())).isPresent()) {
             return body;
         }

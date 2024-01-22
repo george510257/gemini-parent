@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ConfigurationProperties(prefix = CommonConstants.PROPERTIES_PREFIX_BASE + ".snowflake")
+@ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".snowflake")
 public class SnowflakeProperties extends BaseProperties {
     /**
      * 最大的机器节点ID

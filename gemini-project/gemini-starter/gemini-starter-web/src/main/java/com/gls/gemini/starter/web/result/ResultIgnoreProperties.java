@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ConfigurationProperties(prefix = CommonConstants.PROPERTIES_PREFIX_BASE + ".result.ignore")
+@ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".result.ignore")
 public class ResultIgnoreProperties extends BaseProperties {
 
     /**
