@@ -120,7 +120,47 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
      */
     @Override
     default Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        return this.getRoles();
+    }
+
+    /**
+     * 账户是否过期
+     *
+     * @return 是否过期 true:未过期 false:已过期
+     */
+    @Override
+    default boolean isAccountNonExpired() {
+        return true;
+    }
+
+    /**
+     * 账户是否锁定
+     *
+     * @return 是否锁定 true:未锁定 false:已锁定
+     */
+    @Override
+    default boolean isAccountNonLocked() {
+        return true;
+    }
+
+    /**
+     * 密码是否过期
+     *
+     * @return 是否过期 true:未过期 false:已过期
+     */
+    @Override
+    default boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    /**
+     * 是否启用
+     *
+     * @return 是否启用 true:启用 false:禁用
+     */
+    @Override
+    default boolean isEnabled() {
+        return true;
     }
 
     /**

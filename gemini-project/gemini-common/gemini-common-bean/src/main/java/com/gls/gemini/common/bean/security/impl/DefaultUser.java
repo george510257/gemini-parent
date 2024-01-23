@@ -38,15 +38,6 @@ public class DefaultUser extends BaseVo implements IUser<DefaultRole, DefaultPer
     @Schema(title = "时区", description = "时区")
     private TimeZone timeZone;
 
-    @Schema(title = "是否启用", description = "是否启用")
-    private boolean enabled = true;
-    @Schema(title = "账号是否过期", description = "账号是否过期")
-    private boolean accountNonExpired = true;
-    @Schema(title = "账号是否锁定", description = "账号是否锁定")
-    private boolean accountNonLocked = true;
-    @Schema(title = "凭证是否过期", description = "凭证是否过期")
-    private boolean credentialsNonExpired = true;
-
     @Schema(title = "当前角色", description = "当前角色")
     private DefaultRole role;
     @Schema(title = "当前组织", description = "当前组织")

@@ -14,7 +14,7 @@ public interface IRole extends ITreeNode, GrantedAuthority {
      */
     @Override
     default String getAuthority() {
-        return getCode();
+        return this.getCode();
     }
 
 }
