@@ -1,5 +1,7 @@
 package com.gls.gemini.common.bean.security;
 
+import cn.hutool.core.lang.tree.Tree;
+import com.gls.gemini.common.core.tree.TreeUtil;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
@@ -10,7 +12,7 @@ import java.util.TimeZone;
 /**
  * 用户信息
  */
-public interface IUser<R extends IRole<R>, P extends IPermission<P>, O extends IOrganization<O>>
+public interface IUser<R extends IRole, P extends IPermission, O extends IOrganization>
         extends UserDetails, Serializable {
     /**
      * 获取id
@@ -109,4 +111,31 @@ public interface IUser<R extends IRole<R>, P extends IPermission<P>, O extends I
      * @return 组织机构列表
      */
     List<O> getOrganizations();
+
+    /**
+     * 获取角色树
+     *
+     * @return 角色树
+     */
+    default List<Tree<Long>> getRoleTree() {
+        return TreeUtil.buildTree(this.getRoles());
+    }
+
+    /**
+     * 获取权限树
+     *
+     * @return 权限树
+     */
+    default List<Tree<Long>> getPermissionTree() {
+        return TreeUtil.buildTree(this.getPermissions());
+    }
+
+    /**
+     * 获取组织机构树
+     *
+     * @return 组织机构树
+     */
+    default List<Tree<Long>> getOrganizationTree() {
+        return TreeUtil.buildTree(this.getOrganizations());
+    }
 }
