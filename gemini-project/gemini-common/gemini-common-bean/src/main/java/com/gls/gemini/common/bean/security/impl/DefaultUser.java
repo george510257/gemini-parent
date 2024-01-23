@@ -4,7 +4,9 @@ import com.gls.gemini.common.bean.security.IUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -18,6 +20,8 @@ public class DefaultUser implements IUser<DefaultRole, DefaultPermission, Defaul
     private Long id;
     @Schema(title = "用户名", description = "用户名")
     private String username;
+    @Schema(title = "密码", description = "密码")
+    private String password;
     @Schema(title = "手机号", description = "手机号")
     private String mobile;
     @Schema(title = "邮箱", description = "邮箱")
@@ -35,6 +39,15 @@ public class DefaultUser implements IUser<DefaultRole, DefaultPermission, Defaul
     @Schema(title = "时区", description = "时区")
     private TimeZone timeZone;
 
+    @Schema(title = "是否启用", description = "是否启用")
+    private boolean enabled = true;
+    @Schema(title = "账号是否过期", description = "账号是否过期")
+    private boolean accountNonExpired = true;
+    @Schema(title = "账号是否锁定", description = "账号是否锁定")
+    private boolean accountNonLocked = true;
+    @Schema(title = "凭证是否过期", description = "凭证是否过期")
+    private boolean credentialsNonExpired = true;
+
     @Schema(title = "当前角色", description = "当前角色")
     private DefaultRole role;
     @Schema(title = "当前组织", description = "当前组织")
@@ -46,4 +59,9 @@ public class DefaultUser implements IUser<DefaultRole, DefaultPermission, Defaul
     private List<DefaultPermission> permissions;
     @Schema(title = "组织列表", description = "组织列表")
     private List<DefaultOrganization> organizations;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
 }

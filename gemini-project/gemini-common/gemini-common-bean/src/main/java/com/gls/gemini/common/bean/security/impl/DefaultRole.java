@@ -28,4 +28,8 @@ public class DefaultRole implements IRole<DefaultRole> {
     @Schema(title = "权重", description = "权重")
     private Integer weight;
 
+    @Override
+    public String getAuthority() {
+        return this.code;
+    }
 }

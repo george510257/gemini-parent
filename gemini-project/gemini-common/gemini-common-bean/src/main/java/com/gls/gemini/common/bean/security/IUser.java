@@ -1,5 +1,7 @@
 package com.gls.gemini.common.bean.security;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
@@ -8,20 +10,14 @@ import java.util.TimeZone;
 /**
  * 用户信息
  */
-public interface IUser<R extends IRole<R>, P extends IPermission<P>, O extends IOrganization<O>> extends Serializable {
+public interface IUser<R extends IRole<R>, P extends IPermission<P>, O extends IOrganization<O>>
+        extends UserDetails, Serializable {
     /**
      * 获取id
      *
      * @return id
      */
     Long getId();
-
-    /**
-     * 获取用户名
-     *
-     * @return 用户名
-     */
-    String getUsername();
 
     /**
      * 获取手机号
