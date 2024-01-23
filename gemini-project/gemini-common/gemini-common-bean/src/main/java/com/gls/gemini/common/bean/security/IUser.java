@@ -4,7 +4,6 @@ import cn.hutool.core.lang.tree.Tree;
 import com.gls.gemini.common.core.tree.TreeUtil;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -13,7 +12,7 @@ import java.util.TimeZone;
  * 用户信息
  */
 public interface IUser<R extends IRole, P extends IPermission, O extends IOrganization>
-        extends UserDetails, Serializable {
+        extends UserDetails {
     /**
      * 获取id
      *
