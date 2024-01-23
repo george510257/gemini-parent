@@ -1,9 +1,11 @@
 package com.gls.gemini.common.bean.security;
 
 import cn.hutool.core.lang.tree.Tree;
-import com.gls.gemini.common.core.tree.TreeUtil;
+import com.gls.gemini.common.core.support.TreeUtil;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -110,6 +112,16 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
      * @return 组织机构列表
      */
     List<O> getOrganizations();
+
+    /**
+     * 获取角色列表
+     *
+     * @return 角色列表
+     */
+    @Override
+    default Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
 
     /**
      * 获取角色树

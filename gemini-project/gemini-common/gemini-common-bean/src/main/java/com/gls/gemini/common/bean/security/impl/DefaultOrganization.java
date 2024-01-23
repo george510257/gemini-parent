@@ -1,17 +1,18 @@
 package com.gls.gemini.common.bean.security.impl;
 
+import com.gls.gemini.common.bean.domian.BaseVo;
 import com.gls.gemini.common.bean.security.IOrganization;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 @Schema(title = "组织信息", description = "组织信息")
-public class DefaultOrganization implements IOrganization {
+public class DefaultOrganization extends BaseVo implements IOrganization {
 
-    @Schema(title = "组织ID", description = "组织ID")
-    private Long id;
     @Schema(title = "组织名", description = "组织名")
     private String name;
     @Schema(title = "组织编码", description = "组织编码")

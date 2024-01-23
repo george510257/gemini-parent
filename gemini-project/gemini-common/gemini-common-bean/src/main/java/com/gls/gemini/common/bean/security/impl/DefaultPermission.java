@@ -1,17 +1,18 @@
 package com.gls.gemini.common.bean.security.impl;
 
+import com.gls.gemini.common.bean.domian.BaseVo;
 import com.gls.gemini.common.bean.security.IPermission;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 @Schema(title = "权限信息", description = "权限信息")
-public class DefaultPermission implements IPermission {
+public class DefaultPermission extends BaseVo implements IPermission {
 
-    @Schema(title = "权限ID", description = "权限ID")
-    private Long id;
     @Schema(title = "权限名", description = "权限名")
     private String name;
     @Schema(title = "权限编码", description = "权限编码")

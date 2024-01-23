@@ -1,17 +1,18 @@
 package com.gls.gemini.common.bean.security.impl;
 
+import com.gls.gemini.common.bean.domian.BaseVo;
 import com.gls.gemini.common.bean.security.IRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 @Schema(title = "角色信息", description = "角色信息")
-public class DefaultRole implements IRole {
+public class DefaultRole extends BaseVo implements IRole {
 
-    @Schema(title = "角色ID", description = "角色ID")
-    private Long id;
     @Schema(title = "角色名", description = "角色名")
     private String name;
     @Schema(title = "角色编码", description = "角色编码")
@@ -24,9 +25,4 @@ public class DefaultRole implements IRole {
     private Long parentId;
     @Schema(title = "权重", description = "权重")
     private Integer weight;
-
-    @Override
-    public String getAuthority() {
-        return this.code;
-    }
 }

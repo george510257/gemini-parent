@@ -1,23 +1,22 @@
 package com.gls.gemini.common.bean.security.impl;
 
+import com.gls.gemini.common.bean.domian.BaseVo;
 import com.gls.gemini.common.bean.security.IUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 @Data
 @Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
 @Schema(title = "用户信息", description = "用户信息")
-public class DefaultUser implements IUser<DefaultRole, DefaultPermission, DefaultOrganization> {
+public class DefaultUser extends BaseVo implements IUser<DefaultRole, DefaultPermission, DefaultOrganization> {
 
-    @Schema(title = "用户ID", description = "用户ID")
-    private Long id;
     @Schema(title = "用户名", description = "用户名")
     private String username;
     @Schema(title = "密码", description = "密码")
@@ -60,8 +59,4 @@ public class DefaultUser implements IUser<DefaultRole, DefaultPermission, Defaul
     @Schema(title = "组织列表", description = "组织列表")
     private List<DefaultOrganization> organizations;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles;
-    }
 }

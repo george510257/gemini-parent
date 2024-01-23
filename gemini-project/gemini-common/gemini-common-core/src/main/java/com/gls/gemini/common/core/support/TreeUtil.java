@@ -1,5 +1,6 @@
-package com.gls.gemini.common.core.tree;
+package com.gls.gemini.common.core.support;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.tree.Tree;
 import lombok.experimental.UtilityClass;
 
@@ -17,6 +18,7 @@ public class TreeUtil extends cn.hutool.core.lang.tree.TreeUtil {
             treeNode.putExtra("code", object.getCode());
             treeNode.putExtra("description", object.getDescription());
             treeNode.putExtra("type", object.getType());
+            treeNode.putAll(BeanUtil.beanToMap(object));
         });
     }
 }
