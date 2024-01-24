@@ -75,7 +75,7 @@ public class ResultHandler implements ResponseBodyAdvice<Object> {
 
         // 判断是否时feign调用
         if (Optional.ofNullable(request.getHeaders().get(HeaderConstants.CLIENT_TYPE))
-                .filter(list -> list.contains(ClientTypeEnums.FEIGN.getValue())).isPresent()) {
+                .filter(list -> list.contains(ClientTypeEnums.FEIGN.toString())).isPresent()) {
             return body;
         }
         // 判断返回值类型是否为Result

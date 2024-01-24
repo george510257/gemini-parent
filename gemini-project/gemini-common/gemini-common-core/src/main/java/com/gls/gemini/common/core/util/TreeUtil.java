@@ -1,7 +1,8 @@
-package com.gls.gemini.common.core.support;
+package com.gls.gemini.common.core.util;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.tree.Tree;
+import com.gls.gemini.common.core.support.ITreeNode;
 import lombok.experimental.UtilityClass;
 
 import java.util.List;

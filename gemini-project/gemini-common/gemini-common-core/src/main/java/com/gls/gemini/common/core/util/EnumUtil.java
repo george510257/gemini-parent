@@ -1,19 +1,10 @@
-package com.gls.gemini.common.core.base;
+package com.gls.gemini.common.core.util;
 
-public interface BaseEnums<E extends Enum<E> & BaseEnums<E>> {
-    /**
-     * 获取编码
-     *
-     * @return 返回编码
-     */
-    Integer getKey();
+import com.gls.gemini.common.core.support.IEnums;
+import lombok.experimental.UtilityClass;
 
-    /**
-     * 获取名称
-     *
-     * @return 返回名称
-     */
-    String getValue();
+@UtilityClass
+public class EnumUtil {
 
     /**
      * 根据key获取枚举
@@ -22,9 +13,9 @@ public interface BaseEnums<E extends Enum<E> & BaseEnums<E>> {
      * @param clazz 枚举类
      * @return 返回枚举
      */
-    default E getEnumByKey(Integer key, Class<E> clazz) {
+    public <E extends Enum<E> & IEnums> E getEnumByCode(Integer key, Class<E> clazz) {
         for (E e : clazz.getEnumConstants()) {
-            if (key.equals(e.getKey())) {
+            if (key.equals(e.getCode())) {
                 return e;
             }
         }
@@ -38,9 +29,9 @@ public interface BaseEnums<E extends Enum<E> & BaseEnums<E>> {
      * @param clazz 枚举类
      * @return 返回枚举
      */
-    default E getEnumByValue(String value, Class<E> clazz) {
+    public <E extends Enum<E> & IEnums> E getEnumByMessage(String value, Class<E> clazz) {
         for (E e : clazz.getEnumConstants()) {
-            if (value.equals(e.getValue())) {
+            if (value.equals(e.getMessage())) {
                 return e;
             }
         }

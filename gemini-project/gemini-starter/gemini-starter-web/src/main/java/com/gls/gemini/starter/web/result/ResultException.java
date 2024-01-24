@@ -1,6 +1,6 @@
 package com.gls.gemini.starter.web.result;
 
-import com.gls.gemini.common.core.base.BaseEnums;
+import com.gls.gemini.common.core.support.IEnums;
 import lombok.Getter;
 
 @Getter
@@ -34,16 +34,16 @@ public class ResultException extends RuntimeException {
         this.message = message;
     }
 
-    public ResultException(BaseEnums<?> enums) {
-        this(enums.getKey(), enums.getValue());
+    public ResultException(IEnums enums) {
+        this(enums.getCode(), enums.getMessage());
     }
 
-    public ResultException(BaseEnums<?> enums, Throwable cause) {
-        this(enums.getKey(), enums.getValue(), cause);
+    public ResultException(IEnums enums, Throwable cause) {
+        this(enums.getCode(), enums.getMessage(), cause);
     }
 
-    public ResultException(BaseEnums<?> enums, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        this(enums.getKey(), enums.getValue(), cause, enableSuppression, writableStackTrace);
+    public ResultException(IEnums enums, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        this(enums.getCode(), enums.getMessage(), cause, enableSuppression, writableStackTrace);
     }
 
 }

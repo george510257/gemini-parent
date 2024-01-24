@@ -1,6 +1,6 @@
 package com.gls.gemini.common.core.enums;
 
-import com.gls.gemini.common.core.base.BaseEnums;
+import com.gls.gemini.common.core.support.IEnums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum ClientTypeEnums implements BaseEnums<ClientTypeEnums> {
+public enum ClientTypeEnums implements IEnums {
     /**
      * 未知
      */
@@ -56,14 +56,14 @@ public enum ClientTypeEnums implements BaseEnums<ClientTypeEnums> {
     /**
      * 状态码
      */
-    private final Integer key;
+    private final Integer code;
     /**
      * 状态信息
      */
-    private final String value;
+    private final String message;
 
     @Override
     public String toString() {
-        return this.value;
+        return this.message;
     }
 }

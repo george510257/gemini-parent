@@ -1,4 +1,4 @@
-package com.gls.gemini.common.core.base;
+package com.gls.gemini.common.core.constant;
 
 import lombok.Data;
 

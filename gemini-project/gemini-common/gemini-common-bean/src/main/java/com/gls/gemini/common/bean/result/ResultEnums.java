@@ -1,6 +1,6 @@
 package com.gls.gemini.common.bean.result;
 
-import com.gls.gemini.common.core.base.BaseEnums;
+import com.gls.gemini.common.core.support.IEnums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
  */
 @Getter
 @RequiredArgsConstructor
-public enum ResultEnums implements BaseEnums<ResultEnums> {
+public enum ResultEnums implements IEnums {
 
     /**
      * 成功
@@ -29,19 +29,19 @@ public enum ResultEnums implements BaseEnums<ResultEnums> {
     /**
      * 状态码
      */
-    private final Integer key;
+    private final Integer code;
     /**
      * 状态信息
      */
-    private final String value;
+    private final String message;
 
     /**
      * 返回结果
      */
     public Result<Object> getResult() {
         return new Result<>()
-                .setCode(key)
-                .setMessage(value);
+                .setCode(code)
+                .setMessage(message);
     }
 
     /**
@@ -53,8 +53,8 @@ public enum ResultEnums implements BaseEnums<ResultEnums> {
      */
     public <T> Result<T> getResult(T data) {
         return new Result<T>()
-                .setCode(key)
-                .setMessage(value)
+                .setCode(code)
+                .setMessage(message)
                 .setData(data);
     }
 

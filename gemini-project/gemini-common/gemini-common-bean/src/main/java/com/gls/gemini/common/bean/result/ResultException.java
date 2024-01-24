@@ -1,13 +1,13 @@
 package com.gls.gemini.common.bean.result;
 
-import com.gls.gemini.common.core.base.BaseEnums;
+import com.gls.gemini.common.core.support.IEnums;
 import lombok.Getter;
 
 /**
  * 返回结果异常
  */
 @Getter
-public class ResultException extends RuntimeException {
+public class ResultException extends RuntimeException implements IEnums {
 
     /**
      * 异常码
@@ -36,21 +36,21 @@ public class ResultException extends RuntimeException {
         this.message = message;
     }
 
-    public ResultException(BaseEnums<?> enums) {
-        super(enums.getValue());
-        this.code = enums.getKey();
-        this.message = enums.getValue();
+    public ResultException(IEnums enums) {
+        super(enums.getMessage());
+        this.code = enums.getCode();
+        this.message = enums.getMessage();
     }
 
-    public ResultException(BaseEnums<?> enums, Throwable cause) {
-        super(enums.getValue(), cause);
-        this.code = enums.getKey();
-        this.message = enums.getValue();
+    public ResultException(IEnums enums, Throwable cause) {
+        super(enums.getMessage(), cause);
+        this.code = enums.getCode();
+        this.message = enums.getMessage();
     }
 
-    public ResultException(BaseEnums<?> enums, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(enums.getValue(), cause, enableSuppression, writableStackTrace);
-        this.code = enums.getKey();
-        this.message = enums.getValue();
+    public ResultException(IEnums enums, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(enums.getMessage(), cause, enableSuppression, writableStackTrace);
+        this.code = enums.getCode();
+        this.message = enums.getMessage();
     }
 }

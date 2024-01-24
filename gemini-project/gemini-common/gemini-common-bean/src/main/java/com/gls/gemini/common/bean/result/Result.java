@@ -1,5 +1,6 @@
 package com.gls.gemini.common.bean.result;
 
+import com.gls.gemini.common.core.support.IEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @Schema(title = "返回结果", description = "返回结果")
-public class Result<T> implements Serializable {
+public class Result<T> implements IEnums, Serializable {
 
     @Schema(title = "返回码", description = "返回码")
     private Integer code;
