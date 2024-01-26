@@ -1,6 +1,5 @@
-package com.gls.gemini.common.bean.security;
+package com.gls.gemini.common.bean.interfaces;
 
-import com.gls.gemini.common.core.support.ITreeNode;
 import org.springframework.security.core.GrantedAuthority;
 
 /**

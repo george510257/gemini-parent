@@ -10,7 +10,7 @@ import java.util.Map;
  * 基础属性
  */
 @Data
-public class BaseProperties implements Serializable {
+public abstract class BaseProperties implements Serializable {
     /**
      * 是否生效
      */

@@ -1,7 +1,6 @@
-package com.gls.gemini.common.bean.security.impl;
+package com.gls.gemini.common.bean.domain;
 
-import com.gls.gemini.common.bean.domian.BaseVo;
-import com.gls.gemini.common.bean.security.IPermission;
+import com.gls.gemini.common.bean.interfaces.IPermission;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

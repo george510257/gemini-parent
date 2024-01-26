@@ -2,10 +2,11 @@ package com.gls.gemini.starter.web.result;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
-import com.gls.gemini.common.bean.result.Result;
-import com.gls.gemini.common.bean.result.ResultEnums;
+import com.gls.gemini.common.bean.domain.Result;
+import com.gls.gemini.common.bean.enums.ClientTypeEnums;
+import com.gls.gemini.common.bean.enums.ResultEnums;
+import com.gls.gemini.common.bean.exception.ResultException;
 import com.gls.gemini.common.core.constant.HeaderConstants;
-import com.gls.gemini.common.core.enums.ClientTypeEnums;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;

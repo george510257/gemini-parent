@@ -1,13 +1,21 @@
-package com.gls.gemini.starter.web.result;
+package com.gls.gemini.common.bean.exception;
 
-import com.gls.gemini.common.core.support.IEnums;
+import com.gls.gemini.common.bean.interfaces.IEnums;
 import lombok.Getter;
 
+/**
+ * 返回结果异常
+ */
 @Getter
-public class ResultException extends RuntimeException {
+public class ResultException extends RuntimeException implements IEnums {
 
+    /**
+     * 异常码
+     */
     private final Integer code;
-
+    /**
+     * 异常信息
+     */
     private final String message;
 
     public ResultException(Integer code, String message) {
@@ -22,12 +30,6 @@ public class ResultException extends RuntimeException {
         this.message = message;
     }
 
-    public ResultException(Integer code, Throwable cause) {
-        super(cause);
-        this.code = code;
-        this.message = cause.getMessage();
-    }
-
     public ResultException(Integer code, String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
         this.code = code;
@@ -35,15 +37,20 @@ public class ResultException extends RuntimeException {
     }
 
     public ResultException(IEnums enums) {
-        this(enums.getCode(), enums.getMessage());
+        super(enums.getMessage());
+        this.code = enums.getCode();
+        this.message = enums.getMessage();
     }
 
     public ResultException(IEnums enums, Throwable cause) {
-        this(enums.getCode(), enums.getMessage(), cause);
+        super(enums.getMessage(), cause);
+        this.code = enums.getCode();
+        this.message = enums.getMessage();
     }
 
     public ResultException(IEnums enums, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        this(enums.getCode(), enums.getMessage(), cause, enableSuppression, writableStackTrace);
+        super(enums.getMessage(), cause, enableSuppression, writableStackTrace);
+        this.code = enums.getCode();
+        this.message = enums.getMessage();
     }
-
 }

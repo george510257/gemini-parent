@@ -1,6 +1,7 @@
-package com.gls.gemini.common.bean.result;
+package com.gls.gemini.common.bean.enums;
 
-import com.gls.gemini.common.core.support.IEnums;
+import com.gls.gemini.common.bean.domain.Result;
+import com.gls.gemini.common.bean.interfaces.IEnums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

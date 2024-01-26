@@ -1,4 +1,4 @@
-package com.gls.gemini.common.bean.domian;
+package com.gls.gemini.common.bean.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
