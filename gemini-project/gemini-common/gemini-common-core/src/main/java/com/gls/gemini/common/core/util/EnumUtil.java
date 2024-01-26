@@ -1,6 +1,6 @@
-package com.gls.gemini.common.bean.util;
+package com.gls.gemini.common.core.util;
 
-import com.gls.gemini.common.bean.interfaces.IEnums;
+import com.gls.gemini.common.core.interfaces.IEnums;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass

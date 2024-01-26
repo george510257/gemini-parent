@@ -1,6 +1,6 @@
 package com.gls.gemini.common.bean.domain;
 
-import com.gls.gemini.common.bean.interfaces.IUser;
+import com.gls.gemini.common.core.interfaces.IUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

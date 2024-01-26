@@ -1,4 +1,4 @@
-package com.gls.gemini.common.bean.interfaces;
+package com.gls.gemini.common.core.interfaces;
 
 import java.io.Serializable;
 

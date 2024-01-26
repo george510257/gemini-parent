@@ -1,6 +1,6 @@
-package com.gls.gemini.common.bean.exception;
+package com.gls.gemini.common.core.exception;
 
-import com.gls.gemini.common.bean.interfaces.IEnums;
+import com.gls.gemini.common.core.interfaces.IEnums;
 import lombok.Getter;
 
 /**

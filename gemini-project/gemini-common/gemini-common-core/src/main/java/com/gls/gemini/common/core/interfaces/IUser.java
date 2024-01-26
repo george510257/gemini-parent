@@ -1,7 +1,7 @@
-package com.gls.gemini.common.bean.interfaces;
+package com.gls.gemini.common.core.interfaces;
 
 import cn.hutool.core.lang.tree.Tree;
-import com.gls.gemini.common.bean.util.TreeUtil;
+import com.gls.gemini.common.core.util.TreeUtil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

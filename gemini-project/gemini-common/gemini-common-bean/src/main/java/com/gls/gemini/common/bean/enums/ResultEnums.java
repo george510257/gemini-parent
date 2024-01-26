@@ -1,7 +1,7 @@
 package com.gls.gemini.common.bean.enums;
 
 import com.gls.gemini.common.bean.domain.Result;
-import com.gls.gemini.common.bean.interfaces.IEnums;
+import com.gls.gemini.common.core.interfaces.IEnums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -23,9 +23,13 @@ public enum ResultEnums implements IEnums {
      */
     FAILED(500, "失败"),
     /**
+     * 业务异常
+     */
+    BUSINESS_EXCEPTION(5001, "业务异常"),
+    /**
      * 服务器内部错误
      */
-    INTERNAL_SERVER_ERROR(500, "服务器内部错误"),
+    INTERNAL_SERVER_ERROR(5002, "服务器内部错误"),
     ;
     /**
      * 状态码
