@@ -14,7 +14,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>gemini-common-core</module>
-        <module>gemini-common-bean</module>
     </modules>
 
     <dependencies>

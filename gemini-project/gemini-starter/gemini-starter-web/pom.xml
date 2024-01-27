@@ -27,10 +27,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.gls.gemini.common.bean</groupId>
-            <artifactId>gemini-common-bean</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

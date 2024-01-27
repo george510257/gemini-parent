@@ -17,9 +17,5 @@
             <groupId>com.baomidou</groupId>
             <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.gls.gemini.common.core</groupId>
-            <artifactId>gemini-common-core</artifactId>
-        </dependency>
     </dependencies>
 </project>
