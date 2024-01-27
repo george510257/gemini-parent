@@ -2,12 +2,12 @@ package com.gls.gemini.starter.web.result;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
-import com.gls.gemini.common.bean.enums.ClientTypeEnums;
-import com.gls.gemini.common.bean.enums.ResultEnums;
 import com.gls.gemini.common.core.constant.HeaderConstants;
+import com.gls.gemini.common.core.domain.Result;
+import com.gls.gemini.common.core.enums.ClientTypeEnums;
+import com.gls.gemini.common.core.enums.ResultEnums;
 import com.gls.gemini.common.core.exception.BusinessException;
 import com.gls.gemini.common.core.exception.ResultException;
-import com.gls.gemini.common.core.interfaces.IResult;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -81,7 +81,7 @@ public class ResultHandler implements ResponseBodyAdvice<Object> {
             return body;
         }
         // 判断返回值类型是否为Result
-        if (body instanceof IResult) {
+        if (body instanceof Result) {
             return body;
         }
         // 判断返回值类型是否为String
@@ -93,10 +93,13 @@ public class ResultHandler implements ResponseBodyAdvice<Object> {
 
     /**
      * 返回异常处理
+     *
+     * @param e 异常
+     * @return 返回值
      */
     @ExceptionHandler(ResultException.class)
     @ResponseStatus(HttpStatus.OK)
-    public IResult<String> resultExceptionHandler(ResultException e) {
+    public Result<String> resultExceptionHandler(ResultException e) {
         log.error("ResultException: {}", e.getMessage(), e);
         return ResultEnums.FAILED
                 .getResult(ExceptionUtil.stacktraceToString(e))
@@ -104,11 +107,47 @@ public class ResultHandler implements ResponseBodyAdvice<Object> {
                 .setMessage(e.getMessage());
     }
 
+    /**
+     * 业务异常处理
+     *
+     * @param e 异常
+     * @return 返回值
+     */
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.OK)
-    public IResult<String> businessExceptionHandler(BusinessException e) {
+    public Result<String> businessExceptionHandler(BusinessException e) {
         log.error("BusinessException: {}", e.getMessage(), e);
         return ResultEnums.BUSINESS_EXCEPTION
+                .getResult(ExceptionUtil.stacktraceToString(e))
+                .setMessage(e.getMessage());
+    }
+
+    /**
+     * 运行时异常处理
+     *
+     * @param e 异常
+     * @return 返回值
+     */
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Result<String> runtimeExceptionHandler(RuntimeException e) {
+        log.error("RuntimeException: {}", e.getMessage(), e);
+        return ResultEnums.INTERNAL_SERVER_ERROR
+                .getResult(ExceptionUtil.stacktraceToString(e))
+                .setMessage(e.getMessage());
+    }
+
+    /**
+     * 异常处理
+     *
+     * @param e 异常
+     * @return 返回值
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Result<String> exceptionHandler(Exception e) {
+        log.error("Exception: {}", e.getMessage(), e);
+        return ResultEnums.INTERNAL_SERVER_ERROR
                 .getResult(ExceptionUtil.stacktraceToString(e))
                 .setMessage(e.getMessage());
     }

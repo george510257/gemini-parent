@@ -1,4 +1,4 @@
-package com.gls.gemini.common.bean.enums;
+package com.gls.gemini.common.core.enums;
 
 import com.gls.gemini.common.core.interfaces.IEnums;
 import lombok.Getter;

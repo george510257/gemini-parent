@@ -1,5 +1,6 @@
 package com.gls.gemini.common.core.base;
 
+import com.gls.gemini.common.core.domain.PageResult;
 import org.mapstruct.InheritConfiguration;
 
 import java.util.Collection;
@@ -53,6 +54,21 @@ public interface BaseConverter<Source, Target> {
     }
 
     /**
+     * 转换分页 源分页 -> 目标分页
+     *
+     * @param sourcePage 源分页
+     * @return 目标分页
+     */
+    default PageResult<Target> convertPage(PageResult<Source> sourcePage) {
+        return new PageResult<Target>()
+                .setPage(sourcePage.getPage())
+                .setSize(sourcePage.getSize())
+                .setTotalPage(sourcePage.getTotalPage())
+                .setTotal(sourcePage.getTotal())
+                .setRecords(convertList(sourcePage.getRecords()));
+    }
+
+    /**
      * 转换 目标 -> 源
      *
      * @param target 目标
@@ -90,4 +106,18 @@ public interface BaseConverter<Source, Target> {
         return targets.stream().map(this::reverse).collect(Collectors.toSet());
     }
 
+    /**
+     * 转换分页 目标分页 -> 源分页
+     *
+     * @param targetPage 目标分页
+     * @return 源分页
+     */
+    default PageResult<Source> reversePage(PageResult<Target> targetPage) {
+        return new PageResult<Source>()
+                .setPage(targetPage.getPage())
+                .setSize(targetPage.getSize())
+                .setTotalPage(targetPage.getTotalPage())
+                .setTotal(targetPage.getTotal())
+                .setRecords(reverseList(targetPage.getRecords()));
+    }
 }

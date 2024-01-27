@@ -1,4 +1,4 @@
-package com.gls.gemini.common.bean.domain;
+package com.gls.gemini.common.core.base;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @Accessors(chain = true)
 @Schema(title = "基础实体", description = "基础实体")
-public class BaseVo implements Serializable {
+public abstract class BaseVo implements Serializable {
 
     @Schema(title = "主键", description = "主键")
     private Long id;

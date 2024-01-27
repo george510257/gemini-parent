@@ -1,4 +1,4 @@
-package com.gls.gemini.common.bean.domain;
+package com.gls.gemini.common.core.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @Schema(title = "分页查询VO", description = "分页查询VO")
-public class PageQuery implements Serializable {
+public class PageQuery<T> implements Serializable {
 
     @Schema(title = "页码", description = "页码")
     private Integer page;
@@ -22,4 +22,6 @@ public class PageQuery implements Serializable {
     private String sort;
     @Schema(title = "排序方式", description = "排序方式")
     private String order;
+    @Schema(title = "查询参数", description = "查询参数")
+    private T params;
 }

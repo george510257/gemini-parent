@@ -1,4 +1,4 @@
-package com.gls.gemini.common.bean.domain;
+package com.gls.gemini.common.core.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -20,7 +20,7 @@ public class PageResult<T> implements Serializable {
     @Schema(title = "总条数", description = "总条数")
     private Long total;
     @Schema(title = "总页数", description = "总页数")
-    private Integer pages;
+    private Integer totalPage;
     @Schema(title = "数据", description = "数据")
-    private List<T> data = new ArrayList<>();
+    private List<T> records = new ArrayList<>();
 }

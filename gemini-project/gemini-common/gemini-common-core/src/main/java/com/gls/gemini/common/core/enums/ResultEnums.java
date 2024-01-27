@@ -1,6 +1,6 @@
-package com.gls.gemini.common.bean.enums;
+package com.gls.gemini.common.core.enums;
 
-import com.gls.gemini.common.bean.domain.Result;
+import com.gls.gemini.common.core.domain.Result;
 import com.gls.gemini.common.core.interfaces.IEnums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -55,10 +55,8 @@ public enum ResultEnums implements IEnums {
     /**
      * 返回结果
      */
-    public Result<Object> getResult() {
-        return new Result<>()
-                .setCode(code)
-                .setMessage(message);
+    public <T> Result<T> getResult() {
+        return new Result<>(this);
     }
 
     /**
@@ -69,10 +67,7 @@ public enum ResultEnums implements IEnums {
      * @return 返回结果
      */
     public <T> Result<T> getResult(T data) {
-        return new Result<T>()
-                .setCode(code)
-                .setMessage(message)
-                .setData(data);
+        return new Result<>(this, data);
     }
 
 }

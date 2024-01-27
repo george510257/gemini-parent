@@ -1,5 +1,6 @@
-package com.gls.gemini.common.bean.domain;
+package com.gls.gemini.common.core.domain;
 
+import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.interfaces.IOrganization;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
