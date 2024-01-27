@@ -23,6 +23,18 @@ public enum ResultEnums implements IEnums {
      */
     FAILED(500, "失败"),
     /**
+     * 未登录
+     */
+    UNAUTHORIZED(401, "未登录"),
+    /**
+     * 未授权
+     */
+    FORBIDDEN(403, "未授权"),
+    /**
+     * 未找到
+     */
+    NOT_FOUND(404, "未找到"),
+    /**
      * 业务异常
      */
     BUSINESS_EXCEPTION(5001, "业务异常"),

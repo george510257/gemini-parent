@@ -1,6 +1,6 @@
 package com.gls.gemini.starter.web.result;
 
-import com.gls.gemini.common.core.constant.BaseProperties;
+import com.gls.gemini.common.core.base.BaseProperties;
 import com.gls.gemini.common.core.constant.CommonConstants;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
