@@ -25,4 +25,6 @@ public class DefaultPermission extends BaseVo implements IPermission {
     private Long parentId;
     @Schema(title = "权重", description = "权重")
     private Integer weight;
+    @Schema(title = "资源指令", description = "资源指令")
+    private String command;
 }
