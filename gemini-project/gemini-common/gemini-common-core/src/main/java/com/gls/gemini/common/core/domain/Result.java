@@ -33,25 +33,21 @@ public class Result<T> implements IEnums {
         this.message = enums.getMessage();
     }
 
-
     public Result(IEnums enums, T data) {
         this.code = enums.getCode();
         this.message = enums.getMessage();
         this.data = data;
     }
 
-
     public Result(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
-
 
     public Result(Integer code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
-
 
 }

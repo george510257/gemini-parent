@@ -23,4 +23,22 @@ public class PageResult<T> implements Serializable {
     private Integer totalPage;
     @Schema(title = "数据", description = "数据")
     private List<T> records = new ArrayList<>();
+
+    public PageResult() {
+    }
+
+    public PageResult(Integer page, Integer size, Long total, List<T> records) {
+        this.page = page;
+        this.size = size;
+        this.total = total;
+        this.records = records;
+    }
+
+    public PageResult(Integer page, Integer size, Long total, Integer totalPage, List<T> records) {
+        this.page = page;
+        this.size = size;
+        this.total = total;
+        this.totalPage = totalPage;
+        this.records = records;
+    }
 }

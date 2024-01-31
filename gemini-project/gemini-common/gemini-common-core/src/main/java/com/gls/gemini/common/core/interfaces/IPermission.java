@@ -12,5 +12,4 @@ public interface IPermission extends ITreeNode {
      */
     String getCommand();
 
-
 }
