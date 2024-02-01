@@ -16,5 +16,10 @@
         <module>gemini-sdk-core</module>
     </modules>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.gls.gemini.common.core</groupId>
+            <artifactId>gemini-common-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>
