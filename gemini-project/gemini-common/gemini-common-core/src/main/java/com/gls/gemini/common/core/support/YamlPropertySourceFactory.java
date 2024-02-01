@@ -5,7 +5,6 @@ import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.core.io.support.PropertySourceFactory;
-import org.springframework.lang.Nullable;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -23,7 +22,7 @@ public class YamlPropertySourceFactory implements PropertySourceFactory {
      * @return PropertySource 属性源
      */
     @Override
-    public PropertySource<?> createPropertySource(@Nullable String name, EncodedResource resource) throws IOException {
+    public PropertySource<?> createPropertySource(String name, EncodedResource resource) throws IOException {
         // 加载yaml配置文件
         YamlPropertiesFactoryBean yamlPropertiesFactoryBean = new YamlPropertiesFactoryBean();
         // 设置资源
