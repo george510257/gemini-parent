@@ -14,11 +14,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>gemini-starter-core</module>
+        <module>gemini-starter-data-jpa</module>
+        <module>gemini-starter-data-redis</module>
         <module>gemini-starter-dynamic-datasource</module>
-        <module>gemini-starter-jpa</module>
         <module>gemini-starter-json</module>
         <module>gemini-starter-mybatis</module>
-        <module>gemini-starter-redis</module>
         <module>gemini-starter-web</module>
     </modules>
 

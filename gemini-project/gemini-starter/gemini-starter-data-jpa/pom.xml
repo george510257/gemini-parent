@@ -4,17 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.gls.gemini</groupId>
-        <artifactId>gemini-project</artifactId>
+        <groupId>com.gls.gemini.starter</groupId>
+        <artifactId>gemini-starter</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <groupId>com.gls.gemini.boot</groupId>
-    <artifactId>gemini-boot</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>gemini-boot-cloud</module>
-        <module>gemini-boot-core</module>
-    </modules>
+    <groupId>com.gls.gemini.starter.data.jpa</groupId>
+    <artifactId>gemini-starter-data-jpa</artifactId>
+
 
 </project>
