@@ -19,7 +19,9 @@
         <module>gemini-starter-dynamic-datasource</module>
         <module>gemini-starter-json</module>
         <module>gemini-starter-mybatis</module>
+        <module>gemini-starter-openapi</module>
         <module>gemini-starter-web</module>
+        <module>gemini-starter-xxl-job</module>
     </modules>
 
     <dependencies>
