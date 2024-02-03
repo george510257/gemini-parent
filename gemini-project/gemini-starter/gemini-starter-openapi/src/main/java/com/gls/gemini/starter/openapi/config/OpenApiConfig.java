@@ -14,7 +14,8 @@ public class OpenApiConfig {
 
     /**
      * OpenAPI配置
-     * @param openApiProperties  OpenApi配置
+     *
+     * @param openApiProperties OpenApi配置
      * @param openApiConverter  OpenApi转换器
      * @return OpenAPI
      */

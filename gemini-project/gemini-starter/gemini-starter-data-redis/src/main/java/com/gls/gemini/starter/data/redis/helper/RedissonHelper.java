@@ -1,6 +1,7 @@
 package com.gls.gemini.starter.data.redis.helper;
 
 import jakarta.annotation.Resource;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
@@ -55,14 +56,10 @@ public class RedissonHelper {
      * @param unit      时间单位
      * @return 是否获取成功
      */
+    @SneakyThrows
     public boolean tryLock(String key, long waitTime, long leaseTime, TimeUnit unit) {
         String lockKey = getPrefixKey(key);
-        try {
-            return redissonClient.getLock(lockKey).tryLock(waitTime, leaseTime, unit);
-        } catch (InterruptedException e) {
-            log.error("获取锁异常", e);
-            throw new RuntimeException(e);
-        }
+        return redissonClient.getLock(lockKey).tryLock(waitTime, leaseTime, unit);
     }
 
     /**
