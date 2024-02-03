@@ -12,5 +12,10 @@
     <groupId>com.gls.gemini.starter.openapi</groupId>
     <artifactId>gemini-starter-openapi</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -2,6 +2,7 @@ package com.gls.gemini.common.core.base;
 
 import com.gls.gemini.common.core.domain.PageResult;
 import org.mapstruct.InheritConfiguration;
+import org.mapstruct.MappingTarget;
 
 import java.util.Collection;
 import java.util.List;
@@ -31,7 +32,7 @@ public interface BaseConverter<Source, Target> {
      * @return 目标
      */
     @InheritConfiguration(name = "convert")
-    Target convertCopy(Source source, Target target);
+    Target convertCopy(Source source, @MappingTarget Target target);
 
     /**
      * 转换列表 源列表 -> 目标列表
@@ -84,7 +85,7 @@ public interface BaseConverter<Source, Target> {
      * @return 源
      */
     @InheritConfiguration(name = "reverse")
-    Source reverseCopy(Target target, Source source);
+    Source reverseCopy(Target target, @MappingTarget Source source);
 
     /**
      * 转换列表 目标列表 -> 源列表
