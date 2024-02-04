@@ -21,12 +21,13 @@ public class PageUtil {
      * @return 分页参数
      */
     public Pageable getPageable(PageQuery<?> pageQuery) {
+        // 排序
         String order = pageQuery.getOrder();
         if ("desc".equalsIgnoreCase(order)) {
-            return PageRequest.of(pageQuery.getPage(), pageQuery.getSize(), Sort.by(Sort.Direction.DESC, pageQuery.getSort()));
+            return PageRequest.of(pageQuery.getPage(), pageQuery.getSize(), Sort.Direction.DESC, pageQuery.getSort());
         }
         if ("asc".equalsIgnoreCase(order)) {
-            return PageRequest.of(pageQuery.getPage(), pageQuery.getSize(), Sort.by(Sort.Direction.ASC, pageQuery.getSort()));
+            return PageRequest.of(pageQuery.getPage(), pageQuery.getSize(), Sort.Direction.ASC, pageQuery.getSort());
         }
         return PageRequest.of(pageQuery.getPage(), pageQuery.getSize());
     }
