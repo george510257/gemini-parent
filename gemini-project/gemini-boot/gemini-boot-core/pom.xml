@@ -21,5 +21,17 @@
             <groupId>com.gls.gemini.starter.web</groupId>
             <artifactId>gemini-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.gls.gemini.starter.openapi</groupId>
+            <artifactId>gemini-starter-openapi</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gls.gemini.starter.json</groupId>
+            <artifactId>gemini-starter-json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
     </dependencies>
 </project>
