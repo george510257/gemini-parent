@@ -40,10 +40,11 @@ public class PageUtil {
      * @return 分页结果
      */
     public <T> PageResult<T> getPageResult(Page<T> entityPage) {
-        return new PageResult<>(entityPage.getNumber(),
-                entityPage.getSize(),
-                entityPage.getTotalElements(),
-                entityPage.getTotalPages(),
-                entityPage.getContent());
+        return new PageResult<T>()
+                .setPage(entityPage.getNumber())
+                .setSize(entityPage.getSize())
+                .setTotal(entityPage.getTotalElements())
+                .setTotalPage(entityPage.getTotalPages())
+                .setRecords(entityPage.getContent());
     }
 }

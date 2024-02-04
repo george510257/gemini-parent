@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,23 +21,6 @@ public class PageResult<T> implements Serializable {
     @Schema(title = "总页数", description = "总页数")
     private Integer totalPage;
     @Schema(title = "数据", description = "数据")
-    private List<T> records = new ArrayList<>();
+    private List<T> records;
 
-    public PageResult() {
-    }
-
-    public PageResult(Integer page, Integer size, Long total, List<T> records) {
-        this.page = page;
-        this.size = size;
-        this.total = total;
-        this.records = records;
-    }
-
-    public PageResult(Integer page, Integer size, Long total, Integer totalPage, List<T> records) {
-        this.page = page;
-        this.size = size;
-        this.total = total;
-        this.totalPage = totalPage;
-        this.records = records;
-    }
 }

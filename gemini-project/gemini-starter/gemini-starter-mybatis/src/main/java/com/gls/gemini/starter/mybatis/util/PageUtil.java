@@ -21,6 +21,11 @@ public class PageUtil {
     }
 
     public <T> PageResult<T> getPageResult(IPage<T> pages) {
-        return new PageResult<>((int) pages.getCurrent(), (int) pages.getSize(), pages.getTotal(), (int) pages.getPages(), pages.getRecords());
+        return new PageResult<T>()
+                .setPage((int) pages.getCurrent())
+                .setSize((int) pages.getSize())
+                .setTotal(pages.getTotal())
+                .setTotalPage((int) pages.getPages())
+                .setRecords(pages.getRecords());
     }
 }
