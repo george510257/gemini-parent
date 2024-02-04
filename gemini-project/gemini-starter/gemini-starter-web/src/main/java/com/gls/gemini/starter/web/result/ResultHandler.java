@@ -2,6 +2,7 @@ package com.gls.gemini.starter.web.result;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
+import com.gls.gemini.common.core.constant.CommonConstants;
 import com.gls.gemini.common.core.constant.HeaderConstants;
 import com.gls.gemini.common.core.domain.Result;
 import com.gls.gemini.common.core.enums.ClientTypeEnums;
@@ -27,7 +28,7 @@ import java.util.Optional;
  * 返回值处理
  */
 @Slf4j
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = CommonConstants.BASE_PACKAGE_PREFIX)
 public class ResultHandler implements ResponseBodyAdvice<Object> {
     /**
      * 忽略的返回值类型
