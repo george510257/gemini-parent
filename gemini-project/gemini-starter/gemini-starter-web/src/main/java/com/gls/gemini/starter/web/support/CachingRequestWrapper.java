@@ -5,7 +5,6 @@ import cn.hutool.core.util.StrUtil;
 import jakarta.servlet.ServletInputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +14,6 @@ import java.io.InputStreamReader;
  * Request 包装类
  * 用于解决流只能读取一次的问题
  */
-@Slf4j
 public class CachingRequestWrapper extends HttpServletRequestWrapper {
 
     /**
@@ -33,7 +31,6 @@ public class CachingRequestWrapper extends HttpServletRequestWrapper {
         super(request);
         // 读取请求体
         this.requestBody = IoUtil.readBytes(request.getInputStream());
-        log.info("RequestWrapper requestBody: {}", this.getRequestBody());
     }
 
     /**

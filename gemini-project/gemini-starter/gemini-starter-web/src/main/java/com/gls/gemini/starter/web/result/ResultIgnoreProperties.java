@@ -23,9 +23,9 @@ public class ResultIgnoreProperties extends BaseProperties {
     /**
      * 忽略的返回类型
      */
-    private List<Class<?>> returnType = new ArrayList<>();
+    private List<String> returnType = new ArrayList<>();
     /**
      * 忽略的转换类型
      */
-    private List<Class<?>> converterType = new ArrayList<>();
+    private List<String> converterType = new ArrayList<>();
 }

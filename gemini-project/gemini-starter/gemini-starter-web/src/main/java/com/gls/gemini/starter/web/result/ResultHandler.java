@@ -47,16 +47,16 @@ public class ResultHandler implements ResponseBodyAdvice<Object> {
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         log.info("resultHandler supports");
         // 返回值类型
-        log.info("returnType:{}", returnType.getGenericParameterType().getClass().getSimpleName());
+        log.info("returnType:{}", returnType.getGenericParameterType().getTypeName());
         // 返回值转换器类型
-        log.info("converterType:{}", converterType.getSimpleName());
+        log.info("converterType:{}", converterType.getTypeName());
         if (CollUtil.isNotEmpty(ignoreProperties.getReturnType())) {
             // 判断是否包含
-            return !ignoreProperties.getReturnType().contains(returnType.getGenericParameterType().getClass());
+            return !ignoreProperties.getReturnType().contains(returnType.getGenericParameterType().getTypeName());
         }
         if (CollUtil.isNotEmpty(ignoreProperties.getConverterType())) {
             // 判断是否包含
-            return !ignoreProperties.getConverterType().contains(converterType);
+            return !ignoreProperties.getConverterType().contains(converterType.getTypeName());
         }
         return true;
     }

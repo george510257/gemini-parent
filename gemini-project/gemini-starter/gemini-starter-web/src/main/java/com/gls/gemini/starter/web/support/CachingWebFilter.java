@@ -48,13 +48,37 @@ public class CachingWebFilter extends OncePerRequestFilter {
             // 包装请求和响应
             CachingRequestWrapper cachingRequestWrapper = new CachingRequestWrapper(request);
             ContentCachingResponseWrapper cachingResponseWrapper = new ContentCachingResponseWrapper(response);
+            // 打印 request
+            this.printRequest(cachingRequestWrapper);
             // 执行过滤器链
             filterChain.doFilter(cachingRequestWrapper, cachingResponseWrapper);
+            // 打印 response
+            this.printResponse(cachingResponseWrapper);
             // 更新响应
             cachingResponseWrapper.copyBodyToResponse();
         } else {
             // 执行过滤器链
             filterChain.doFilter(request, response);
         }
+    }
+
+    private void printResponse(ContentCachingResponseWrapper response) {
+        // 响应体
+        String responseBody = new String(response.getContentAsByteArray());
+        log.info("Response: responseBody:{}", responseBody);
+    }
+
+    private void printRequest(HttpServletRequest request) {
+        // ip
+        String ip = request.getRemoteAddr();
+        // 请求方法
+        String method = request.getMethod();
+        // 请求路径
+        String path = request.getRequestURI();
+        // 请求参数
+        String queryString = request.getQueryString();
+        // 请求体
+        String requestBody = ((CachingRequestWrapper) request).getRequestBody();
+        log.info("Request: ip:{}, method:{}, path:{}, queryString:{}, requestBody:{}", ip, method, path, queryString, requestBody);
     }
 }
