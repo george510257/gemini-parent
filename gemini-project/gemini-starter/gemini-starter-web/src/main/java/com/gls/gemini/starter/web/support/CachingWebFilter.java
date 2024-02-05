@@ -32,11 +32,19 @@ public class CachingWebFilter extends OncePerRequestFilter {
      */
     private static final String JSON_CONTENT_TYPE = "application/json";
 
+    /**
+     * 销毁过滤器
+     */
     @Override
     public void destroy() {
         log.info("CachingWebFilter destroy");
     }
 
+    /**
+     * 初始化过滤器
+     *
+     * @throws ServletException Servlet异常
+     */
     @Override
     protected void initFilterBean() throws ServletException {
         log.info("CachingWebFilter initFilterBean");

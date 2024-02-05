@@ -46,9 +46,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-
+        // 移除默认的Jackson消息转换器
         converters.removeIf(converter -> converter instanceof AbstractJackson2HttpMessageConverter);
-
+        // 添加自定义的Jackson消息转换器
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter(jackson2ObjectMapperBuilder.build());
         converter.setDefaultCharset(StandardCharsets.UTF_8);
         converters.add(converter);
