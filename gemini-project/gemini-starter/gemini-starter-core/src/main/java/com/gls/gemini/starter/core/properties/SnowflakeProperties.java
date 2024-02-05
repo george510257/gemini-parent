@@ -13,9 +13,9 @@ public class SnowflakeProperties extends BaseProperties {
     /**
      * 最大的机器节点ID
      */
-    private Long maxWorkerId;
+    private Long maxWorkerId = 31L;
     /**
      * 最大的中心ID
      */
-    private Long maxDataCenterId;
+    private Long maxDataCenterId = 31L;
 }
