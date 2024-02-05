@@ -32,6 +32,16 @@ public class CachingWebFilter extends OncePerRequestFilter {
      */
     private static final String JSON_CONTENT_TYPE = "application/json";
 
+    @Override
+    public void destroy() {
+        log.info("CachingWebFilter destroy");
+    }
+
+    @Override
+    protected void initFilterBean() throws ServletException {
+        log.info("CachingWebFilter initFilterBean");
+    }
+
     /**
      * 执行过滤器
      *
@@ -62,12 +72,22 @@ public class CachingWebFilter extends OncePerRequestFilter {
         }
     }
 
+    /**
+     * 打印请求
+     *
+     * @param response 响应
+     */
     private void printResponse(ContentCachingResponseWrapper response) {
         // 响应体
         String responseBody = new String(response.getContentAsByteArray());
         log.info("Response: responseBody:{}", responseBody);
     }
 
+    /**
+     * 打印请求
+     *
+     * @param request 请求
+     */
     private void printRequest(HttpServletRequest request) {
         // ip
         String ip = request.getRemoteAddr();
