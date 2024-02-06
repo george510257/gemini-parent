@@ -1,22 +1,23 @@
 package com.gls.gemini.starter.data.redis.config;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
-import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 /**
  * Redis 配置类
  */
 
-@AutoConfiguration
-@AutoConfigureBefore(RedisAutoConfiguration.class)
+@Configuration
 public class RedisConfig {
     /**
      * RedisTemplate 配置
@@ -51,11 +52,16 @@ public class RedisConfig {
     /**
      * json序列化器
      *
-     * @param objectMapper 对象映射器
+     * @param jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder 实例
      * @return json序列化器
      */
     @Bean
-    public Jackson2JsonRedisSerializer<Object> jsonRedisSerializer(ObjectMapper objectMapper) {
+    public Jackson2JsonRedisSerializer<Object> jsonRedisSerializer(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
+        ObjectMapper objectMapper = jackson2ObjectMapperBuilder.build();
+        // 设置可见度
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        // 启用默认类型
+        objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
         return new Jackson2JsonRedisSerializer<>(objectMapper, Object.class);
     }
 }

@@ -23,7 +23,7 @@ public class JacksonConfig {
      * @return 自定义配置类
      */
     @Bean
-    public Jackson2ObjectMapperBuilderCustomizer customizer() {
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         return builder -> {
             // 设置全局地区
             builder.locale(Locale.CHINA);

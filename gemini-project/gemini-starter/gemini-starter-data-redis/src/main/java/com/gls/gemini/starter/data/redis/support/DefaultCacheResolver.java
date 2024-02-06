@@ -1,7 +1,6 @@
 package com.gls.gemini.starter.data.redis.support;
 
 import cn.hutool.core.util.StrUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.interceptor.AbstractCacheResolver;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
@@ -14,7 +13,6 @@ import java.util.List;
 /**
  * 默认缓存解析器
  */
-@Slf4j
 @Component
 public class DefaultCacheResolver extends AbstractCacheResolver {
 
