@@ -2,6 +2,10 @@ package com.gls.gemini.common.core.base;
 
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -10,6 +14,7 @@ import java.util.List;
  *
  * @param <V> 基础视图
  */
+@CacheConfig(cacheResolver = "defaultCacheResolver")
 public interface BaseService<V extends BaseVo> {
 
     /**
@@ -18,6 +23,7 @@ public interface BaseService<V extends BaseVo> {
      * @param vo 视图
      * @return 返回新增后的视图
      */
+    @CachePut(key = "#result.id")
     V insert(V vo);
 
     /**
@@ -27,6 +33,7 @@ public interface BaseService<V extends BaseVo> {
      * @param vo 视图
      * @return 返回修改后的视图
      */
+    @CachePut(key = "#result.id")
     V update(Long id, V vo);
 
     /**
@@ -35,6 +42,7 @@ public interface BaseService<V extends BaseVo> {
      * @param id 主键
      * @return 删除结果
      */
+    @CacheEvict(key = "#id", value = "vo")
     Boolean delete(Long id);
 
     /**
@@ -43,6 +51,7 @@ public interface BaseService<V extends BaseVo> {
      * @param id 主键
      * @return 查询结果
      */
+    @Cacheable(key = "#id", value = "vo")
     V get(Long id);
 
     /**

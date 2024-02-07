@@ -34,8 +34,7 @@ public class DefaultCacheResolver extends AbstractCacheResolver {
         String className = context.getTarget().getClass().getSimpleName();
         // 将类名转换为下划线格式
         cacheNames.add(StrUtil.toUnderlineCase(className));
-        // 添加缓存名称
-        cacheNames.addAll(context.getOperation().getCacheNames());
+
         return cacheNames;
     }
 }
