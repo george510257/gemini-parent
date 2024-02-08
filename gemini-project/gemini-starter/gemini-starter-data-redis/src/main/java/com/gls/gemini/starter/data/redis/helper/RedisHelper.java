@@ -1,26 +1,28 @@
 package com.gls.gemini.starter.data.redis.helper;
 
-import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.Delegate;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Redis 帮助类
  */
-@Component
+@RequiredArgsConstructor
 public class RedisHelper {
 
-    @Value("${spring.redis.prefix:redis:}")
-    private String prefix = "redis:";
+    /**
+     * 前缀
+     */
+    private final String prefix;
 
     /**
      * RedisTemplate
      */
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+    @Delegate
+    private final RedisTemplate<String, Object> redisTemplate;
+
 
     /**
      * 获取带前缀的 key

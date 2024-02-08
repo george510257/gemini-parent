@@ -1,30 +1,27 @@
 package com.gls.gemini.starter.data.redis.helper;
 
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+import lombok.experimental.Delegate;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
 /**
  * Redisson 帮助类
  */
-@Slf4j
-@Component
+@RequiredArgsConstructor
 public class RedissonHelper {
 
-    @Value("${spring.redisson.prefix:redisson:}")
-    private String prefix;
+    private final String prefix;
 
     /**
      * Redisson 客户端
      */
-    @Resource
-    private RedissonClient redissonClient;
+    @Delegate
+    private final RedissonClient redissonClient;
+
 
     /**
      * 获取带前缀的 key

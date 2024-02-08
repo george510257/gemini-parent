@@ -13,6 +13,9 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 
 import java.util.stream.Collectors;
 
+/**
+ * 缓存配置
+ */
 @EnableCaching
 @Configuration
 public class CacheConfig {

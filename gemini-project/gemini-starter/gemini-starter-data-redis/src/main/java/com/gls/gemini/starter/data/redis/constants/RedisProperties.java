@@ -20,6 +20,16 @@ import java.util.List;
 public class RedisProperties extends BaseProperties {
 
     /**
+     * redis前缀
+     */
+    private String prefix = "gemini:redis:";
+
+    /**
+     * 锁前缀
+     */
+    private String lockPrefix = "gemini:lock:";
+
+    /**
      * 缓存配置
      */
     private List<Cache> cache = new ArrayList<>();
