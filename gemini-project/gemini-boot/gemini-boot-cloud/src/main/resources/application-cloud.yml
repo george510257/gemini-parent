@@ -4,10 +4,10 @@ spring:
       server-addr: ${nacos.host:docker-server}:${nacos.port:8848}
       discovery:
         group: ${nacos.group:gemini}
-        namespace: ${nacos.namespace:5e632956-936e-4df8-a4e1-aad059fe7831}
+        namespace: ${nacos.namespace:cc7d8bb5-1db6-4766-9dff-fd9dd012328c}
       config:
         group: ${nacos.group:gemini}
-        namespace: ${nacos.namespace:5e632956-936e-4df8-a4e1-aad059fe7831}
+        namespace: ${nacos.namespace:cc7d8bb5-1db6-4766-9dff-fd9dd012328c}
   config:
     import:
       - optional:nacos:application-${spring.profiles.active:dev}.yml?refresh=true

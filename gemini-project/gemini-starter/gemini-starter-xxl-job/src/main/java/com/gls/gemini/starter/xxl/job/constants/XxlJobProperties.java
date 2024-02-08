@@ -11,12 +11,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".xxl.job")
+@ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".xxl-job")
 public class XxlJobProperties extends BaseProperties {
     /**
      * 调度中心地址 (选填)：如调度中心集群部署存在多个地址，用逗号分隔。
      */
-    private String adminAddresses = "http://xxl-job-admin:8080/xxl-job-admin";
+    private String adminAddresses;
     /**
      * 执行器Token (选填)：非空时启用；
      */
@@ -24,7 +24,7 @@ public class XxlJobProperties extends BaseProperties {
     /**
      * 执行器AppName (选填)：执行器心跳注册分组依据；存在调度中心集群部署时，执行器AppName 要保持唯一；
      */
-    private String appname;
+    private String appName;
     /**
      * 执行器注册地址 (选填)：默认为空，非空时优先使用；
      */
