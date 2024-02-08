@@ -1,4 +1,4 @@
-package com.gls.gemini.common.core.domain;
+package com.gls.gemini.starter.core.def;
 
 import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.interfaces.IOrganization;

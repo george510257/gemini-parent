@@ -2,8 +2,8 @@ package com.gls.gemini.starter.core.config;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
-import com.gls.gemini.common.core.support.DefaultLoginTemplate;
 import com.gls.gemini.common.core.support.LoginTemplate;
+import com.gls.gemini.starter.core.def.DefaultLoginTemplate;
 import com.gls.gemini.starter.core.properties.SnowflakeProperties;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
