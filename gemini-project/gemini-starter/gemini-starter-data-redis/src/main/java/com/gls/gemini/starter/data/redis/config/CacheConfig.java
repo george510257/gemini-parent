@@ -1,6 +1,8 @@
 package com.gls.gemini.starter.data.redis.config;
 
+import com.gls.gemini.starter.data.redis.constants.RedisProperties;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
+import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +10,8 @@ import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
+
+import java.util.stream.Collectors;
 
 @EnableCaching
 @Configuration
@@ -45,6 +49,19 @@ public class CacheConfig {
             config = config.disableKeyPrefix();
         }
         return config;
+    }
+
+    /**
+     * 自定义缓存管理器构建器
+     *
+     * @param config          缓存配置
+     * @param redisProperties redis配置
+     * @return 自定义缓存管理器构建器
+     */
+    @Bean
+    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer(RedisCacheConfiguration config, RedisProperties redisProperties) {
+        return builder -> builder.withInitialCacheConfigurations(redisProperties.getCache().stream().collect(
+                Collectors.toMap(RedisProperties.Cache::getCacheName, cache -> config.entryTtl(cache.getTimeToLive()))));
     }
 
 }
