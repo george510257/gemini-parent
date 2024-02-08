@@ -23,7 +23,7 @@ public interface BaseService<V extends BaseVo> {
      * @param vo 视图
      * @return 返回新增后的视图
      */
-    @CachePut(key = "#result.id")
+    @CachePut(key = "#result.id", value = "vo")
     V insert(V vo);
 
     /**
@@ -33,7 +33,7 @@ public interface BaseService<V extends BaseVo> {
      * @param vo 视图
      * @return 返回修改后的视图
      */
-    @CachePut(key = "#result.id")
+    @CachePut(key = "#result.id", value = "vo")
     V update(Long id, V vo);
 
     /**

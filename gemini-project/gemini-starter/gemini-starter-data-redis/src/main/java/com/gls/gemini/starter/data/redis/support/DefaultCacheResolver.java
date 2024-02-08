@@ -6,9 +6,8 @@ import org.springframework.cache.interceptor.AbstractCacheResolver;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 默认缓存解析器
@@ -28,13 +27,13 @@ public class DefaultCacheResolver extends AbstractCacheResolver {
      */
     @Override
     protected Collection<String> getCacheNames(CacheOperationInvocationContext<?> context) {
-        // 获取缓存名称
-        List<String> cacheNames = new ArrayList<>();
         // 获取类名
         String className = context.getTarget().getClass().getSimpleName();
-        // 将类名转换为下划线格式
-        cacheNames.add(StrUtil.toUnderlineCase(className));
 
-        return cacheNames;
+        // 获取缓存名称
+        return context.getOperation().getCacheNames().stream().map(cacheName -> {
+            // 将类名转换为下划线格式
+            return StrUtil.toUnderlineCase(className) + ":" + cacheName;
+        }).collect(Collectors.toList());
     }
 }
