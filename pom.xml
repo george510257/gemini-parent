@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.gls.gemini</groupId>
     <artifactId>gemini-parent</artifactId>
-    <version>${revision}</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>gemini-parent</name>
     <description>gemini-parent</description>
@@ -44,6 +44,7 @@
         <dynamic-datasource.version>4.3.0</dynamic-datasource.version>
         <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <xxl-job.version>2.4.0</xxl-job.version>
+        <aliyun-sdk-oss.version>3.17.4</aliyun-sdk-oss.version>
 
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
     </properties>
@@ -182,6 +183,11 @@
                 <groupId>com.xuxueli</groupId>
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>${aliyun-sdk-oss.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

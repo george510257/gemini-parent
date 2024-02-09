@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.gls.gemini</groupId>
         <artifactId>gemini-project</artifactId>
-        <version>${revision}</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.gls.gemini.starter</groupId>
@@ -22,6 +22,7 @@
         <module>gemini-starter-openapi</module>
         <module>gemini-starter-web</module>
         <module>gemini-starter-xxl-job</module>
+        <module>gemini-starter-aliyun-oss</module>
     </modules>
 
     <dependencies>

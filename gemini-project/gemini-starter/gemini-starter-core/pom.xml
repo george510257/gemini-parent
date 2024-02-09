@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.gls.gemini.starter</groupId>
         <artifactId>gemini-starter</artifactId>
-        <version>${revision}</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.gls.gemini.starter.core</groupId>
