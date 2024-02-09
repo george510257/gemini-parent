@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import com.gls.gemini.common.core.support.LoginTemplate;
 import com.gls.gemini.starter.core.def.DefaultLoginTemplate;
 import com.gls.gemini.starter.core.properties.SnowflakeProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ public class CoreConfig {
      * @return MessageSource 国际化配置
      */
     @Bean
+    @ConditionalOnMissingBean(MessageSource.class)
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         // 设置编码
@@ -40,6 +42,7 @@ public class CoreConfig {
      * @return Snowflake 雪花算法
      */
     @Bean
+    @ConditionalOnMissingBean(Snowflake.class)
     public Snowflake snowflake(SnowflakeProperties snowflakeProperties) {
         if (snowflakeProperties.isEnabled()) {
             long dataCenterId = IdUtil.getDataCenterId(snowflakeProperties.getMaxDataCenterId());
@@ -50,6 +53,7 @@ public class CoreConfig {
     }
 
     @Bean
+    @ConditionalOnMissingBean(LoginTemplate.class)
     public LoginTemplate<?, ?, ?, ?> loginTemplate() {
         return new DefaultLoginTemplate();
     }
