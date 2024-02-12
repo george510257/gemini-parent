@@ -41,6 +41,11 @@
 
             <!-- gemini-starter -->
             <dependency>
+                <groupId>com.gls.gemini.starter.aliyun.oss</groupId>
+                <artifactId>gemini-starter-aliyun-oss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.gls.gemini.starter.core</groupId>
                 <artifactId>gemini-starter-core</artifactId>
                 <version>${project.version}</version>
@@ -73,6 +78,11 @@
             <dependency>
                 <groupId>com.gls.gemini.starter.openapi</groupId>
                 <artifactId>gemini-starter-openapi</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gls.gemini.starter.oss</groupId>
+                <artifactId>gemini-starter-oss</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
