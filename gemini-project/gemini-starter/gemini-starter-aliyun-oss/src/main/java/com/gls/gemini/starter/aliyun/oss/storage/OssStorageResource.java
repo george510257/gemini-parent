@@ -40,8 +40,17 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public OutputStream getOutputStream() throws IOException {
+        // 如果是存储桶，则抛出异常
+        if (location.isBucket()) {
+            throw new FileNotFoundException("Cannot open an output stream to a bucket");
+        }
+        // 如果对象存在，则抛出异常
+        if (oss.doesObjectExist(location.getBucketName(), location.getFileName())) {
+            throw new FileNotFoundException("The specified key already exists");
+        }
+
         // 创建管道输入流
-        PipedInputStream inputStream = new PipedInputStream();
+        final PipedInputStream inputStream = new PipedInputStream();
         // 创建管道输出流
         final OutputStream outputStream = new PipedOutputStream(inputStream);
         // 执行 OSS 任务
@@ -64,9 +73,12 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public boolean exists() {
+        // 如果是存储桶，则判断存储桶是否存在
         if (location.isBucket()) {
+            // 判断存储桶是否存在
             return oss.doesBucketExist(location.getBucketName());
         }
+        // 判断对象是否存在
         return oss.doesObjectExist(location.getBucketName(), location.getFileName());
     }
 
@@ -118,6 +130,7 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public File getFile() throws IOException {
+        // 抛出异常
         throw new UnsupportedOperationException("The OSS object cannot be resolved to a File");
     }
 
@@ -129,6 +142,7 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public long contentLength() throws IOException {
+        // 如果对象存在，则返回对象的内容长度
         if (getOssObject() != null) {
             return getOssObject().getObjectMetadata().getContentLength();
         }
@@ -143,6 +157,7 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public long lastModified() throws IOException {
+        // 如果对象存在，则返回对象的最后修改时间
         if (getOssObject() != null) {
             return getOssObject().getObjectMetadata().getLastModified().getTime();
         }
@@ -158,7 +173,9 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public Resource createRelative(String relativePath) throws IOException {
+        // 创建相对路径的存储位置
         OssStorageLocation relativeLocation = OssStorageLocation.ofLocation(relativePath);
+        // 返回相对路径的资源
         return new OssStorageResource(oss, ossTaskExecutor, relativeLocation);
     }
 
@@ -169,7 +186,12 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public String getFilename() {
-        return location.isBucket() ? location.getBucketName() : location.getFileName();
+        // 如果是存储桶，则返回存储桶名称
+        if (location.isBucket()) {
+            return location.getBucketName();
+        }
+        // 返回文件名称
+        return location.getFileName();
     }
 
     /**
@@ -179,6 +201,7 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public String getDescription() {
+        // 返回存储位置的字符串表示
         return location.toString();
     }
 
@@ -190,6 +213,7 @@ public class OssStorageResource implements WritableResource {
      */
     @Override
     public InputStream getInputStream() throws IOException {
+        // 如果对象存在，则返回对象的输入流
         if (getOssObject() != null) {
             return getOssObject().getObjectContent();
         }

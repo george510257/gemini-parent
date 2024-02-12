@@ -34,10 +34,19 @@ public class OssStorageLocation {
      * @param fileName   文件名称
      */
     private OssStorageLocation(String bucketName, String fileName) {
-        this.bucketName = bucketName;
+        // 如果存储桶名称为空，则抛出异常
+        if (StrUtil.isBlank(bucketName)) {
+            throw new IllegalArgumentException("Bucket name must not be blank");
+        }
+        // 如果文件名称为空，则设置为空字符串
+        if (StrUtil.isBlank(fileName)) {
+            fileName = "";
+        }
+        // 如果文件名称不为空且以/开头，则去掉/
         if (StrUtil.isNotBlank(fileName) && fileName.startsWith("/")) {
             fileName = fileName.substring(1);
         }
+        this.bucketName = bucketName;
         this.fileName = fileName;
         this.uri = URI.create(String.format(PROTOCOL_FORMAT, bucketName, fileName));
     }
@@ -70,12 +79,19 @@ public class OssStorageLocation {
      * @return 存储位置
      */
     public static OssStorageLocation of(URI uri) {
+        // 如果URI为空，则抛出异常
+        if (uri == null) {
+            throw new IllegalArgumentException("URI must not be null");
+        }
+        // 如果URI的协议不是oss，则抛出异常
         if (!"oss".equals(uri.getScheme())) {
             throw new IllegalArgumentException("URI scheme must be oss");
         }
+        // 如果URI的主机为空，则抛出异常
         if (StrUtil.isBlank(uri.getAuthority())) {
             throw new IllegalArgumentException("URI authority must not be blank");
         }
+        // 返回存储位置
         return of(uri.getAuthority(), uri.getPath());
     }
 
@@ -104,7 +120,8 @@ public class OssStorageLocation {
      * @return 是否是文件
      */
     public boolean isFile() {
-        return StrUtil.isNotBlank(fileName) && !fileName.endsWith("/");
+        // 如果文件名称不为空且不以/结尾，则是文件
+        return StrUtil.isNotBlank(fileName) && !fileName.endsWith("/") ;
     }
 
     /**
@@ -113,7 +130,7 @@ public class OssStorageLocation {
      * @return 是否是目录
      */
     public boolean isDirectory() {
-        return StrUtil.isNotBlank(fileName) && fileName.endsWith("/");
+        return !isBucket() && !isFile();
     }
 
     /**
