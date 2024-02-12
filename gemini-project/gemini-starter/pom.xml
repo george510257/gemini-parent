@@ -23,6 +23,7 @@
         <module>gemini-starter-web</module>
         <module>gemini-starter-xxl-job</module>
         <module>gemini-starter-aliyun-oss</module>
+        <module>gemini-starter-oss</module>
     </modules>
 
     <dependencies>
