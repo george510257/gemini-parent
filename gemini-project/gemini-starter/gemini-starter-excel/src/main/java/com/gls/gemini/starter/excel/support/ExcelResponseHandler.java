@@ -3,7 +3,6 @@ package com.gls.gemini.starter.excel.support;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.builder.ExcelWriterBuilder;
@@ -12,36 +11,45 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.gls.gemini.starter.excel.annotation.ExcelResponse;
 import com.gls.gemini.starter.excel.annotation.ExcelSheet;
 import com.gls.gemini.starter.excel.constants.ExcelProperties;
-import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Slf4j
+@RequiredArgsConstructor
 public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
-    @Resource
-    private ExcelProperties excelProperties;
+    /**
+     * excel配置
+     */
+    private final ExcelProperties excelProperties;
 
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {
+        log.info("excelResponseHandler supports");
         return returnType.hasMethodAnnotation(ExcelResponse.class);
     }
 
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
+        // 设置请求已处理
+        mavContainer.setRequestHandled(true);
         // 获取返回值类型
         Class<?> parameterType = returnType.getParameterType();
         // 如果不是List类型, 抛出异常
-        if (!parameterType.isAssignableFrom(List.class)) {
+        if (!List.class.isAssignableFrom(parameterType)) {
             throw new IllegalArgumentException("Excel download response handler error, @ExcelResponse return value is not List " + parameterType);
         }
 
@@ -53,12 +61,10 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
         assert response != null;
         // 设置响应参数
-        mavContainer.setRequestHandled(true);
-
         response.setContentType("application/vnd.ms-excel");
         response.setCharacterEncoding("utf-8");
         response.setHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION);
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + excelResponse.fileName() + ".xlsx");
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + URLEncoder.encode(excelResponse.fileName(), StandardCharsets.UTF_8) + excelResponse.excelType().getValue());
 
         // 导出excel
         ExcelWriter excelWriter = getExcelWriter(response, excelResponse);
@@ -127,6 +133,11 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
     private WriteSheet getWriteSheet(int i, ExcelSheet sheet) {
         final ExcelWriterSheetBuilder builder = EasyExcel.writerSheet(i, sheet.sheetName());
         // 设置参数
+        // 设置是否需要头
+        builder.needHead(sheet.needHead());
+        builder.head(sheet.head());
+        // 设置自动合并
+        builder.automaticMergeHead(sheet.automaticMergeHead());
         // 设置包含字段
         if (ArrayUtil.isNotEmpty(sheet.include())) {
             builder.includeColumnFieldNames(CollUtil.newArrayList(sheet.include()));
@@ -138,17 +149,17 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
         // 设置写处理器
         if (ArrayUtil.isNotEmpty(sheet.writeHandler())) {
             CollUtil.newArrayList(sheet.writeHandler())
-                    .forEach(clazz -> builder.registerWriteHandler(SpringUtil.getBean(clazz)));
+                    .forEach(clazz -> builder.registerWriteHandler(BeanUtils.instantiateClass(clazz)));
         }
         // 设置转换器
         if (ArrayUtil.isNotEmpty(sheet.converter())) {
             CollUtil.newArrayList(sheet.converter())
-                    .forEach(clazz -> builder.registerConverter(SpringUtil.getBean(clazz)));
+                    .forEach(clazz -> builder.registerConverter(BeanUtils.instantiateClass(clazz)));
         }
         // 自定义处理
         if (ArrayUtil.isNotEmpty(sheet.customizer())) {
             CollUtil.newArrayList(sheet.customizer())
-                    .forEach(clazz -> SpringUtil.getBean(clazz).customize(builder));
+                    .forEach(clazz -> BeanUtils.instantiateClass(clazz).customize(builder));
         }
         return builder.build();
     }
@@ -192,17 +203,17 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
         // 设置写处理器
         if (ArrayUtil.isNotEmpty(excelResponse.writeHandler())) {
             CollUtil.newArrayList(excelResponse.writeHandler())
-                    .forEach(clazz -> builder.registerWriteHandler(SpringUtil.getBean(clazz)));
+                    .forEach(clazz -> builder.registerWriteHandler(BeanUtils.instantiateClass(clazz)));
         }
         // 设置转换器
         if (ArrayUtil.isNotEmpty(excelResponse.converter())) {
             CollUtil.newArrayList(excelResponse.converter())
-                    .forEach(clazz -> builder.registerConverter(SpringUtil.getBean(clazz)));
+                    .forEach(clazz -> builder.registerConverter(BeanUtils.instantiateClass(clazz)));
         }
         // 自定义处理
         if (ArrayUtil.isNotEmpty(excelResponse.customizer())) {
             CollUtil.newArrayList(excelResponse.customizer())
-                    .forEach(clazz -> SpringUtil.getBean(clazz).customize(builder));
+                    .forEach(clazz -> BeanUtils.instantiateClass(clazz).customize(builder));
         }
         return builder.build();
     }

@@ -59,4 +59,19 @@ public @interface ExcelSheet {
      */
     Class<? extends Customizer<ExcelWriterSheetBuilder>>[] customizer() default {};
 
+    /**
+     * 是否自动合并头
+     *
+     * @return 默认自动合并
+     */
+    boolean automaticMergeHead() default true;
+
+    /**
+     * 是否需要头
+     *
+     * @return 默认需要头
+     */
+    boolean needHead() default true;
+
+    Class<?> head() default Object.class;
 }

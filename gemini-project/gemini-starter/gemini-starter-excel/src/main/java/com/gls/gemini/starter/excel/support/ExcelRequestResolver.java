@@ -6,7 +6,6 @@ import com.gls.gemini.starter.excel.annotation.ExcelRequest;
 import com.gls.gemini.starter.excel.listener.ListReadListener;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
-import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,7 +22,6 @@ import java.util.List;
 /**
  * excel请求解析器
  */
-@Component
 public class ExcelRequestResolver implements HandlerMethodArgumentResolver {
     /**
      * 是否支持参数
@@ -41,7 +39,7 @@ public class ExcelRequestResolver implements HandlerMethodArgumentResolver {
         // 获取参数类型
         Class<?> parameterType = parameter.getParameterType();
         // 如果不是List类型, 抛出异常
-        if (!parameterType.isAssignableFrom(List.class)) {
+        if (!List.class.isAssignableFrom(parameterType)) {
             throw new IllegalArgumentException("Excel upload request resolver error, @ExcelRequest parameter is not List " + parameterType);
         }
         // 获取请求参数
