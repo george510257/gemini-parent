@@ -25,6 +25,7 @@ public class OssTemplate {
 
     /**
      * 创建bucket
+     *
      * @param bucketName bucket名称
      */
     public void createBucket(String bucketName) {

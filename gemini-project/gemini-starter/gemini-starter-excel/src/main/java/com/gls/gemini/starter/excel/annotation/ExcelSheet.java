@@ -1,5 +1,10 @@
 package com.gls.gemini.starter.excel.annotation;
 
+import com.alibaba.excel.converters.Converter;
+import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
+import com.alibaba.excel.write.handler.WriteHandler;
+import com.gls.gemini.starter.excel.customizer.Customizer;
+
 import java.lang.annotation.*;
 
 /**
@@ -21,12 +26,37 @@ public @interface ExcelSheet {
 
     /**
      * 包含字段
+     *
+     * @return 默认为空
      */
-    String[] includeFields() default {};
+    String[] include() default {};
 
     /**
      * 排除字段
+     *
+     * @return 默认为空
      */
-    String[] excludeFields() default {};
+    String[] exclude() default {};
+
+    /**
+     * 写处理器
+     *
+     * @return 默认为空
+     */
+    Class<? extends WriteHandler>[] writeHandler() default {};
+
+    /**
+     * 转换器
+     *
+     * @return 默认为空
+     */
+    Class<? extends Converter<?>>[] converter() default {};
+
+    /**
+     * 自定义处理
+     *
+     * @return 默认为空
+     */
+    Class<? extends Customizer<ExcelWriterSheetBuilder>>[] customizer() default {};
 
 }

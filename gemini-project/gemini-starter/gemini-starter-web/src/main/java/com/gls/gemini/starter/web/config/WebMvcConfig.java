@@ -11,6 +11,7 @@ import org.springframework.http.converter.json.AbstractJackson2HttpMessageConver
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.StandardCharsets;
@@ -27,6 +28,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     private Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder;
     @Resource
     private List<HandlerMethodArgumentResolver> resolvers;
+    @Resource
+    private List<HandlerMethodReturnValueHandler> handlers;
 
     /**
      * 增加GET请求参数中时间类型转换
@@ -65,5 +68,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
         resolvers.addAll(this.resolvers);
+    }
+
+    /**
+     * 增加返回值处理器
+     *
+     * @param handlers initially an empty list
+     */
+    @Override
+    public void addReturnValueHandlers(List<HandlerMethodReturnValueHandler> handlers) {
+        handlers.addAll(this.handlers);
     }
 }

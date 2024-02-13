@@ -121,7 +121,7 @@ public class OssStorageLocation {
      */
     public boolean isFile() {
         // 如果文件名称不为空且不以/结尾，则是文件
-        return StrUtil.isNotBlank(fileName) && !fileName.endsWith("/") ;
+        return StrUtil.isNotBlank(fileName) && !fileName.endsWith("/");
     }
 
     /**
