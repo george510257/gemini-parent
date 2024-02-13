@@ -10,6 +10,7 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.StandardCharsets;
@@ -24,6 +25,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Resource
     private Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder;
+    @Resource
+    private List<HandlerMethodArgumentResolver> resolvers;
 
     /**
      * 增加GET请求参数中时间类型转换
@@ -52,5 +55,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter(jackson2ObjectMapperBuilder.build());
         converter.setDefaultCharset(StandardCharsets.UTF_8);
         converters.add(converter);
+    }
+
+    /**
+     * 增加参数解析器
+     *
+     * @param resolvers initially an empty list
+     */
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.addAll(this.resolvers);
     }
 }
