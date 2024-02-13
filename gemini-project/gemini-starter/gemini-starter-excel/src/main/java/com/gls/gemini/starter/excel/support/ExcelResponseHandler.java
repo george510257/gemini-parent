@@ -65,9 +65,9 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
         List<WriteSheet> sheets = getWriteSheetList(excelResponse);
         // 写入数据
         if (sheets.size() > 1) {
-            manySheetWrite(returnValue, excelWriter, sheets, excelResponse.autoFill());
+            manySheetWrite((List<List<?>>) returnValue, excelWriter, sheets, excelResponse.autoFill());
         } else {
-            singleSheetWrite(returnValue, excelWriter, sheets.getFirst(), excelResponse.autoFill());
+            singleSheetWrite((List<?>) returnValue, excelWriter, sheets.getFirst(), excelResponse.autoFill());
         }
         // 关闭流
         excelWriter.finish();
@@ -82,9 +82,8 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
      * @param sheets      sheets
      * @param autoFill    是否自动填充
      */
-    private void manySheetWrite(Object returnValue, ExcelWriter excelWriter, List<WriteSheet> sheets, boolean autoFill) {
-        List<List<?>> list = (List<List<?>>) returnValue;
-        sheets.forEach(sheet -> singleSheetWrite(list.get(sheets.indexOf(sheet)), excelWriter, sheet, autoFill));
+    private void manySheetWrite(List<List<?>> returnValue, ExcelWriter excelWriter, List<WriteSheet> sheets, boolean autoFill) {
+        sheets.forEach(sheet -> singleSheetWrite(returnValue.get(sheets.indexOf(sheet)), excelWriter, sheet, autoFill));
     }
 
     /**
@@ -95,11 +94,11 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
      * @param writeSheet  writeSheet
      * @param autoFill    是否自动填充
      */
-    private void singleSheetWrite(Object returnValue, ExcelWriter excelWriter, WriteSheet writeSheet, boolean autoFill) {
+    private void singleSheetWrite(List<?> returnValue, ExcelWriter excelWriter, WriteSheet writeSheet, boolean autoFill) {
         if (autoFill) {
             excelWriter.fill(returnValue, writeSheet);
         } else {
-            excelWriter.write((List<?>) returnValue, writeSheet);
+            excelWriter.write(returnValue, writeSheet);
         }
     }
 
