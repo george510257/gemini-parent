@@ -131,7 +131,7 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
      */
     @Operation(summary = "导出", description = "导出")
     @PostMapping(value = "/export")
-    @ExcelResponse(fileName = "导出结果", sheets = @ExcelSheet(sheetName = "导出结果"))
+    @ExcelResponse(fileName = "导出结果", sheets = @ExcelSheet(sheetName = "导出结果", exclude = {"tenantId", "version", "deleted", "createUserId", "createUserName", "createTime", "updateUserId", "updateUserName", "updateTime"}))
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
     public List<Vo> exportData(Vo vo) {
         return this.service.exportData(vo);
