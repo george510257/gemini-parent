@@ -20,6 +20,18 @@ public abstract class BaseVo implements Serializable {
     private Long id;
 
     /**
+     * 租户ID
+     */
+    @Schema(title = "租户ID", description = "租户ID")
+    private Long tenantId;
+
+    /**
+     * 版本号
+     */
+    @Schema(title = "版本号", description = "版本号")
+    private Integer version;
+
+    /**
      * 删除标记 0:正常;1:已删除
      */
     @Schema(title = "删除标记 0:正常;1:已删除", description = "删除标记 0:正常;1:已删除")

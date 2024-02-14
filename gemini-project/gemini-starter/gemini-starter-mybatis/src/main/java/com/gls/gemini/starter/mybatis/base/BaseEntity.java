@@ -27,6 +27,15 @@ public abstract class BaseEntity implements Serializable {
     @TableId(type = IdType.ASSIGN_ID)
     private Long id;
     /**
+     * 租户ID
+     */
+    private Long tenantId;
+    /**
+     * 版本号
+     */
+    @Version
+    private Integer version;
+    /**
      * 删除标记 0:正常;1:已删除
      */
     @TableLogic

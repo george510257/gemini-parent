@@ -23,6 +23,13 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
     Long getId();
 
     /**
+     * 获取租户ID
+     *
+     * @return 租户ID
+     */
+    Long getTenantId();
+
+    /**
      * 获取手机号
      *
      * @return 手机号
@@ -189,4 +196,6 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
     default List<Tree<Long>> getOrganizationTree() {
         return TreeUtil.buildTree(this.getOrganizations());
     }
+
+
 }

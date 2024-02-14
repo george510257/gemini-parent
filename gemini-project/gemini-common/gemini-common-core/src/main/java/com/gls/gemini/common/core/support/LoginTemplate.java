@@ -33,6 +33,15 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
     }
 
     /**
+     * 获取登录租户id
+     *
+     * @return 登录租户id
+     */
+    default Optional<Long> getLoginTenantId() {
+        return getLoginUser().map(IUser::getTenantId);
+    }
+
+    /**
      * 获取登录用户名
      *
      * @return 登录用户名
