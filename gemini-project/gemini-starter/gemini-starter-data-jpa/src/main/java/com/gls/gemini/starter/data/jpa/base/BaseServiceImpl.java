@@ -110,4 +110,28 @@ public abstract class BaseServiceImpl<Converter extends BaseConverter<Vo, Entity
         List<Entity> entityList = repository.findAll(entity);
         return converter.reverseList(entityList);
     }
+
+    /**
+     * 导入数据
+     *
+     * @param vos 导入对象
+     * @return 导入结果
+     */
+    @Override
+    public Boolean importData(List<Vo> vos) {
+        List<Entity> entities = converter.convertList(vos);
+        repository.saveAll(entities);
+        return true;
+    }
+
+    /**
+     * 导出数据
+     *
+     * @param vo 查询参数
+     * @return 查询结果
+     */
+    @Override
+    public List<Vo> exportData(Vo vo) {
+        return list(vo);
+    }
 }

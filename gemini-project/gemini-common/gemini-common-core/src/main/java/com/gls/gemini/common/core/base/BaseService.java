@@ -69,4 +69,20 @@ public interface BaseService<V extends BaseVo> {
      * @return 查询结果
      */
     List<V> list(V vo);
+
+    /**
+     * 导入数据
+     *
+     * @param vos 导入对象
+     * @return 导入结果
+     */
+    Boolean importData(List<V> vos);
+
+    /**
+     * 导出数据
+     *
+     * @param vo 查询参数
+     * @return 查询结果
+     */
+    List<V> exportData(V vo);
 }

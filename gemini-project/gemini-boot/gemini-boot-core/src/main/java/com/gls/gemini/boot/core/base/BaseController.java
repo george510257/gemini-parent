@@ -8,10 +8,15 @@ import com.gls.gemini.common.core.domain.PageResult;
 import com.gls.gemini.common.core.domain.Result;
 import com.gls.gemini.common.core.enums.ResultEnums;
 import com.gls.gemini.sdk.core.base.BaseFeign;
+import com.gls.gemini.starter.excel.annotation.ExcelRequest;
+import com.gls.gemini.starter.excel.annotation.ExcelResponse;
+import com.gls.gemini.starter.excel.annotation.ExcelSheet;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -103,5 +108,32 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
     public Result<List<Vo>> list(Vo vo) {
         return ResultEnums.SUCCESS.getResult(this.service.list(vo));
+    }
+
+    /**
+     * 导入
+     *
+     * @param vos 导入对象
+     * @return 导入结果
+     */
+    @Operation(summary = "导入", description = "导入")
+    @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
+    public Result<Boolean> importData(@ExcelRequest List<Vo> vos) {
+        return ResultEnums.SUCCESS.getResult(this.service.importData(vos));
+    }
+
+    /**
+     * 导出
+     *
+     * @param vo 查询对象
+     * @return 导出结果
+     */
+    @Operation(summary = "导出", description = "导出")
+    @PostMapping(value = "/export")
+    @ExcelResponse(fileName = "导出结果", sheets = @ExcelSheet(sheetName = "导出结果"))
+    @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
+    public List<Vo> exportData(Vo vo) {
+        return this.service.exportData(vo);
     }
 }
