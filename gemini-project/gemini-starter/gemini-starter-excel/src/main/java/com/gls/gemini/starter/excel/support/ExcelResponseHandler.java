@@ -5,6 +5,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.converters.Converter;
 import com.alibaba.excel.write.builder.ExcelWriterBuilder;
 import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
 import com.alibaba.excel.write.metadata.WriteSheet;
@@ -39,6 +40,8 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
 
     @Resource
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
+    @Resource
+    private List<Converter<?>> converters;
 
     @PostConstruct
     public void init() {
@@ -219,6 +222,10 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
         if (ArrayUtil.isNotEmpty(excelResponse.writeHandler())) {
             CollUtil.newArrayList(excelResponse.writeHandler())
                     .forEach(clazz -> builder.registerWriteHandler(BeanUtils.instantiateClass(clazz)));
+        }
+        // 设置默认转换器
+        if (ArrayUtil.isNotEmpty(converters)) {
+            converters.forEach(builder::registerConverter);
         }
         // 设置转换器
         if (ArrayUtil.isNotEmpty(excelResponse.converter())) {
