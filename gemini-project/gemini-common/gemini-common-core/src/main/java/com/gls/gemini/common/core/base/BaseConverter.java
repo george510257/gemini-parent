@@ -29,10 +29,9 @@ public interface BaseConverter<Source, Target> {
      *
      * @param source 源
      * @param target 目标
-     * @return 目标
      */
     @InheritConfiguration(name = "convert")
-    Target convertCopy(Source source, @MappingTarget Target target);
+    void convertCopy(Source source, @MappingTarget Target target);
 
     /**
      * 转换列表 源列表 -> 目标列表
@@ -86,7 +85,7 @@ public interface BaseConverter<Source, Target> {
      * @return 源
      */
     @InheritConfiguration(name = "reverse")
-    Source reverseCopy(Target target, @MappingTarget Source source);
+    void reverseCopy(Target target, @MappingTarget Source source);
 
     /**
      * 转换列表 目标列表 -> 源列表

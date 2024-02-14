@@ -3,10 +3,13 @@ package com.gls.gemini.starter.excel.support;
 import com.alibaba.excel.EasyExcel;
 import com.gls.gemini.starter.excel.annotation.ExcelRequest;
 import com.gls.gemini.starter.excel.listener.ListReadListener;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -16,15 +19,33 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * excel请求解析器
  */
 @Slf4j
+@Component
 public class ExcelRequestResolver implements HandlerMethodArgumentResolver {
+    @Resource
+    private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
+
+    @PostConstruct
+    public void init() {
+        // 添加自定义的Excel参数解析器
+        List<HandlerMethodArgumentResolver> argumentResolvers = requestMappingHandlerAdapter.getArgumentResolvers();
+        List<HandlerMethodArgumentResolver> newArgumentResolvers = new ArrayList<>();
+        newArgumentResolvers.add(this);
+        if (argumentResolvers != null) {
+            newArgumentResolvers.addAll(argumentResolvers);
+        }
+        requestMappingHandlerAdapter.setArgumentResolvers(newArgumentResolvers);
+    }
+
     /**
      * 是否支持参数
      *

@@ -11,16 +11,19 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.gls.gemini.starter.excel.annotation.ExcelResponse;
 import com.gls.gemini.starter.excel.annotation.ExcelSheet;
 import com.gls.gemini.starter.excel.constants.ExcelProperties;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -29,12 +32,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@RequiredArgsConstructor
+@Component
 public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
-    /**
-     * excel配置
-     */
-    private final ExcelProperties excelProperties;
+    @Resource
+    private ExcelProperties excelProperties;
+
+    @Resource
+    private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
+
+    @PostConstruct
+    public void init() {
+        // 添加自定义的Excel返回值处理器
+        List<HandlerMethodReturnValueHandler> returnValueHandlers = requestMappingHandlerAdapter.getReturnValueHandlers();
+        List<HandlerMethodReturnValueHandler> newReturnValueHandlers = new ArrayList<>();
+        newReturnValueHandlers.add(this);
+        if (returnValueHandlers != null) {
+            newReturnValueHandlers.addAll(returnValueHandlers);
+        }
+        requestMappingHandlerAdapter.setReturnValueHandlers(newReturnValueHandlers);
+    }
 
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {
