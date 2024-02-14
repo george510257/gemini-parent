@@ -26,10 +26,10 @@ public class DefaultExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public Result<String> resultExceptionHandler(ResultException e) {
         log.error("ResultException: {}", e.getMessage(), e);
-        return ResultEnums.FAILED
-                .getResult(ExceptionUtil.stacktraceToString(e))
-                .setCode(e.getCode())
-                .setMessage(e.getMessage());
+        Result<String> result = ResultEnums.FAILED.getResult(ExceptionUtil.stacktraceToString(e));
+        result.setCode(e.getCode());
+        result.setMessage(e.getMessage());
+        return result;
     }
 
     /**
@@ -42,9 +42,9 @@ public class DefaultExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public Result<String> businessExceptionHandler(BusinessException e) {
         log.error("BusinessException: {}", e.getMessage(), e);
-        return ResultEnums.BUSINESS_EXCEPTION
-                .getResult(ExceptionUtil.stacktraceToString(e))
-                .setMessage(e.getMessage());
+        Result<String> result = ResultEnums.BUSINESS_EXCEPTION.getResult(ExceptionUtil.stacktraceToString(e));
+        result.setMessage(e.getMessage());
+        return result;
     }
 
     /**
@@ -57,9 +57,9 @@ public class DefaultExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public Result<String> runtimeExceptionHandler(RuntimeException e) {
         log.error("RuntimeException: {}", e.getMessage(), e);
-        return ResultEnums.INTERNAL_SERVER_ERROR
-                .getResult(ExceptionUtil.stacktraceToString(e))
-                .setMessage(e.getMessage());
+        Result<String> result = ResultEnums.INTERNAL_SERVER_ERROR.getResult(ExceptionUtil.stacktraceToString(e));
+        result.setMessage(e.getMessage());
+        return result;
     }
 
     /**
@@ -72,8 +72,8 @@ public class DefaultExceptionHandler {
     @ResponseStatus(HttpStatus.OK)
     public Result<String> exceptionHandler(Exception e) {
         log.error("Exception: {}", e.getMessage(), e);
-        return ResultEnums.INTERNAL_SERVER_ERROR
-                .getResult(ExceptionUtil.stacktraceToString(e))
-                .setMessage(e.getMessage());
+        Result<String> result = ResultEnums.INTERNAL_SERVER_ERROR.getResult(ExceptionUtil.stacktraceToString(e));
+        result.setMessage(e.getMessage());
+        return result;
     }
 }

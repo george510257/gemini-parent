@@ -3,7 +3,6 @@ package com.gls.gemini.common.core.domain;
 import com.gls.gemini.common.core.interfaces.IEnums;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 /**
  * 返回结果
@@ -12,7 +11,6 @@ import lombok.experimental.Accessors;
  * @author george
  */
 @Data
-@Accessors(chain = true)
 @Schema(title = "返回结果", description = "返回结果")
 public class Result<T> implements IEnums {
 

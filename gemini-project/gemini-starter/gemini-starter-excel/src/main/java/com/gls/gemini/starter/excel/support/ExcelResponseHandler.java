@@ -38,7 +38,6 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
 
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {
-        log.info("excelResponseHandler supports");
         return returnType.hasMethodAnnotation(ExcelResponse.class);
     }
 

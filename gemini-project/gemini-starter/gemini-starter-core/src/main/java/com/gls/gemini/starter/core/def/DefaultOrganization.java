@@ -5,10 +5,8 @@ import com.gls.gemini.common.core.interfaces.IOrganization;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 @Data
-@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @Schema(title = "组织信息", description = "组织信息")
 public class DefaultOrganization extends BaseVo implements IOrganization {

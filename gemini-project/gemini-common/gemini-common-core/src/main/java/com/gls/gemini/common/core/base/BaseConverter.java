@@ -61,12 +61,13 @@ public interface BaseConverter<Source, Target> {
      * @return 目标分页
      */
     default PageResult<Target> convertPage(PageResult<Source> sourcePage) {
-        return new PageResult<Target>()
-                .setPage(sourcePage.getPage())
-                .setSize(sourcePage.getSize())
-                .setTotalPage(sourcePage.getTotalPage())
-                .setTotal(sourcePage.getTotal())
-                .setRecords(convertList(sourcePage.getRecords()));
+        PageResult<Target> targetPage = new PageResult<>();
+        targetPage.setPage(sourcePage.getPage());
+        targetPage.setSize(sourcePage.getSize());
+        targetPage.setTotalPage(sourcePage.getTotalPage());
+        targetPage.setTotal(sourcePage.getTotal());
+        targetPage.setRecords(convertList(sourcePage.getRecords()));
+        return targetPage;
     }
 
     /**
@@ -114,11 +115,12 @@ public interface BaseConverter<Source, Target> {
      * @return 源分页
      */
     default PageResult<Source> reversePage(PageResult<Target> targetPage) {
-        return new PageResult<Source>()
-                .setPage(targetPage.getPage())
-                .setSize(targetPage.getSize())
-                .setTotalPage(targetPage.getTotalPage())
-                .setTotal(targetPage.getTotal())
-                .setRecords(reverseList(targetPage.getRecords()));
+        PageResult<Source> sourcePage = new PageResult<>();
+        sourcePage.setPage(targetPage.getPage());
+        sourcePage.setSize(targetPage.getSize());
+        sourcePage.setTotalPage(targetPage.getTotalPage());
+        sourcePage.setTotal(targetPage.getTotal());
+        sourcePage.setRecords(reverseList(targetPage.getRecords()));
+        return sourcePage;
     }
 }

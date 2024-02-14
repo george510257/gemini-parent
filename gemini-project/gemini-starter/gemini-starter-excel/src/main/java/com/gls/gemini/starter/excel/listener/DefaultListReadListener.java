@@ -2,6 +2,9 @@ package com.gls.gemini.starter.excel.listener;
 
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.excel.context.AnalysisContext;
+import com.alibaba.excel.metadata.CellExtra;
+import com.alibaba.excel.metadata.data.ReadCellData;
+import com.alibaba.excel.util.ConverterUtils;
 import com.gls.gemini.starter.excel.annotation.ExcelLine;
 import com.gls.gemini.starter.excel.domain.ExcelError;
 import jakarta.validation.ConstraintViolation;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,9 +30,27 @@ public class DefaultListReadListener<T> implements ListReadListener<T> {
     private Long line = 1L;
 
     @Override
+    public void onException(Exception exception, AnalysisContext context) throws Exception {
+        log.error("解析异常", exception);
+    }
+
+    @Override
+    public void invokeHead(Map<Integer, ReadCellData<?>> headMap, AnalysisContext context) {
+        Map<Integer, String> head = ConverterUtils.convertToStringMap(headMap, context);
+        log.info("解析到一条头数据: {}", head);
+    }
+
+    @Override
+    public void extra(CellExtra extra, AnalysisContext context) {
+        log.info("解析到一条额外数据: {}", extra);
+    }
+
+
+    @Override
     public void invoke(T data, AnalysisContext context) {
         // 行号增加
         line++;
+        log.info("解析第{}行数据: {}", line, data);
 
         // 校验
         Set<ConstraintViolation<T>> violations = Validation.buildDefaultValidatorFactory().getValidator().validate(data);

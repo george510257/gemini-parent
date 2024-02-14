@@ -7,7 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
-import lombok.experimental.Accessors;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,7 +17,6 @@ import java.util.Date;
  * 基础实体类
  */
 @Data
-@Accessors(chain = true)
 @MappedSuperclass
 @EntityListeners({DefaultEntityListener.class})
 public abstract class BaseEntity implements Serializable {

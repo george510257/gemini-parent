@@ -5,10 +5,8 @@ import com.gls.gemini.common.core.interfaces.IRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 @Data
-@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @Schema(title = "角色信息", description = "角色信息")
 public class DefaultRole extends BaseVo implements IRole {

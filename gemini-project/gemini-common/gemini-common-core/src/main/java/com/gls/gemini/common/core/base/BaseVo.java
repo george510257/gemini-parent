@@ -2,7 +2,6 @@ package com.gls.gemini.common.core.base;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +10,6 @@ import java.util.Date;
  * 基础实体
  */
 @Data
-@Accessors(chain = true)
 @Schema(title = "基础实体", description = "基础实体")
 public abstract class BaseVo implements Serializable {
 

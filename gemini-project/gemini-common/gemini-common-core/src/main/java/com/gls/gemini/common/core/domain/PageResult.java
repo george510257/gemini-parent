@@ -2,13 +2,11 @@ package com.gls.gemini.common.core.domain;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Data
-@Accessors(chain = true)
 @Schema(title = "分页结果", description = "分页结果")
 public class PageResult<T> implements Serializable {
 

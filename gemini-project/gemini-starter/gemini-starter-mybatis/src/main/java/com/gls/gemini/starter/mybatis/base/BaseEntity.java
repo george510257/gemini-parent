@@ -2,7 +2,6 @@ package com.gls.gemini.starter.mybatis.base;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +10,6 @@ import java.util.Date;
  * 基础实体类
  */
 @Data
-@Accessors(chain = true)
 public abstract class BaseEntity implements Serializable {
 
     public static final String COL_ID = "id";

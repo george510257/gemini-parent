@@ -5,14 +5,12 @@ import com.gls.gemini.common.core.interfaces.IUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 @Data
-@Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @Schema(title = "用户信息", description = "用户信息")
 public class DefaultUser extends BaseVo implements IUser<DefaultRole, DefaultPermission, DefaultOrganization> {

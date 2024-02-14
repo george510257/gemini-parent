@@ -1,9 +1,10 @@
 package com.gls.gemini.starter.excel.support;
 
-import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.excel.EasyExcel;
 import com.gls.gemini.starter.excel.annotation.ExcelRequest;
 import com.gls.gemini.starter.excel.listener.ListReadListener;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
 import org.springframework.ui.ModelMap;
@@ -22,6 +23,7 @@ import java.util.List;
 /**
  * excel请求解析器
  */
+@Slf4j
 public class ExcelRequestResolver implements HandlerMethodArgumentResolver {
     /**
      * 是否支持参数
@@ -46,17 +48,19 @@ public class ExcelRequestResolver implements HandlerMethodArgumentResolver {
         ExcelRequest excelRequest = parameter.getParameterAnnotation(ExcelRequest.class);
         assert excelRequest != null;
         Class<? extends ListReadListener> readListenerClass = excelRequest.readListener();
-        ListReadListener<?> readListener = SpringUtil.getBean(readListenerClass);
-
+        ListReadListener<?> readListener = BeanUtils.instantiateClass(readListenerClass);
+        log.info("Excel upload request resolver, readListener: {}", readListener);
         // 获取文件流
         MultipartRequest request = webRequest.getNativeRequest(MultipartRequest.class);
         assert request != null;
         MultipartFile file = request.getFile(excelRequest.fileName());
         assert file != null;
         InputStream inputStream = file.getInputStream();
+        log.info("Excel upload request resolver, fileName: {}", file.getOriginalFilename());
 
         // 获取目标类型
         Class<?> target = ResolvableType.forMethodParameter(parameter).getGeneric(0).resolve();
+        log.info("Excel upload request resolver, target: {}", target);
 
         EasyExcel.read(inputStream, target, readListener)
                 .ignoreEmptyRow(excelRequest.ignoreEmptyRow())
