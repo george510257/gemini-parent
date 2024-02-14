@@ -21,6 +21,10 @@
             <groupId>org.redisson</groupId>
             <artifactId>redisson-spring-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.gls.gemini.starter.json</groupId>
+            <artifactId>gemini-starter-json</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

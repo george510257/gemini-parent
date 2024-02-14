@@ -1,10 +1,13 @@
-package com.gls.gemini.common.core.base;
+package com.gls.gemini.boot.core.base;
 
+import com.gls.gemini.common.core.base.BaseService;
+import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.constant.HeaderConstants;
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
 import com.gls.gemini.common.core.domain.Result;
 import com.gls.gemini.common.core.enums.ResultEnums;
+import com.gls.gemini.sdk.core.base.BaseFeign;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -18,8 +21,7 @@ import java.util.List;
  * @param <Service> 服务
  * @param <Vo>      视图
  */
-public abstract class BaseController<Service extends BaseService<Vo>, Vo extends BaseVo>
-        implements BaseFeign<Vo> {
+public abstract class BaseController<Service extends BaseService<Vo>, Vo extends BaseVo> implements BaseFeign<Vo> {
 
     @Autowired
     protected Service service;

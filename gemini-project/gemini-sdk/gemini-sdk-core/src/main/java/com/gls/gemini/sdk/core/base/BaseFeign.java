@@ -1,5 +1,6 @@
-package com.gls.gemini.common.core.base;
+package com.gls.gemini.sdk.core.base;
 
+import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
 import com.gls.gemini.common.core.domain.Result;
