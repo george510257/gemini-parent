@@ -70,6 +70,7 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
         if (!List.class.isAssignableFrom(parameterType)) {
             throw new IllegalArgumentException("Excel download response handler error, @ExcelResponse return value is not List " + parameterType);
         }
+        List<?> list = (List<?>) returnValue;
 
         // 获取请求参数
         ExcelResponse excelResponse = returnType.getMethodAnnotation(ExcelResponse.class);
@@ -86,12 +87,12 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
 
         // 导出excel
         ExcelWriter excelWriter = getExcelWriter(response, excelResponse);
-        List<WriteSheet> sheets = getWriteSheetList(excelResponse);
+        List<WriteSheet> sheets = getWriteSheetList(list, excelResponse);
         // 写入数据
         if (sheets.size() > 1) {
-            manySheetWrite((List<List<?>>) returnValue, excelWriter, sheets, excelResponse.autoFill());
+            manySheetWrite((List<List<?>>) list, excelWriter, sheets, excelResponse.autoFill());
         } else {
-            singleSheetWrite((List<?>) returnValue, excelWriter, sheets.getFirst(), excelResponse.autoFill());
+            singleSheetWrite(list, excelWriter, sheets.getFirst(), excelResponse.autoFill());
         }
         // 关闭流
         excelWriter.finish();
@@ -129,13 +130,20 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
     /**
      * 获取WriteSheet列表
      *
+     * @param returnValue
      * @param excelResponse excelResponse
      * @return WriteSheet列表
      */
-    private List<WriteSheet> getWriteSheetList(ExcelResponse excelResponse) {
+    private List<WriteSheet> getWriteSheetList(List<?> returnValue, ExcelResponse excelResponse) {
         List<WriteSheet> sheets = new ArrayList<>();
-        for (int i = 0; i < excelResponse.sheets().length; i++) {
-            WriteSheet sheet = getWriteSheet(i, excelResponse.sheets()[i]);
+        if (excelResponse.sheets().length > 1) {
+            List<List<?>> list = (List<List<?>>) returnValue;
+            for (int i = 0; i < excelResponse.sheets().length; i++) {
+                WriteSheet sheet = getWriteSheet(i, excelResponse.sheets()[i], list.get(i).getFirst().getClass());
+                sheets.add(sheet);
+            }
+        } else {
+            WriteSheet sheet = getWriteSheet(0, excelResponse.sheets()[0], returnValue.getFirst().getClass());
             sheets.add(sheet);
         }
         return sheets;
@@ -144,16 +152,17 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
     /**
      * 获取WriteSheet
      *
-     * @param i     下标
-     * @param sheet sheet
+     * @param i         下标
+     * @param sheet     sheet
+     * @param headClass 头部类
      * @return WriteSheet
      */
-    private WriteSheet getWriteSheet(int i, ExcelSheet sheet) {
+    private WriteSheet getWriteSheet(int i, ExcelSheet sheet, Class<?> headClass) {
         final ExcelWriterSheetBuilder builder = EasyExcel.writerSheet(i, sheet.sheetName());
         // 设置参数
         // 设置是否需要头
         builder.needHead(sheet.needHead());
-        builder.head(sheet.head());
+        builder.head(headClass);
         // 设置自动合并
         builder.automaticMergeHead(sheet.automaticMergeHead());
         // 设置包含字段

@@ -72,6 +72,4 @@ public @interface ExcelSheet {
      * @return 默认需要头
      */
     boolean needHead() default true;
-
-    Class<?> head() default Object.class;
 }
