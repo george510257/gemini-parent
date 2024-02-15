@@ -1,5 +1,6 @@
 package com.gls.gemini.starter.data.jpa.base;
 
+import com.gls.gemini.common.core.interfaces.IDoMain;
 import com.gls.gemini.starter.data.jpa.support.DefaultEntityListener;
 import com.gls.gemini.starter.data.jpa.support.JpaSnowflakeGenerator;
 import jakarta.persistence.*;
@@ -7,7 +8,6 @@ import lombok.Data;
 import org.hibernate.annotations.Comment;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 @MappedSuperclass
 @EntityListeners({DefaultEntityListener.class})
-public abstract class BaseEntity implements Serializable {
+public class BaseEntity implements IDoMain {
 
     @Id
     @GenericGenerator(name = "snowflake", type = JpaSnowflakeGenerator.class)

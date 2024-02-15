@@ -2,9 +2,9 @@ package com.gls.gemini.starter.data.jpa.base;
 
 import com.gls.gemini.common.core.base.BaseConverter;
 import com.gls.gemini.common.core.base.BaseService;
-import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
+import com.gls.gemini.common.core.interfaces.IDoMain;
 import com.gls.gemini.starter.data.jpa.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 public abstract class BaseServiceImpl<Converter extends BaseConverter<Vo, Entity>,
         Repository extends BaseRepository<Entity>,
-        Vo extends BaseVo,
+        Vo extends IDoMain,
         Entity extends BaseEntity>
         implements BaseService<Vo> {
 

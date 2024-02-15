@@ -1,9 +1,9 @@
-package com.gls.gemini.sdk.core.base;
+package com.gls.gemini.sdk.core.feign;
 
-import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
 import com.gls.gemini.common.core.domain.Result;
+import com.gls.gemini.sdk.core.vo.BaseVo;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

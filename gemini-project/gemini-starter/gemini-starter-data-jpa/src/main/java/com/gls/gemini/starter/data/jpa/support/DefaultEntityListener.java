@@ -9,13 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Slf4j
 @Component
 public class DefaultEntityListener {
 
     @Resource
-    private LoginTemplate<?, ?, ?, ?> loginTemplate;
+    private Optional<LoginTemplate<?, ?, ?, ?>> loginTemplate;
 
     /**
      * 新增前操作
@@ -25,11 +26,11 @@ public class DefaultEntityListener {
         log.info("prePersist entity: {}", entity);
         Date now = new Date();
         entity.setDeleted(false);
-        entity.setCreateUserId(loginTemplate.getLoginUserId().orElse(0L));
-        entity.setCreateUserName(loginTemplate.getLoginUserName().orElse("system"));
+        entity.setCreateUserId(loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
+        entity.setCreateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
         entity.setCreateTime(now);
-        entity.setUpdateUserId(loginTemplate.getLoginUserId().orElse(0L));
-        entity.setUpdateUserName(loginTemplate.getLoginUserName().orElse("system"));
+        entity.setUpdateUserId(loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
+        entity.setUpdateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
         entity.setUpdateTime(now);
     }
 
@@ -40,8 +41,8 @@ public class DefaultEntityListener {
     public void preUpdate(BaseEntity entity) {
         log.info("preUpdate entity: {}", entity);
         Date now = new Date();
-        entity.setUpdateUserId(loginTemplate.getLoginUserId().orElse(0L));
-        entity.setUpdateUserName(loginTemplate.getLoginUserName().orElse("system"));
+        entity.setUpdateUserId(loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
+        entity.setUpdateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
         entity.setUpdateTime(now);
     }
 }

@@ -1,6 +1,5 @@
-package com.gls.gemini.starter.core.def;
+package com.gls.gemini.sdk.core.vo;
 
-import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.interfaces.IRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(title = "角色信息", description = "角色信息")
-public class DefaultRole extends BaseVo implements IRole {
+public class RoleVo extends BaseVo implements IRole {
 
     @Schema(title = "角色名", description = "角色名")
     private String name;

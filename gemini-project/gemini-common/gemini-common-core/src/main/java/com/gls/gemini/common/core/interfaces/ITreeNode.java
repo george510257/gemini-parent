@@ -1,17 +1,9 @@
 package com.gls.gemini.common.core.interfaces;
 
-import java.io.Serializable;
-
 /**
  * 树节点
  */
-public interface ITreeNode extends Serializable {
-    /**
-     * 获取id
-     *
-     * @return id
-     */
-    Long getId();
+public interface ITreeNode extends IDoMain {
 
     /**
      * 获取编码

@@ -1,18 +1,20 @@
 package com.gls.gemini.starter.mybatis.base;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.gls.gemini.common.core.interfaces.IDoMain;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 基础实体类
  */
 @Data
-public abstract class BaseEntity implements Serializable {
+public class BaseEntity implements IDoMain {
 
     public static final String COL_ID = "id";
+    public static final String COL_TENANT_ID = "tenant_id";
+    public static final String COL_VERSION = "version";
     public static final String COL_DELETED = "deleted";
     public static final String COL_CREATE_USER_ID = "create_user_id";
     public static final String COL_CREATE_USER_NAME = "create_user_name";

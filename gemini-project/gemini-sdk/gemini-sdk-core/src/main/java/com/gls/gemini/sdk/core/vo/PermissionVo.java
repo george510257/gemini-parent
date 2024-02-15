@@ -1,6 +1,5 @@
-package com.gls.gemini.starter.core.def;
+package com.gls.gemini.sdk.core.vo;
 
-import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.interfaces.IPermission;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(title = "权限信息", description = "权限信息")
-public class DefaultPermission extends BaseVo implements IPermission {
+public class PermissionVo extends BaseVo implements IPermission {
 
     @Schema(title = "权限名", description = "权限名")
     private String name;

@@ -2,8 +2,6 @@ package com.gls.gemini.starter.core.config;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
-import com.gls.gemini.common.core.support.LoginTemplate;
-import com.gls.gemini.starter.core.def.DefaultLoginTemplate;
 import com.gls.gemini.starter.core.properties.SnowflakeProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.MessageSource;
@@ -52,9 +50,5 @@ public class CoreConfig {
         return IdUtil.getSnowflake();
     }
 
-    @Bean
-    @ConditionalOnMissingBean(LoginTemplate.class)
-    public LoginTemplate<?, ?, ?, ?> loginTemplate() {
-        return new DefaultLoginTemplate();
-    }
+
 }

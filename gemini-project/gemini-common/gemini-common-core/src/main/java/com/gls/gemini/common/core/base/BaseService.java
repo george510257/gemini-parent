@@ -2,6 +2,7 @@ package com.gls.gemini.common.core.base;
 
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
+import com.gls.gemini.common.core.interfaces.IDoMain;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -15,7 +16,7 @@ import java.util.List;
  * @param <V> 基础视图
  */
 @CacheConfig(cacheResolver = "defaultCacheResolver")
-public interface BaseService<V extends BaseVo> {
+public interface BaseService<V extends IDoMain> {
 
     /**
      * 新增

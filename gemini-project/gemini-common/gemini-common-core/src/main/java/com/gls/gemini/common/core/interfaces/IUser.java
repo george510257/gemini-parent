@@ -14,20 +14,7 @@ import java.util.TimeZone;
  * 用户信息
  */
 public interface IUser<R extends IRole, P extends IPermission, O extends IOrganization>
-        extends UserDetails {
-    /**
-     * 获取id
-     *
-     * @return id
-     */
-    Long getId();
-
-    /**
-     * 获取租户ID
-     *
-     * @return 租户ID
-     */
-    Long getTenantId();
+        extends UserDetails, IDoMain {
 
     /**
      * 获取手机号

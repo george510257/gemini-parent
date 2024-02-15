@@ -1,13 +1,13 @@
 package com.gls.gemini.boot.core.base;
 
 import com.gls.gemini.common.core.base.BaseService;
-import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.constant.HeaderConstants;
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
 import com.gls.gemini.common.core.domain.Result;
 import com.gls.gemini.common.core.enums.ResultEnums;
-import com.gls.gemini.sdk.core.base.BaseFeign;
+import com.gls.gemini.sdk.core.feign.BaseFeign;
+import com.gls.gemini.sdk.core.vo.BaseVo;
 import com.gls.gemini.starter.excel.annotation.ExcelRequest;
 import com.gls.gemini.starter.excel.annotation.ExcelResponse;
 import com.gls.gemini.starter.excel.annotation.ExcelSheet;

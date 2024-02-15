@@ -1,9 +1,9 @@
-package com.gls.gemini.common.core.base;
+package com.gls.gemini.sdk.core.vo;
 
+import com.gls.gemini.common.core.interfaces.IDoMain;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Data
 @Schema(title = "基础实体", description = "基础实体")
-public abstract class BaseVo implements Serializable {
+public class BaseVo implements IDoMain {
 
     /**
      * 主键

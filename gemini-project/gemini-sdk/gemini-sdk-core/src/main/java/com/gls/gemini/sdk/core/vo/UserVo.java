@@ -1,6 +1,5 @@
-package com.gls.gemini.starter.core.def;
+package com.gls.gemini.sdk.core.vo;
 
-import com.gls.gemini.common.core.base.BaseVo;
 import com.gls.gemini.common.core.interfaces.IUser;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.util.TimeZone;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(title = "用户信息", description = "用户信息")
-public class DefaultUser extends BaseVo implements IUser<DefaultRole, DefaultPermission, DefaultOrganization> {
+public class UserVo extends BaseVo implements IUser<RoleVo, PermissionVo, OrganizationVo> {
 
     @Schema(title = "用户名", description = "用户名")
     private String username;
@@ -37,15 +36,15 @@ public class DefaultUser extends BaseVo implements IUser<DefaultRole, DefaultPer
     private TimeZone timeZone;
 
     @Schema(title = "当前角色", description = "当前角色")
-    private DefaultRole role;
+    private RoleVo role;
     @Schema(title = "当前组织", description = "当前组织")
-    private DefaultOrganization organization;
+    private OrganizationVo organization;
 
     @Schema(title = "角色列表", description = "角色列表")
-    private List<DefaultRole> roles;
+    private List<RoleVo> roles;
     @Schema(title = "权限列表", description = "权限列表")
-    private List<DefaultPermission> permissions;
+    private List<PermissionVo> permissions;
     @Schema(title = "组织列表", description = "组织列表")
-    private List<DefaultOrganization> organizations;
+    private List<OrganizationVo> organizations;
 
 }
