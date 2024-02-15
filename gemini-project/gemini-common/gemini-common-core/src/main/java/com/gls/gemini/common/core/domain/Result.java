@@ -1,7 +1,6 @@
 package com.gls.gemini.common.core.domain;
 
 import com.gls.gemini.common.core.interfaces.IEnums;
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -11,16 +10,22 @@ import lombok.Data;
  * @author george
  */
 @Data
-@Schema(title = "返回结果", description = "返回结果")
 public class Result<T> implements IEnums {
-
-    @Schema(title = "返回码", description = "返回码")
+    /**
+     * 返回码
+     */
     private Integer code;
-    @Schema(title = "返回信息", description = "返回信息")
+    /**
+     * 返回消息
+     */
     private String message;
-    @Schema(title = "跟踪ID", description = "跟踪ID")
+    /**
+     * 跟踪ID
+     */
     private String traceId;
-    @Schema(title = "返回数据", description = "返回数据")
+    /**
+     * 返回数据
+     */
     private T data;
 
     public Result() {

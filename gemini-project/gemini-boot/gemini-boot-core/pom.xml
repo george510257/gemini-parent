@@ -26,10 +26,6 @@
             <artifactId>gemini-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.gls.gemini.starter.openapi</groupId>
-            <artifactId>gemini-starter-openapi</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.gls.gemini.starter.json</groupId>
             <artifactId>gemini-starter-json</artifactId>
         </dependency>
