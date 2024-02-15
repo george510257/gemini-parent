@@ -27,7 +27,6 @@ public class OpenApiProperties extends BaseProperties {
      */
     private List<Server> servers = new ArrayList<>();
 
-
     /**
      * 配置信息
      */
@@ -101,7 +100,6 @@ public class OpenApiProperties extends BaseProperties {
             private String identifier = null;
         }
     }
-
 
     /**
      * 服务器属性

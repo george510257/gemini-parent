@@ -43,7 +43,6 @@ public class DefaultListReadListener<T> implements ListReadListener<T> {
         log.info("解析到一条额外数据: {}", extra);
     }
 
-
     @Override
     public void invoke(T data, AnalysisContext context) {
         // 行号增加

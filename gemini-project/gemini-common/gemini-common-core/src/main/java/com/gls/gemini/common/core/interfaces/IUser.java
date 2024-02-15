@@ -185,5 +185,4 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
         return TreeUtil.build(this.getOrganizations(), 0L, new ITreeNodeParser<>());
     }
 
-
 }

@@ -50,5 +50,4 @@ public class CoreConfig {
         return IdUtil.getSnowflake();
     }
 
-
 }

@@ -86,5 +86,4 @@ public class ResultHandler implements ResponseBodyAdvice<Object> {
         return ResultEnums.SUCCESS.getResult(body);
     }
 
-
 }

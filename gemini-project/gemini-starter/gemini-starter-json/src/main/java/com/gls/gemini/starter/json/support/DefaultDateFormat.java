@@ -10,7 +10,6 @@ import java.util.Date;
 
 public class DefaultDateFormat extends SimpleDateFormat {
 
-
     public DefaultDateFormat() {
         super(DatePattern.NORM_DATETIME_PATTERN);
     }

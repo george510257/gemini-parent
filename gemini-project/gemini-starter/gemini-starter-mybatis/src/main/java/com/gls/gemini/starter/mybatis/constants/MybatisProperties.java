@@ -19,7 +19,6 @@ public class MybatisProperties extends BaseProperties {
      */
     private Tenant tenant = new Tenant();
 
-
     @Data
     public static class Tenant implements Serializable {
         /**

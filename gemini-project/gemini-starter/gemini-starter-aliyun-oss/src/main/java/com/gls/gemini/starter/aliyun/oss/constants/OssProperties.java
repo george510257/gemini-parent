@@ -35,7 +35,6 @@ public class OssProperties extends BaseProperties {
      */
     private ThreadPool threadPool = new ThreadPool();
 
-
     @Data
     public static class Client implements Serializable {
         /**

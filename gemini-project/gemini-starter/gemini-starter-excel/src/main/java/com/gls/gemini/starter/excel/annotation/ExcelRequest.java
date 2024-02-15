@@ -42,5 +42,4 @@ public @interface ExcelRequest {
      */
     Class<? extends ListReadListener> readListener() default DefaultListReadListener.class;
 
-
 }
