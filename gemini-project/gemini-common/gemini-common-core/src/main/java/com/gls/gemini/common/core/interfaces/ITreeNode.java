@@ -3,7 +3,7 @@ package com.gls.gemini.common.core.interfaces;
 /**
  * 树节点
  */
-public interface ITreeNode extends IDoMain {
+public interface ITreeNode extends IDomain {
 
     /**
      * 获取编码

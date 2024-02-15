@@ -1,7 +1,7 @@
 package com.gls.gemini.starter.mybatis.base;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.gls.gemini.common.core.interfaces.IDoMain;
+import com.gls.gemini.common.core.interfaces.IDomain;
 import lombok.Data;
 
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Date;
  * 基础实体类
  */
 @Data
-public class BaseEntity implements IDoMain {
+public class BaseEntity implements IDomain {
 
     public static final String COL_ID = "id";
     public static final String COL_TENANT_ID = "tenant_id";

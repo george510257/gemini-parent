@@ -1,6 +1,6 @@
 package com.gls.gemini.sdk.core.vo;
 
-import com.gls.gemini.common.core.interfaces.IDoMain;
+import com.gls.gemini.common.core.interfaces.IDomain;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Data
 @Schema(title = "基础实体", description = "基础实体")
-public class BaseVo implements IDoMain {
+public class BaseVo implements IDomain {
 
     /**
      * 主键

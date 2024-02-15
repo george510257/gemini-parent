@@ -8,7 +8,7 @@ import com.gls.gemini.common.core.base.BaseConverter;
 import com.gls.gemini.common.core.base.BaseService;
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
-import com.gls.gemini.common.core.interfaces.IDoMain;
+import com.gls.gemini.common.core.interfaces.IDomain;
 import com.gls.gemini.starter.mybatis.util.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public abstract class BaseServiceImpl<Converter extends BaseConverter<Vo, Entity>,
         Mapper extends BaseMapper<Entity>,
-        Vo extends IDoMain,
+        Vo extends IDomain,
         Entity extends BaseEntity> extends ServiceImpl<Mapper, Entity>
         implements BaseService<Vo> {
 

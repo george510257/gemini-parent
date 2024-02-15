@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * 领域对象
  */
-public interface IDoMain extends Serializable {
+public interface IDomain extends Serializable {
 
     /**
      * 获取ID

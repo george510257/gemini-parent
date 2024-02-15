@@ -1,6 +1,6 @@
 package com.gls.gemini.starter.data.jpa.base;
 
-import com.gls.gemini.common.core.interfaces.IDoMain;
+import com.gls.gemini.common.core.interfaces.IDomain;
 import com.gls.gemini.starter.data.jpa.support.DefaultEntityListener;
 import com.gls.gemini.starter.data.jpa.support.JpaSnowflakeGenerator;
 import jakarta.persistence.*;
@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 @MappedSuperclass
 @EntityListeners({DefaultEntityListener.class})
-public class BaseEntity implements IDoMain {
+public class BaseEntity implements IDomain {
 
     @Id
     @GenericGenerator(name = "snowflake", type = JpaSnowflakeGenerator.class)

@@ -15,7 +15,7 @@ import java.util.TimeZone;
  * 用户信息
  */
 public interface IUser<R extends IRole, P extends IPermission, O extends IOrganization>
-        extends UserDetails, IDoMain {
+        extends UserDetails, IDomain {
 
     /**
      * 获取手机号
