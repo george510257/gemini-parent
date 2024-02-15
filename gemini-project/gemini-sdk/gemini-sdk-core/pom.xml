@@ -17,5 +17,9 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.gls.gemini.starter.excel</groupId>
+            <artifactId>gemini-starter-excel</artifactId>
+        </dependency>
     </dependencies>
 </project>
