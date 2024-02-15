@@ -16,7 +16,7 @@ public class XxlJobProperties extends BaseProperties {
     /**
      * 调度中心地址 (选填)：如调度中心集群部署存在多个地址，用逗号分隔。
      */
-    private String adminAddresses;
+    private String adminAddresses = "http://xxl-job-admin:8080/xxl-job-admin";
     /**
      * 执行器Token (选填)：非空时启用；
      */

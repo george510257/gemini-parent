@@ -5,6 +5,7 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.gls.gemini.starter.xxl.job.constants.XxlJobConstants;
 import com.gls.gemini.starter.xxl.job.constants.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 /**
  * 定时任务配置
  */
+@Slf4j
 @Configuration
 public class XxlJobConfig {
 
@@ -28,14 +30,16 @@ public class XxlJobConfig {
     public XxlJobSpringExecutor xxlJobExecutor(XxlJobProperties xxlJobProperties, DiscoveryClient discoveryClient) {
         XxlJobSpringExecutor executor = new XxlJobSpringExecutor();
         // 定时任务中心地址
-        if (xxlJobProperties.getAdminAddresses() != null) {
-            executor.setAdminAddresses(xxlJobProperties.getAdminAddresses());
+        String adminAddresses = discoveryClient.getServices().stream()
+                .filter(serviceId -> serviceId.contains(XxlJobConstants.ADMIN_SERVICE_ID))
+                .flatMap(serviceId -> discoveryClient.getInstances(serviceId).stream())
+                .map(serviceInstance -> StrUtil.format(XxlJobConstants.URL_TEMPLATE, serviceInstance.getHost(), serviceInstance.getPort(), XxlJobConstants.ADMIN_SERVICE_ID))
+                .collect(Collectors.joining(","));
+        log.info("定时任务中心地址: {}", adminAddresses);
+        if (StrUtil.isNotBlank(adminAddresses)) {
+            executor.setAdminAddresses(adminAddresses);
         } else {
-            executor.setAdminAddresses(discoveryClient.getServices().stream()
-                    .filter(serviceId -> serviceId.contains(XxlJobConstants.ADMIN_SERVICE_ID))
-                    .flatMap(serviceId -> discoveryClient.getInstances(serviceId).stream())
-                    .map(serviceInstance -> StrUtil.format(XxlJobConstants.URL_TEMPLATE, serviceInstance.getHost(), serviceInstance.getPort(), XxlJobConstants.ADMIN_SERVICE_ID))
-                    .collect(Collectors.joining(",")));
+            executor.setAdminAddresses(xxlJobProperties.getAdminAddresses());
         }
         // 执行器AppName
         if (xxlJobProperties.getAppName() != null) {
