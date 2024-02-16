@@ -3,7 +3,7 @@ package com.gls.gemini.starter.excel.annotation;
 import com.alibaba.excel.converters.Converter;
 import com.alibaba.excel.write.builder.ExcelWriterSheetBuilder;
 import com.alibaba.excel.write.handler.WriteHandler;
-import com.gls.gemini.starter.excel.customizer.Customizer;
+import com.gls.gemini.common.core.support.Customizer;
 
 import java.lang.annotation.*;
 
