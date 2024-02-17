@@ -30,10 +30,10 @@ public class BaseEntityHandler implements MetaObjectHandler {
         Date now = new Date();
         this.strictInsertFill(metaObject, "deleted", Boolean.class, false);
         this.strictInsertFill(metaObject, "createUserId", Long.class, loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
-        this.strictInsertFill(metaObject, "createUserName", String.class, loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
+        this.strictInsertFill(metaObject, "createUserName", String.class, loginTemplate.flatMap(LoginTemplate::getLoginUserRealName).orElse("system"));
         this.strictInsertFill(metaObject, "createTime", Date.class, now);
         this.strictInsertFill(metaObject, "updateUserId", Long.class, loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
-        this.strictInsertFill(metaObject, "updateUserName", String.class, loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
+        this.strictInsertFill(metaObject, "updateUserName", String.class, loginTemplate.flatMap(LoginTemplate::getLoginUserRealName).orElse("system"));
         this.strictInsertFill(metaObject, "updateTime", Date.class, now);
     }
 
@@ -47,7 +47,7 @@ public class BaseEntityHandler implements MetaObjectHandler {
         log.info("updateFill metaObject: {}", metaObject);
         Date now = new Date();
         this.strictUpdateFill(metaObject, "updateUserId", Long.class, loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
-        this.strictUpdateFill(metaObject, "updateUserName", String.class, loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
+        this.strictUpdateFill(metaObject, "updateUserName", String.class, loginTemplate.flatMap(LoginTemplate::getLoginUserRealName).orElse("system"));
         this.strictUpdateFill(metaObject, "updateTime", Date.class, now);
     }
 }

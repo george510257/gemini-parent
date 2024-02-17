@@ -27,10 +27,10 @@ public class DefaultEntityListener {
         Date now = new Date();
         entity.setDeleted(false);
         entity.setCreateUserId(loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
-        entity.setCreateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
+        entity.setCreateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserRealName).orElse("system"));
         entity.setCreateTime(now);
         entity.setUpdateUserId(loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
-        entity.setUpdateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
+        entity.setUpdateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserRealName).orElse("system"));
         entity.setUpdateTime(now);
     }
 
@@ -42,7 +42,7 @@ public class DefaultEntityListener {
         log.info("preUpdate entity: {}", entity);
         Date now = new Date();
         entity.setUpdateUserId(loginTemplate.flatMap(LoginTemplate::getLoginUserId).orElse(0L));
-        entity.setUpdateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserName).orElse("system"));
+        entity.setUpdateUserName(loginTemplate.flatMap(LoginTemplate::getLoginUserRealName).orElse("system"));
         entity.setUpdateTime(now);
     }
 }
