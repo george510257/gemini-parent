@@ -17,6 +17,7 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpHeaders;
@@ -34,6 +35,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@ConditionalOnBean(RequestMappingHandlerAdapter.class)
 public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
     @Resource
     private ExcelProperties excelProperties;

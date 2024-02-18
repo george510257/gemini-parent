@@ -7,6 +7,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ResolvableType;
 import org.springframework.stereotype.Component;
@@ -30,6 +31,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
+@ConditionalOnBean(RequestMappingHandlerAdapter.class)
 public class ExcelRequestResolver implements HandlerMethodArgumentResolver {
     @Resource
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
