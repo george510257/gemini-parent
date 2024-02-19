@@ -1,6 +1,6 @@
 ## 项目介绍
 
-- 项目名称：gemini-parent 
+- 项目名称：gemini-parent
 - 项目介绍：父项目
 
 ## 项目结构
