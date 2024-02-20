@@ -8,18 +8,14 @@ import net.sf.jsqlparser.expression.Expression;
 import net.sf.jsqlparser.expression.LongValue;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class DefaultTenantLineHandler implements TenantLineHandler {
     @Resource
     private MybatisProperties mybatisProperties;
-    @Resource
-    private Optional<LoginTemplate<?, ?, ?, ?>> loginTemplate;
 
     @Override
     public Expression getTenantId() {
-        Long tenantId = loginTemplate.flatMap(LoginTemplate::getLoginTenantId).orElse(0L);
+        Long tenantId = LoginTemplate.getLoginTenantId().orElse(0L);
         return new LongValue(tenantId);
     }
 

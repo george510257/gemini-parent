@@ -1,4 +1,4 @@
-package com.gls.gemini.starter.excel.support;
+package com.gls.gemini.sdk.core.support;
 
 import com.alibaba.excel.converters.Converter;
 import com.alibaba.excel.enums.CellDataTypeEnum;
@@ -25,18 +25,18 @@ public class StatusConverter implements Converter<Integer> {
     @Override
     public Integer convertToJavaData(ReadCellData<?> cellData, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) throws Exception {
         if (cellData.getStringValue().equals("正常")) {
-            return 0;
-        } else if (cellData.getStringValue().equals("禁用")) {
             return 1;
+        } else if (cellData.getStringValue().equals("禁用")) {
+            return 0;
         }
         return null;
     }
 
     @Override
     public WriteCellData<?> convertToExcelData(Integer value, ExcelContentProperty contentProperty, GlobalConfiguration globalConfiguration) throws Exception {
-        if (value == 0) {
+        if (value == 1) {
             return new WriteCellData<>("正常");
-        } else if (value == 1) {
+        } else if (value == 0) {
             return new WriteCellData<>("禁用");
         }
         return null;

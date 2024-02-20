@@ -5,6 +5,9 @@ import com.gls.gemini.common.core.interfaces.IOrganization;
 import com.gls.gemini.common.core.interfaces.IPermission;
 import com.gls.gemini.common.core.interfaces.IRole;
 import com.gls.gemini.common.core.interfaces.IUser;
+import lombok.experimental.UtilityClass;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.Locale;
@@ -14,21 +17,31 @@ import java.util.TimeZone;
 /**
  * 登录模板
  */
-public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P extends IPermission, O extends IOrganization> {
+@UtilityClass
+public class LoginTemplate {
 
     /**
      * 获取登录用户
      *
      * @return 登录用户
      */
-    Optional<U> getLoginUser();
+    public Optional<IUser> getLoginUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof IUser user) {
+                return Optional.of(user);
+            }
+        }
+        return Optional.empty();
+    }
 
     /**
      * 获取登录用户id
      *
      * @return 登录用户id
      */
-    default Optional<Long> getLoginUserId() {
+    public Optional<Long> getLoginUserId() {
         return getLoginUser().map(IUser::getId);
     }
 
@@ -37,7 +50,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录租户id
      */
-    default Optional<Long> getLoginTenantId() {
+    public Optional<Long> getLoginTenantId() {
         return getLoginUser().map(IUser::getTenantId);
     }
 
@@ -46,7 +59,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户名
      */
-    default Optional<String> getLoginUserName() {
+    public Optional<String> getLoginUserName() {
         return getLoginUser().map(IUser::getUsername);
     }
 
@@ -55,7 +68,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户手机号
      */
-    default Optional<String> getLoginUserMobile() {
+    public Optional<String> getLoginUserMobile() {
         return getLoginUser().map(IUser::getMobile);
     }
 
@@ -64,7 +77,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户邮箱
      */
-    default Optional<String> getLoginUserEmail() {
+    public Optional<String> getLoginUserEmail() {
         return getLoginUser().map(IUser::getEmail);
     }
 
@@ -73,7 +86,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户真实姓名
      */
-    default Optional<String> getLoginUserRealName() {
+    public Optional<String> getLoginUserRealName() {
         return getLoginUser().map(IUser::getRealName);
     }
 
@@ -82,7 +95,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户昵称
      */
-    default Optional<String> getLoginUserNickname() {
+    public Optional<String> getLoginUserNickname() {
         return getLoginUser().map(IUser::getNickname);
     }
 
@@ -91,7 +104,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户头像
      */
-    default Optional<String> getLoginUserAvatar() {
+    public Optional<String> getLoginUserAvatar() {
         return getLoginUser().map(IUser::getAvatar);
     }
 
@@ -100,7 +113,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户语言
      */
-    default Optional<String> getLoginUserLanguage() {
+    public Optional<String> getLoginUserLanguage() {
         return getLoginUser().map(IUser::getLanguage);
     }
 
@@ -109,7 +122,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户区域
      */
-    default Optional<Locale> getLoginUserLocale() {
+    public Optional<Locale> getLoginUserLocale() {
         return getLoginUser().map(IUser::getLocale);
     }
 
@@ -118,7 +131,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户时区
      */
-    default Optional<TimeZone> getLoginUserTimeZone() {
+    public Optional<TimeZone> getLoginUserTimeZone() {
         return getLoginUser().map(IUser::getTimeZone);
     }
 
@@ -127,7 +140,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户角色
      */
-    default Optional<R> getLoginUserRole() {
+    public Optional<IRole> getLoginUserRole() {
         return getLoginUser().map(IUser::getRole);
     }
 
@@ -136,7 +149,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户角色id
      */
-    default Optional<Long> getLoginUserRoleId() {
+    public Optional<Long> getLoginUserRoleId() {
         return getLoginUserRole().map(IRole::getId);
     }
 
@@ -145,7 +158,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户角色名称
      */
-    default Optional<String> getLoginUserRoleName() {
+    public Optional<String> getLoginUserRoleName() {
         return getLoginUserRole().map(IRole::getName);
     }
 
@@ -154,7 +167,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户角色编码
      */
-    default Optional<String> getLoginUserRoleCode() {
+    public Optional<String> getLoginUserRoleCode() {
         return getLoginUserRole().map(IRole::getCode);
     }
 
@@ -163,7 +176,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户角色列表
      */
-    default Optional<List<R>> getLoginUserRoleList() {
+    public Optional<List<IRole>> getLoginUserRoleList() {
         return getLoginUser().map(IUser::getRoles);
     }
 
@@ -172,7 +185,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户角色树
      */
-    default Optional<List<Tree<Long>>> getLoginUserRoleTree() {
+    public Optional<List<Tree<Long>>> getLoginUserRoleTree() {
         return getLoginUser().map(IUser::getRoleTree);
     }
 
@@ -181,7 +194,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户组织
      */
-    default Optional<O> getLoginUserOrganization() {
+    public Optional<IOrganization> getLoginUserOrganization() {
         return getLoginUser().map(IUser::getOrganization);
     }
 
@@ -190,7 +203,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户组织id
      */
-    default Optional<Long> getLoginUserOrganizationId() {
+    public Optional<Long> getLoginUserOrganizationId() {
         return getLoginUserOrganization().map(IOrganization::getId);
     }
 
@@ -199,7 +212,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户组织名称
      */
-    default Optional<String> getLoginUserOrganizationName() {
+    public Optional<String> getLoginUserOrganizationName() {
         return getLoginUserOrganization().map(IOrganization::getName);
     }
 
@@ -208,7 +221,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户组织编码
      */
-    default Optional<String> getLoginUserOrganizationCode() {
+    public Optional<String> getLoginUserOrganizationCode() {
         return getLoginUserOrganization().map(IOrganization::getCode);
     }
 
@@ -217,7 +230,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户组织列表
      */
-    default Optional<List<O>> getLoginUserOrganizationList() {
+    public Optional<List<IOrganization>> getLoginUserOrganizationList() {
         return getLoginUser().map(IUser::getOrganizations);
     }
 
@@ -226,7 +239,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户组织树
      */
-    default Optional<List<Tree<Long>>> getLoginUserOrganizationTree() {
+    public Optional<List<Tree<Long>>> getLoginUserOrganizationTree() {
         return getLoginUser().map(IUser::getOrganizationTree);
     }
 
@@ -235,7 +248,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户权限列表
      */
-    default Optional<List<P>> getLoginUserPermissionList() {
+    public Optional<List<IPermission>> getLoginUserPermissionList() {
         return getLoginUser().map(IUser::getPermissions);
     }
 
@@ -244,7 +257,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户权限树
      */
-    default Optional<List<Tree<Long>>> getLoginUserPermissionTree() {
+    public Optional<List<Tree<Long>>> getLoginUserPermissionTree() {
         return getLoginUser().map(IUser::getPermissionTree);
     }
 
@@ -254,7 +267,7 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      * @param command 权限
      * @return 是否存在权限
      */
-    default boolean hasPermission(String command) {
+    public boolean hasPermission(String command) {
         return getLoginUserPermissionList()
                 .map(permissions -> permissions.stream()
                         .anyMatch(permission -> permission.getCommand().contains(command)))
