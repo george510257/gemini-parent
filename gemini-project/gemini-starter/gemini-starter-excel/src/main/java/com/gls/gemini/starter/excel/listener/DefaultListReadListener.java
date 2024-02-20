@@ -6,7 +6,7 @@ import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.util.ConverterUtils;
 import com.gls.gemini.starter.excel.annotation.ExcelLine;
-import com.gls.gemini.starter.excel.domain.ExcelError;
+import com.gls.gemini.starter.excel.support.ExcelError;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.gls.gemini.starter.excel.listener;
 
 import com.alibaba.excel.read.listener.ReadListener;
-import com.gls.gemini.starter.excel.domain.ExcelError;
+import com.gls.gemini.starter.excel.support.ExcelError;
 
 import java.util.List;
 

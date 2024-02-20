@@ -1,4 +1,4 @@
-package com.gls.gemini.starter.excel.domain;
+package com.gls.gemini.starter.excel.support;
 
 import lombok.Builder;
 import lombok.Data;
