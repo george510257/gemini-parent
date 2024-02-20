@@ -14,7 +14,7 @@ import java.util.TimeZone;
 /**
  * 用户信息
  */
-public interface IUser extends UserDetails, IDomain {
+public interface IUser<R extends IRole, P extends IPermission, O extends IOrganization> extends UserDetails, IDomain {
 
     /**
      * 获取手机号
@@ -77,35 +77,35 @@ public interface IUser extends UserDetails, IDomain {
      *
      * @return 当前角色
      */
-    IRole getRole();
+    R getRole();
 
     /**
      * 获取当前组织
      *
      * @return 当前组织
      */
-    IOrganization getOrganization();
+    O getOrganization();
 
     /**
      * 获取用户角色列表
      *
      * @return 角色列表
      */
-    List<IRole> getRoles();
+    List<R> getRoles();
 
     /**
      * 获取用户权限列表
      *
      * @return 权限列表
      */
-    List<IPermission> getPermissions();
+    List<P> getPermissions();
 
     /**
      * 获取组织机构列表
      *
      * @return 组织机构列表
      */
-    List<IOrganization> getOrganizations();
+    List<O> getOrganizations();
 
     /**
      * 获取角色列表
