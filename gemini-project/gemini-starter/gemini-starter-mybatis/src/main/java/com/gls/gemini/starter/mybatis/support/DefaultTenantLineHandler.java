@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 public class DefaultTenantLineHandler implements TenantLineHandler {
     @Resource
     private MybatisProperties mybatisProperties;
+    @Resource
+    private LoginTemplate<?, ?, ?, ?> loginTemplate;
 
     @Override
     public Expression getTenantId() {
-        Long tenantId = LoginTemplate.getLoginTenantId().orElse(0L);
+        Long tenantId = loginTemplate.getLoginTenantId().orElse(0L);
         return new LongValue(tenantId);
     }
 

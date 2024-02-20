@@ -2,6 +2,7 @@ package com.gls.gemini.starter.data.jpa.support;
 
 import com.gls.gemini.common.core.support.LoginTemplate;
 import com.gls.gemini.starter.data.jpa.base.BaseEntity;
+import jakarta.annotation.Resource;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import lombok.extern.slf4j.Slf4j;
@@ -13,19 +14,24 @@ import java.util.Date;
 @Component
 public class DefaultEntityListener {
 
+    @Resource
+    private LoginTemplate<?, ?, ?, ?> loginTemplate;
+
     /**
      * 新增前操作
      */
     @PrePersist
     public void prePersist(BaseEntity entity) {
         log.info("prePersist entity: {}", entity);
+        Long userId = loginTemplate.getLoginUserId().orElse(0L);
+        String userName = loginTemplate.getLoginUserRealName().orElse("system");
         Date now = new Date();
         entity.setDeleted(false);
-        entity.setCreateUserId(LoginTemplate.getLoginUserId().orElse(0L));
-        entity.setCreateUserName(LoginTemplate.getLoginUserRealName().orElse("system"));
+        entity.setCreateUserId(userId);
+        entity.setCreateUserName(userName);
         entity.setCreateTime(now);
-        entity.setUpdateUserId(LoginTemplate.getLoginUserId().orElse(0L));
-        entity.setUpdateUserName(LoginTemplate.getLoginUserRealName().orElse("system"));
+        entity.setUpdateUserId(userId);
+        entity.setUpdateUserName(userName);
         entity.setUpdateTime(now);
     }
 
@@ -35,9 +41,11 @@ public class DefaultEntityListener {
     @PreUpdate
     public void preUpdate(BaseEntity entity) {
         log.info("preUpdate entity: {}", entity);
+        Long userId = loginTemplate.getLoginUserId().orElse(0L);
+        String userName = loginTemplate.getLoginUserRealName().orElse("system");
         Date now = new Date();
-        entity.setUpdateUserId(LoginTemplate.getLoginUserId().orElse(0L));
-        entity.setUpdateUserName(LoginTemplate.getLoginUserRealName().orElse("system"));
+        entity.setUpdateUserId(userId);
+        entity.setUpdateUserName(userName);
         entity.setUpdateTime(now);
     }
 }

@@ -5,9 +5,6 @@ import com.gls.gemini.common.core.interfaces.IOrganization;
 import com.gls.gemini.common.core.interfaces.IPermission;
 import com.gls.gemini.common.core.interfaces.IRole;
 import com.gls.gemini.common.core.interfaces.IUser;
-import lombok.experimental.UtilityClass;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 import java.util.Locale;
@@ -17,31 +14,21 @@ import java.util.TimeZone;
 /**
  * 登录模板
  */
-@UtilityClass
-public class LoginTemplate {
+public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P extends IPermission, O extends IOrganization> {
 
     /**
      * 获取登录用户
      *
      * @return 登录用户
      */
-    public Optional<IUser> getLoginUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof IUser user) {
-                return Optional.of(user);
-            }
-        }
-        return Optional.empty();
-    }
+    Optional<U> getLoginUser();
 
     /**
      * 获取登录用户id
      *
      * @return 登录用户id
      */
-    public Optional<Long> getLoginUserId() {
+    default Optional<Long> getLoginUserId() {
         return getLoginUser().map(IUser::getId);
     }
 
@@ -50,7 +37,7 @@ public class LoginTemplate {
      *
      * @return 登录租户id
      */
-    public Optional<Long> getLoginTenantId() {
+    default Optional<Long> getLoginTenantId() {
         return getLoginUser().map(IUser::getTenantId);
     }
 
@@ -59,7 +46,7 @@ public class LoginTemplate {
      *
      * @return 登录用户名
      */
-    public Optional<String> getLoginUserName() {
+    default Optional<String> getLoginUserName() {
         return getLoginUser().map(IUser::getUsername);
     }
 
@@ -68,7 +55,7 @@ public class LoginTemplate {
      *
      * @return 登录用户手机号
      */
-    public Optional<String> getLoginUserMobile() {
+    default Optional<String> getLoginUserMobile() {
         return getLoginUser().map(IUser::getMobile);
     }
 
@@ -77,7 +64,7 @@ public class LoginTemplate {
      *
      * @return 登录用户邮箱
      */
-    public Optional<String> getLoginUserEmail() {
+    default Optional<String> getLoginUserEmail() {
         return getLoginUser().map(IUser::getEmail);
     }
 
@@ -86,7 +73,7 @@ public class LoginTemplate {
      *
      * @return 登录用户真实姓名
      */
-    public Optional<String> getLoginUserRealName() {
+    default Optional<String> getLoginUserRealName() {
         return getLoginUser().map(IUser::getRealName);
     }
 
@@ -95,7 +82,7 @@ public class LoginTemplate {
      *
      * @return 登录用户昵称
      */
-    public Optional<String> getLoginUserNickname() {
+    default Optional<String> getLoginUserNickname() {
         return getLoginUser().map(IUser::getNickname);
     }
 
@@ -104,7 +91,7 @@ public class LoginTemplate {
      *
      * @return 登录用户头像
      */
-    public Optional<String> getLoginUserAvatar() {
+    default Optional<String> getLoginUserAvatar() {
         return getLoginUser().map(IUser::getAvatar);
     }
 
@@ -113,7 +100,7 @@ public class LoginTemplate {
      *
      * @return 登录用户语言
      */
-    public Optional<String> getLoginUserLanguage() {
+    default Optional<String> getLoginUserLanguage() {
         return getLoginUser().map(IUser::getLanguage);
     }
 
@@ -122,7 +109,7 @@ public class LoginTemplate {
      *
      * @return 登录用户区域
      */
-    public Optional<Locale> getLoginUserLocale() {
+    default Optional<Locale> getLoginUserLocale() {
         return getLoginUser().map(IUser::getLocale);
     }
 
@@ -131,7 +118,7 @@ public class LoginTemplate {
      *
      * @return 登录用户时区
      */
-    public Optional<TimeZone> getLoginUserTimeZone() {
+    default Optional<TimeZone> getLoginUserTimeZone() {
         return getLoginUser().map(IUser::getTimeZone);
     }
 
@@ -140,7 +127,7 @@ public class LoginTemplate {
      *
      * @return 登录用户角色
      */
-    public Optional<IRole> getLoginUserRole() {
+    default Optional<R> getLoginUserRole() {
         return getLoginUser().map(IUser::getRole);
     }
 
@@ -149,7 +136,7 @@ public class LoginTemplate {
      *
      * @return 登录用户角色id
      */
-    public Optional<Long> getLoginUserRoleId() {
+    default Optional<Long> getLoginUserRoleId() {
         return getLoginUserRole().map(IRole::getId);
     }
 
@@ -158,7 +145,7 @@ public class LoginTemplate {
      *
      * @return 登录用户角色名称
      */
-    public Optional<String> getLoginUserRoleName() {
+    default Optional<String> getLoginUserRoleName() {
         return getLoginUserRole().map(IRole::getName);
     }
 
@@ -167,7 +154,7 @@ public class LoginTemplate {
      *
      * @return 登录用户角色编码
      */
-    public Optional<String> getLoginUserRoleCode() {
+    default Optional<String> getLoginUserRoleCode() {
         return getLoginUserRole().map(IRole::getCode);
     }
 
@@ -176,7 +163,7 @@ public class LoginTemplate {
      *
      * @return 登录用户角色列表
      */
-    public Optional<List<IRole>> getLoginUserRoleList() {
+    default Optional<List<R>> getLoginUserRoleList() {
         return getLoginUser().map(IUser::getRoles);
     }
 
@@ -185,7 +172,7 @@ public class LoginTemplate {
      *
      * @return 登录用户角色树
      */
-    public Optional<List<Tree<Long>>> getLoginUserRoleTree() {
+    default Optional<List<Tree<Long>>> getLoginUserRoleTree() {
         return getLoginUser().map(IUser::getRoleTree);
     }
 
@@ -194,7 +181,7 @@ public class LoginTemplate {
      *
      * @return 登录用户组织
      */
-    public Optional<IOrganization> getLoginUserOrganization() {
+    default Optional<O> getLoginUserOrganization() {
         return getLoginUser().map(IUser::getOrganization);
     }
 
@@ -203,7 +190,7 @@ public class LoginTemplate {
      *
      * @return 登录用户组织id
      */
-    public Optional<Long> getLoginUserOrganizationId() {
+    default Optional<Long> getLoginUserOrganizationId() {
         return getLoginUserOrganization().map(IOrganization::getId);
     }
 
@@ -212,7 +199,7 @@ public class LoginTemplate {
      *
      * @return 登录用户组织名称
      */
-    public Optional<String> getLoginUserOrganizationName() {
+    default Optional<String> getLoginUserOrganizationName() {
         return getLoginUserOrganization().map(IOrganization::getName);
     }
 
@@ -221,7 +208,7 @@ public class LoginTemplate {
      *
      * @return 登录用户组织编码
      */
-    public Optional<String> getLoginUserOrganizationCode() {
+    default Optional<String> getLoginUserOrganizationCode() {
         return getLoginUserOrganization().map(IOrganization::getCode);
     }
 
@@ -230,7 +217,7 @@ public class LoginTemplate {
      *
      * @return 登录用户组织列表
      */
-    public Optional<List<IOrganization>> getLoginUserOrganizationList() {
+    default Optional<List<O>> getLoginUserOrganizationList() {
         return getLoginUser().map(IUser::getOrganizations);
     }
 
@@ -239,7 +226,7 @@ public class LoginTemplate {
      *
      * @return 登录用户组织树
      */
-    public Optional<List<Tree<Long>>> getLoginUserOrganizationTree() {
+    default Optional<List<Tree<Long>>> getLoginUserOrganizationTree() {
         return getLoginUser().map(IUser::getOrganizationTree);
     }
 
@@ -248,7 +235,7 @@ public class LoginTemplate {
      *
      * @return 登录用户权限列表
      */
-    public Optional<List<IPermission>> getLoginUserPermissionList() {
+    default Optional<List<P>> getLoginUserPermissionList() {
         return getLoginUser().map(IUser::getPermissions);
     }
 
@@ -257,7 +244,7 @@ public class LoginTemplate {
      *
      * @return 登录用户权限树
      */
-    public Optional<List<Tree<Long>>> getLoginUserPermissionTree() {
+    default Optional<List<Tree<Long>>> getLoginUserPermissionTree() {
         return getLoginUser().map(IUser::getPermissionTree);
     }
 
@@ -267,7 +254,7 @@ public class LoginTemplate {
      * @param command 权限
      * @return 是否存在权限
      */
-    public boolean hasPermission(String command) {
+    default boolean hasPermission(String command) {
         return getLoginUserPermissionList()
                 .map(permissions -> permissions.stream()
                         .anyMatch(permission -> permission.getCommand().contains(command)))
