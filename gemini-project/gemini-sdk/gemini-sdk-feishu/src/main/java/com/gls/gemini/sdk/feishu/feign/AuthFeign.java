@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- *
+ * 认证相关接口
  */
 @FeignClient(name = "feishu", contextId = "auth", path = "/auth")
 public interface AuthFeign {
