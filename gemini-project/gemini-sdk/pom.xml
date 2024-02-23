@@ -14,12 +14,13 @@
     <packaging>pom</packaging>
     <modules>
         <module>gemini-sdk-core</module>
+        <module>gemini-sdk-feishu</module>
     </modules>
 
     <dependencies>
         <dependency>
-            <groupId>com.gls.gemini.common.core</groupId>
-            <artifactId>gemini-common-core</artifactId>
+            <groupId>com.gls.gemini.starter.core</groupId>
+            <artifactId>gemini-starter-core</artifactId>
         </dependency>
     </dependencies>
 </project>
