@@ -1,5 +1,6 @@
 package com.gls.gemini.sdk.feishu.feign;
 
+import com.gls.gemini.sdk.feishu.interceptor.AuthInterceptor;
 import com.gls.gemini.sdk.feishu.vo.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * 认证相关接口
  */
-@FeignClient(name = "feishu", contextId = "auth", path = "/auth")
+@FeignClient(name = "feishu", contextId = "auth", path = "/auth/v3", configuration = AuthInterceptor.class)
 public interface AuthFeign {
 
     /**
@@ -17,7 +18,7 @@ public interface AuthFeign {
      * @param request 请求参数
      * @return 返回参数
      */
-    @PostMapping(value = "/v3/tenant_access_token/internal", consumes = "application/json;charset=UTF-8")
+    @PostMapping("/tenant_access_token/internal")
     TenantAccessTokenVo getTenantAccessToken(@RequestBody AppVo request);
 
     /**
@@ -26,7 +27,7 @@ public interface AuthFeign {
      * @param request 请求参数
      * @return 返回参数
      */
-    @PostMapping(value = "/v3/app_access_token/internal", consumes = "application/json;charset=UTF-8")
+    @PostMapping("/app_access_token/internal")
     AppAccessTokenVo getAppAccessToken(@RequestBody AppVo request);
 
     /**
@@ -35,7 +36,7 @@ public interface AuthFeign {
      * @param request 请求参数
      * @return 返回参数
      */
-    @PostMapping(value = "/v3/app_access_token", consumes = "application/json;charset=UTF-8")
+    @PostMapping("/app_access_token")
     AppAccessTokenVo getAppAccessToken(@RequestBody AppTicketVo request);
 
     /**
@@ -44,7 +45,7 @@ public interface AuthFeign {
      * @param request 请求参数
      * @return 返回参数
      */
-    @PostMapping(value = "/v3/tenant_access_token", consumes = "application/json;charset=UTF-8")
+    @PostMapping("/tenant_access_token")
     TenantAccessTokenVo getTenantAccessToken(@RequestBody TenantKeyVo request);
 
     /**
@@ -53,6 +54,6 @@ public interface AuthFeign {
      * @param request 请求参数
      * @return 返回参数
      */
-    @PostMapping(value = "/v3/app_ticket/resend", consumes = "application/json;charset=UTF-8")
+    @PostMapping("/app_ticket/resend")
     ResultVo<String> resendAppTicket(@RequestBody AppVo request);
 }
