@@ -1,4 +1,4 @@
-package com.gls.gemini.sdk.feishu.vo;
+package com.gls.gemini.sdk.feishu.vo.auth;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
