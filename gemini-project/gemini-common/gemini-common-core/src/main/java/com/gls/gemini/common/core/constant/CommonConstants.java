@@ -24,7 +24,7 @@ public interface CommonConstants {
     /**
      * 默认网关服务ID
      */
-    String GATEWAY_SERVICE_ID = "gemini-cloud-gateway";
+    String GATEWAY_SERVICE_ID = "gemini-gateway";
     /**
      * 默认网关服务名称
      */
@@ -32,7 +32,7 @@ public interface CommonConstants {
     /**
      * 默认认证授权服务ID
      */
-    String UAA_SERVICE_ID = "gemini-cloud-uaa";
+    String UAA_SERVICE_ID = "gemini-uaa";
     /**
      * 默认认证授权服务名称
      */
@@ -40,7 +40,7 @@ public interface CommonConstants {
     /**
      * 默认用户权限服务ID
      */
-    String UPMS_SERVICE_ID = "gemini-cloud-upms";
+    String UPMS_SERVICE_ID = "gemini-upms";
     /**
      * 默认用户权限服务名称
      */
