@@ -14,4 +14,5 @@ public interface FeishuConstants {
      * 飞书host
      */
     String FEISHU_HOST = "https://open.feishu.cn/open-apis";
+
 }

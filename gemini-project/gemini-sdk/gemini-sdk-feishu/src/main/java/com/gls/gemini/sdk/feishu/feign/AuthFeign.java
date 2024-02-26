@@ -1,6 +1,6 @@
 package com.gls.gemini.sdk.feishu.feign;
 
-import com.gls.gemini.sdk.feishu.interceptor.AuthInterceptor;
+import com.gls.gemini.sdk.feishu.interceptor.DefaultInterceptor;
 import com.gls.gemini.sdk.feishu.vo.ResultVo;
 import com.gls.gemini.sdk.feishu.vo.auth.*;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * 认证相关接口
  */
-@FeignClient(name = "feishu", contextId = "auth", path = "/auth/v3", configuration = AuthInterceptor.class)
+@FeignClient(name = "feishu", contextId = "auth", path = "/auth/v3", configuration = DefaultInterceptor.class)
 public interface AuthFeign {
 
     /**
