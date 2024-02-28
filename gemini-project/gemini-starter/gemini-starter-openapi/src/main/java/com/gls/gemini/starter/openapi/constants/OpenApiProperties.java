@@ -115,15 +115,15 @@ public class OpenApiProperties extends BaseProperties {
             /**
              * 许可证名称
              */
-            private String name = null;
+            private String name = "Apache License 2.0";
             /**
              * 许可证url
              */
-            private String url = null;
+            private String url = "https://www.apache.org/licenses/LICENSE-2.0.html";
             /**
              * 许可证identifier
              */
-            private String identifier = null;
+            private String identifier = "Apache-2.0";
         }
     }
 
