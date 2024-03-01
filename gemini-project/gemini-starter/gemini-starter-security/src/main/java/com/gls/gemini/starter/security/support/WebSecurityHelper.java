@@ -22,10 +22,14 @@ import org.springframework.security.oauth2.server.resource.web.access.BearerToke
  * 安全工具
  */
 @RequiredArgsConstructor
-public class SecurityHelper {
-
+public class WebSecurityHelper {
+    /**
+     * 安全忽略属性
+     */
     private final SecurityIgnoreProperties securityIgnoreProperties;
-
+    /**
+     * 用户详情服务
+     */
     private final UserDetailsService userDetailsService;
 
     /**
@@ -81,7 +85,8 @@ public class SecurityHelper {
         String username = jwt.getSubject();
         // 创建用户名密码认证令牌
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return UsernamePasswordAuthenticationToken.authenticated(userDetails, null, userDetails.getAuthorities());
+        // 返回认证令牌
+        return UsernamePasswordAuthenticationToken.authenticated(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
     }
 
     /**

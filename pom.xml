@@ -35,7 +35,7 @@
         <timefold-solver.version>1.6.0</timefold-solver.version>
         <vaadin.version>24.3.3</vaadin.version>
 
-        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
+        <spring-cloud-alibaba.version>2023.0.0.0-RC1</spring-cloud-alibaba.version>
         <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
         <swagger-api.version>2.2.20</swagger-api.version>
         <redisson.version>3.26.0</redisson.version>

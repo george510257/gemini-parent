@@ -16,10 +16,10 @@ public class SecurityIgnoreProperties extends BaseProperties {
     /**
      * 忽略的 URL (静态资源，不通过过滤器链)
      */
-    private String[] ignoreUrls;
+    private String[] ignoreUrls = new String[]{};
 
     /**
      * 忽略的 URL (非静态资源，通过过滤器链)
      */
-    private String[] ignorePatterns;
+    private String[] ignorePatterns = new String[]{};
 }

@@ -91,6 +91,11 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
+                <groupId>com.gls.gemini.starter.security</groupId>
+                <artifactId>gemini-starter-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>com.gls.gemini.starter.web</groupId>
                 <artifactId>gemini-starter-web</artifactId>
                 <version>${project.version}</version>
