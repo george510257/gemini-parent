@@ -14,7 +14,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".security.ignore")
 public class SecurityIgnoreProperties extends BaseProperties {
     /**
-     * 忽略的 URL
+     * 忽略的 URL (静态资源，不通过过滤器链)
      */
-    private String[] ignoreUrls = new String[]{};
+    private String[] ignoreUrls;
+
+    /**
+     * 忽略的 URL (非静态资源，通过过滤器链)
+     */
+    private String[] ignorePatterns;
 }
