@@ -46,6 +46,8 @@ public class WebFluxResourceServerConfig {
         // 配置请求授权
         http.authorizeExchange(spec -> spec
                 // 忽略配置的url
+                .pathMatchers(securityIgnoreProperties.getIgnoreUrls()).permitAll()
+                // 忽略配置的url
                 .pathMatchers(securityIgnoreProperties.getIgnorePatterns()).permitAll()
                 // 其他请求需要认证
                 .anyExchange().authenticated());
