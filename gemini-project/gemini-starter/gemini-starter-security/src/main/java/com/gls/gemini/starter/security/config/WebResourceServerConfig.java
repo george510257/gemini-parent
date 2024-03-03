@@ -71,7 +71,7 @@ public class WebResourceServerConfig {
                 // 配置请求授权 - 忽略请求
                 .requestMatchers(securityIgnoreProperties.getIgnorePatterns()).permitAll()
                 // 配置请求授权 - 其他请求
-                .anyRequest().authenticated());
+                .anyRequest().permitAll());
 
         // 关闭csrf
         http.csrf(AbstractHttpConfigurer::disable);
