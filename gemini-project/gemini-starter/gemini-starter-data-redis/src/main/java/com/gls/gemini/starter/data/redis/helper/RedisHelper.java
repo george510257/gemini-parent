@@ -5,6 +5,7 @@ import lombok.experimental.Delegate;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Redis 帮助类
@@ -129,4 +130,15 @@ public class RedisHelper {
         return redisTemplate.opsForList().range(getPrefixKey(key), 0, size);
     }
 
+    /**
+     * 设置列表
+     *
+     * @param key      key
+     * @param value    value
+     * @param timeout  超时时间
+     * @param timeUnit 时间单位
+     */
+    public void set(String key, Object value, long timeout, TimeUnit timeUnit) {
+        redisTemplate.opsForValue().set(getPrefixKey(key), value, timeout, timeUnit);
+    }
 }
