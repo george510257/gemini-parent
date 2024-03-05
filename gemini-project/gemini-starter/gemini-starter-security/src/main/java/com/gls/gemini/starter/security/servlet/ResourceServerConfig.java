@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -73,7 +72,7 @@ public class ResourceServerConfig {
      * @throws Exception 异常
      */
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order
     public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
         // 配置请求授权
         http.authorizeHttpRequests(this::authorizeHttpRequestsCustomizer);

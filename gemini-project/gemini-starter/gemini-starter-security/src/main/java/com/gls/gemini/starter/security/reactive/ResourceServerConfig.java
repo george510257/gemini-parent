@@ -10,15 +10,14 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
@@ -44,10 +43,10 @@ public class ResourceServerConfig {
      * 用户详情服务
      */
     @Resource
-    private Optional<UserDetailsService> userDetailsService;
+    private Optional<ReactiveUserDetailsService> userDetailsService;
 
     @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @Order
     public SecurityWebFilterChain defaultSecurityFilterChain(ServerHttpSecurity http) {
         // 配置请求授权
         http.authorizeExchange(this::authorizeExchangeCustomizer);
@@ -103,9 +102,9 @@ public class ResourceServerConfig {
             // 获取用户名
             String username = jwt.getSubject();
             // 创建用户名密码认证令牌
-            UserDetails userDetails = detailsService.loadUserByUsername(username);
+            Mono<UserDetails> userDetails = detailsService.findByUsername(username);
             // 返回认证令牌
-            return Mono.just(UsernamePasswordAuthenticationToken.authenticated(userDetails, userDetails.getPassword(), userDetails.getAuthorities()));
+            return userDetails.map(user -> UsernamePasswordAuthenticationToken.authenticated(user, user.getPassword(), user.getAuthorities()));
         }).orElse(new ReactiveJwtAuthenticationConverter());
     }
 
