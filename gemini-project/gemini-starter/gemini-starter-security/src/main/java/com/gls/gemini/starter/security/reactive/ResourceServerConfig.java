@@ -1,6 +1,5 @@
 package com.gls.gemini.starter.security.reactive;
 
-import cn.hutool.core.util.StrUtil;
 import com.gls.gemini.common.core.constant.CommonConstants;
 import com.gls.gemini.starter.security.constants.SecurityConstants;
 import com.gls.gemini.starter.security.constants.SecurityIgnoreProperties;
@@ -137,7 +136,7 @@ public class ResourceServerConfig {
                 // 获取uaa服务实例
                 .flatMap(serviceId -> discoveryClient.getInstances(serviceId).stream())
                 // 获取uaa服务实例的uri
-                .map(serviceInstance -> StrUtil.format(SecurityConstants.URL_TEMPLATE, serviceInstance.getHost(), serviceInstance.getPort()))
+                .map(serviceInstance -> serviceInstance.getUri().toString() + SecurityConstants.JWK_SET_ENDPOINT)
                 // 获取任意一个
                 .findAny()
                 // 获取不到则返回空字符串

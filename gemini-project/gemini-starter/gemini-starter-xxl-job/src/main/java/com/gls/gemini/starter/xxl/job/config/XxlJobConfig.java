@@ -33,7 +33,7 @@ public class XxlJobConfig {
         String adminAddresses = discoveryClient.getServices().stream()
                 .filter(serviceId -> serviceId.contains(XxlJobConstants.ADMIN_SERVICE_ID))
                 .flatMap(serviceId -> discoveryClient.getInstances(serviceId).stream())
-                .map(serviceInstance -> StrUtil.format(XxlJobConstants.URL_TEMPLATE, serviceInstance.getHost(), serviceInstance.getPort(), XxlJobConstants.ADMIN_SERVICE_ID))
+                .map(serviceInstance -> serviceInstance.getUri().toString() + "/" + XxlJobConstants.ADMIN_SERVICE_ID)
                 .collect(Collectors.joining(","));
         log.info("定时任务中心地址: {}", adminAddresses);
         if (StrUtil.isNotBlank(adminAddresses)) {
