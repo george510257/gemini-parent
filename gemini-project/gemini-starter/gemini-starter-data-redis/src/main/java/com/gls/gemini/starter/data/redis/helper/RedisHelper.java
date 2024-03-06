@@ -5,7 +5,6 @@ import lombok.experimental.Delegate;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -153,11 +152,23 @@ public class RedisHelper {
         redisTemplate.delete(getPrefixKey(key));
     }
 
+    /**
+     * 获取列表
+     *
+     * @param key    key
+     * @param tClass 类型
+     * @param <T>    类型
+     * @return 列表
+     */
     public <T> List<T> getValues(String key, Class<T> tClass) {
         Set<String> keys = redisTemplate.keys(getPrefixKey(key));
-        if (keys != null) {
-            return Objects.requireNonNull(redisTemplate.opsForValue().multiGet(keys)).stream().map(t -> (T) t).toList();
+        if (keys == null) {
+            return null;
         }
-        return null;
+        List<Object> objects = redisTemplate.opsForValue().multiGet(keys);
+        if (objects == null) {
+            return null;
+        }
+        return objects.stream().map(t -> (T) t).toList();
     }
 }
