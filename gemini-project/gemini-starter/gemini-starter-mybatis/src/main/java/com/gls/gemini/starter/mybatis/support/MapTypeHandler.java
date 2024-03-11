@@ -1,6 +1,7 @@
 package com.gls.gemini.starter.mybatis.support;
 
 import cn.hutool.core.lang.TypeReference;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -49,7 +50,7 @@ public class MapTypeHandler<K, V> extends BaseTypeHandler<Map<K, V>> {
     public Map<K, V> getNullableResult(ResultSet rs, String columnName) throws SQLException {
         // 获取json字符串
         String jsonStr = rs.getString(columnName);
-        if (jsonStr != null) {
+        if (StrUtil.isNotBlank(jsonStr)) {
             // json字符串转map
             return JSONUtil.toBean(jsonStr, new TypeReference<>() {
             }, true);
@@ -69,7 +70,7 @@ public class MapTypeHandler<K, V> extends BaseTypeHandler<Map<K, V>> {
     public Map<K, V> getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         // 获取json字符串
         String jsonStr = rs.getString(columnIndex);
-        if (jsonStr != null) {
+        if (StrUtil.isNotBlank(jsonStr)) {
             // json字符串转map
             return JSONUtil.toBean(jsonStr, new TypeReference<>() {
             }, true);
@@ -89,7 +90,7 @@ public class MapTypeHandler<K, V> extends BaseTypeHandler<Map<K, V>> {
     public Map<K, V> getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         // 获取json字符串
         String jsonStr = cs.getString(columnIndex);
-        if (jsonStr != null) {
+        if (StrUtil.isNotBlank(jsonStr)) {
             // json字符串转map
             return JSONUtil.toBean(jsonStr, new TypeReference<>() {
             }, true);

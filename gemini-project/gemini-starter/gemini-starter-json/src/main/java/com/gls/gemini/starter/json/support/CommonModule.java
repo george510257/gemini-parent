@@ -3,7 +3,6 @@ package com.gls.gemini.starter.json.support;
 import cn.hutool.core.date.DatePattern;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.fasterxml.jackson.datatype.jsr310.PackageVersion;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
@@ -18,8 +17,6 @@ import java.time.LocalTime;
 public class CommonModule extends SimpleModule {
 
     public CommonModule() {
-        super(PackageVersion.VERSION);
-
         // ======================= 时间序列化规则 ===============================
         // yyyy-MM-dd HH:mm:ss
         this.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DatePattern.NORM_DATETIME_FORMATTER));

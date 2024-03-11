@@ -1,6 +1,7 @@
 package com.gls.gemini.starter.json.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.gls.gemini.starter.json.support.CommonModule;
 import com.gls.gemini.starter.json.support.DefaultDateFormat;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -31,8 +32,8 @@ public class JacksonConfig {
             builder.timeZone(TimeZone.getTimeZone(ZoneId.systemDefault()));
             // 设置全局日期格式
             builder.dateFormat(new DefaultDateFormat());
-            // 设置全局序列化模块
-            builder.modules(new CommonModule());
+            // 设置全局序列化模块 JavaTimeModule 用于序列化和反序列化 java8 时间类型
+            builder.modules(new JavaTimeModule(), new CommonModule());
             // 反序列化时忽略未知属性
             builder.failOnUnknownProperties(false);
             // 序列化时忽略值为 null 的属性

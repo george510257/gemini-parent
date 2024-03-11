@@ -16,7 +16,10 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -40,7 +43,7 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
     @Override
     @Operation(summary = "新增", description = "新增")
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
-    public Result<Vo> insert(Vo vo) {
+    public Result<Vo> insert(@RequestBody @Validated Vo vo) {
         return ResultEnums.SUCCESS.getResult(this.service.insert(vo));
     }
 
@@ -54,7 +57,7 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
     @Override
     @Operation(summary = "更新", description = "更新")
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
-    public Result<Vo> update(Long id, Vo vo) {
+    public Result<Vo> update(@PathVariable Long id, @RequestBody @Validated Vo vo) {
         return ResultEnums.SUCCESS.getResult(this.service.update(id, vo));
     }
 
@@ -67,7 +70,7 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
     @Override
     @Operation(summary = "删除", description = "删除")
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
-    public Result<Boolean> delete(Long id) {
+    public Result<Boolean> delete(@PathVariable Long id) {
         return ResultEnums.SUCCESS.getResult(this.service.delete(id));
     }
 
@@ -80,7 +83,7 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
     @Override
     @Operation(summary = "查询", description = "查询")
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
-    public Result<Vo> get(Long id) {
+    public Result<Vo> get(@PathVariable Long id) {
         return ResultEnums.SUCCESS.getResult(this.service.get(id));
     }
 
@@ -93,7 +96,7 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
     @Override
     @Operation(summary = "分页查询", description = "分页查询")
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
-    public Result<PageResult<Vo>> page(PageQuery<Vo> pageQuery) {
+    public Result<PageResult<Vo>> page(@RequestBody @Validated PageQuery<Vo> pageQuery) {
         return ResultEnums.SUCCESS.getResult(this.service.page(pageQuery));
     }
 
@@ -106,7 +109,7 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
     @Override
     @Operation(summary = "查询所有", description = "查询所有")
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
-    public Result<List<Vo>> list(Vo vo) {
+    public Result<List<Vo>> list(@RequestBody @Validated Vo vo) {
         return ResultEnums.SUCCESS.getResult(this.service.list(vo));
     }
 
@@ -133,7 +136,7 @@ public abstract class BaseController<Service extends BaseService<Vo>, Vo extends
     @PostMapping(value = "/export")
     @ExcelResponse(fileName = "导出结果", sheets = @ExcelSheet(sheetName = "导出结果"))
     @Parameter(name = HeaderConstants.CLIENT_TYPE, in = ParameterIn.HEADER, example = "PC", description = "客户端类型(PC：统一返回Result和PageResult对象)")
-    public List<Vo> exportData(Vo vo) {
+    public List<Vo> exportData(@RequestBody @Validated Vo vo) {
         return this.service.exportData(vo);
     }
 }
