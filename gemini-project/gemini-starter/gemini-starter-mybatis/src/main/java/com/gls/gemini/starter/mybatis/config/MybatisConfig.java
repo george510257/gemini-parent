@@ -7,11 +7,12 @@ import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
-import com.gls.gemini.starter.mybatis.support.MapTypeHandler;
-import com.gls.gemini.starter.mybatis.support.SetTypeHandler;
+import org.apache.ibatis.type.TypeHandler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 /**
  * Mybatis配置
@@ -44,11 +45,9 @@ public class MybatisConfig {
      * @return 自定义SqlSessionFactoryBean
      */
     @Bean
-    public SqlSessionFactoryBeanCustomizer sqlSessionFactoryBeanCustomizer() {
+    public SqlSessionFactoryBeanCustomizer sqlSessionFactoryBeanCustomizer(List<TypeHandler<?>> typeHandlers) {
         return (sqlSessionFactoryBean) -> {
-            MapTypeHandler<?, ?> mapTypeHandler = new MapTypeHandler<>();
-            SetTypeHandler<?> setTypeHandler = new SetTypeHandler<>();
-            sqlSessionFactoryBean.setTypeHandlers(mapTypeHandler, setTypeHandler);
+            sqlSessionFactoryBean.setTypeHandlers(typeHandlers.toArray(new TypeHandler<?>[0]));
         };
     }
 }

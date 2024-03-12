@@ -42,7 +42,7 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
      *
      * @return 昵称
      */
-    String getNickname();
+    String getNickName();
 
     /**
      * 获取用户头像

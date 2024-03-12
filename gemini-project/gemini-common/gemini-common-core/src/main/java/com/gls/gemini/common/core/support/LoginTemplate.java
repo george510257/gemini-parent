@@ -82,8 +82,8 @@ public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P exte
      *
      * @return 登录用户昵称
      */
-    default Optional<String> getLoginUserNickname() {
-        return getLoginUser().map(IUser::getNickname);
+    default Optional<String> getLoginUserNickName() {
+        return getLoginUser().map(IUser::getNickName);
     }
 
     /**

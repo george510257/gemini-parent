@@ -7,6 +7,7 @@ import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
 import org.apache.ibatis.type.MappedTypes;
+import org.springframework.stereotype.Component;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @param <K> key
  * @param <V> value
  */
+@Component
 @MappedTypes(Map.class)
 @MappedJdbcTypes(JdbcType.VARCHAR)
 public class MapTypeHandler<K, V> extends BaseTypeHandler<Map<K, V>> {

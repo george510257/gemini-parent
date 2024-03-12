@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -26,7 +25,7 @@ public class UserVo extends BaseVo implements IUser<RoleVo, PermissionVo, Organi
     @Schema(title = "姓名", description = "姓名")
     private String realName;
     @Schema(title = "昵称", description = "昵称")
-    private String nickname;
+    private String nickName;
     @Schema(title = "头像", description = "头像")
     private String avatar;
     @Schema(title = "语言", description = "语言")
@@ -42,10 +41,10 @@ public class UserVo extends BaseVo implements IUser<RoleVo, PermissionVo, Organi
     private OrganizationVo organization;
 
     @Schema(title = "角色列表", description = "角色列表")
-    private List<RoleVo> roles = new ArrayList<>();
+    private List<RoleVo> roles;
     @Schema(title = "权限列表", description = "权限列表")
-    private List<PermissionVo> permissions = new ArrayList<>();
+    private List<PermissionVo> permissions;
     @Schema(title = "组织列表", description = "组织列表")
-    private List<OrganizationVo> organizations = new ArrayList<>();
+    private List<OrganizationVo> organizations;
 
 }
