@@ -1,5 +1,6 @@
 package com.gls.gemini.common.core.interfaces;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.tree.Tree;
 import cn.hutool.core.lang.tree.TreeUtil;
 import com.gls.gemini.common.core.support.ITreeNodeParser;
@@ -163,6 +164,9 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
      * @return 角色树
      */
     default List<Tree<Long>> getRoleTree() {
+        if (CollUtil.isEmpty(this.getRoles())) {
+            return null;
+        }
         return TreeUtil.build(this.getRoles(), 0L, new ITreeNodeParser<>());
     }
 
@@ -172,6 +176,9 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
      * @return 权限树
      */
     default List<Tree<Long>> getPermissionTree() {
+        if (CollUtil.isEmpty(this.getPermissions())) {
+            return null;
+        }
         return TreeUtil.build(this.getPermissions(), 0L, new ITreeNodeParser<>());
     }
 
@@ -181,6 +188,9 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
      * @return 组织机构树
      */
     default List<Tree<Long>> getOrganizationTree() {
+        if (CollUtil.isEmpty(this.getOrganizations())) {
+            return null;
+        }
         return TreeUtil.build(this.getOrganizations(), 0L, new ITreeNodeParser<>());
     }
 
