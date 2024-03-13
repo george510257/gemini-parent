@@ -3,14 +3,14 @@ package com.gls.gemini.starter.mybatis.config;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.SqlSessionFactoryBeanCustomizer;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.handler.DataPermissionHandler;
 import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
-import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.*;
 import org.apache.ibatis.type.TypeHandler;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import java.util.List;
 
@@ -25,17 +25,10 @@ public class MybatisConfig {
      * @return 分页插件
      */
     @Bean
-    @ConditionalOnMissingBean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(TenantLineHandler tenantLineHandler) {
+    @ConditionalOnBean(InnerInterceptor.class)
+    public MybatisPlusInterceptor mybatisPlusInterceptor(List<InnerInterceptor> innerInterceptors) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        // 添加乐观锁插件
-        interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());
-        // 添加数据权限插件
-//        interceptor.addInnerInterceptor(new DataPermissionInterceptor());
-        // 添加租户插件
-        interceptor.addInnerInterceptor(new TenantLineInnerInterceptor(tenantLineHandler));
-        // 添加分页插件
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
+        innerInterceptors.forEach(interceptor::addInnerInterceptor);
         return interceptor;
     }
 
@@ -45,9 +38,56 @@ public class MybatisConfig {
      * @return 自定义SqlSessionFactoryBean
      */
     @Bean
+    @ConditionalOnBean(TypeHandler.class)
     public SqlSessionFactoryBeanCustomizer sqlSessionFactoryBeanCustomizer(List<TypeHandler<?>> typeHandlers) {
         return (sqlSessionFactoryBean) -> {
             sqlSessionFactoryBean.setTypeHandlers(typeHandlers.toArray(new TypeHandler<?>[0]));
         };
+    }
+
+    /**
+     * 乐观锁插件
+     *
+     * @return 乐观锁插件
+     */
+    @Bean
+    @Order(1)
+    public OptimisticLockerInnerInterceptor optimisticLockerInnerInterceptor() {
+        return new OptimisticLockerInnerInterceptor();
+    }
+
+    /**
+     * 分页插件
+     *
+     * @return 分页插件
+     */
+    @Bean
+    @Order(10)
+    public PaginationInnerInterceptor paginationInnerInterceptor() {
+        return new PaginationInnerInterceptor(DbType.MYSQL);
+    }
+
+    /**
+     * 租户插件
+     *
+     * @return 租户插件
+     */
+    @Bean
+    @Order(3)
+    @ConditionalOnBean(TenantLineHandler.class)
+    public TenantLineInnerInterceptor tenantLineInnerInterceptor(TenantLineHandler tenantLineHandler) {
+        return new TenantLineInnerInterceptor(tenantLineHandler);
+    }
+
+    /**
+     * 数据权限插件
+     *
+     * @return 数据权限插件
+     */
+    @Bean
+    @Order(4)
+    @ConditionalOnBean(DataPermissionHandler.class)
+    public DataPermissionInterceptor dataPermissionInterceptor(DataPermissionHandler dataPermissionHandler) {
+        return new DataPermissionInterceptor(dataPermissionHandler);
     }
 }
