@@ -1,4 +1,4 @@
-package com.gls.gemini.starter.mybatis.type;
+package com.gls.gemini.starter.mybatis.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
@@ -10,44 +10,44 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.TimeZone;
+import java.util.Locale;
 
 @Component
-@MappedTypes(TimeZone.class)
+@MappedTypes(Locale.class)
 @MappedJdbcTypes(JdbcType.VARCHAR)
-public class TimeZoneTypeHandler extends BaseTypeHandler<TimeZone> {
+public class LocaleTypeHandler extends BaseTypeHandler<Locale> {
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, TimeZone parameter, JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(PreparedStatement ps, int i, Locale parameter, JdbcType jdbcType) throws SQLException {
         // 设置参数
-        ps.setString(i, parameter.getID());
+        ps.setString(i, parameter.toLanguageTag());
     }
 
     @Override
-    public TimeZone getNullableResult(ResultSet rs, String columnName) throws SQLException {
+    public Locale getNullableResult(ResultSet rs, String columnName) throws SQLException {
         // 获取字符串
         String result = rs.getString(columnName);
         if (result != null) {
-            return TimeZone.getTimeZone(result);
+            return Locale.forLanguageTag(result);
         }
         return null;
     }
 
     @Override
-    public TimeZone getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    public Locale getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
         // 获取字符串
         String result = rs.getString(columnIndex);
         if (result != null) {
-            return TimeZone.getTimeZone(result);
+            return Locale.forLanguageTag(result);
         }
         return null;
     }
 
     @Override
-    public TimeZone getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    public Locale getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         // 获取字符串
         String result = cs.getString(columnIndex);
         if (result != null) {
-            return TimeZone.getTimeZone(result);
+            return Locale.forLanguageTag(result);
         }
         return null;
     }

@@ -1,4 +1,4 @@
-package com.gls.gemini.starter.mybatis.type;
+package com.gls.gemini.starter.mybatis.handler;
 
 import cn.hutool.core.util.StrUtil;
 import org.apache.ibatis.type.BaseTypeHandler;
