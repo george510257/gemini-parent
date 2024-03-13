@@ -15,7 +15,7 @@ import java.util.TimeZone;
 /**
  * 用户信息
  */
-public interface IUser<R extends IRole, P extends IPermission, O extends IOrganization> extends UserDetails, IDomain {
+public interface IUser<R extends IRole<P>, P extends IPermission, O extends IOrganization> extends UserDetails, IDomain {
 
     /**
      * 获取手机号
@@ -99,7 +99,12 @@ public interface IUser<R extends IRole, P extends IPermission, O extends IOrgani
      *
      * @return 权限列表
      */
-    List<P> getPermissions();
+    default List<P> getPermissions() {
+        if (CollUtil.isEmpty(this.getRoles())) {
+            return null;
+        }
+        return this.getRoles().stream().map(IRole::getPermissions).flatMap(Collection::stream).distinct().toList();
+    }
 
     /**
      * 获取组织机构列表

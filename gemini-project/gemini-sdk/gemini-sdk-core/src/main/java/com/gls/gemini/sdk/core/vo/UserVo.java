@@ -42,8 +42,6 @@ public class UserVo extends BaseVo implements IUser<RoleVo, PermissionVo, Organi
 
     @Schema(title = "角色列表", description = "角色列表")
     private List<RoleVo> roles;
-    @Schema(title = "权限列表", description = "权限列表")
-    private List<PermissionVo> permissions;
     @Schema(title = "组织列表", description = "组织列表")
     private List<OrganizationVo> organizations;
 

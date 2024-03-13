@@ -5,10 +5,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(title = "角色信息", description = "角色信息")
-public class RoleVo extends BaseVo implements IRole {
+public class RoleVo extends BaseVo implements IRole<PermissionVo> {
 
     @Schema(title = "角色名", description = "角色名")
     private String name;
@@ -22,4 +24,6 @@ public class RoleVo extends BaseVo implements IRole {
     private Long parentId;
     @Schema(title = "排序", description = "排序")
     private Integer sort;
+    @Schema(title = "权限列表", description = "权限列表")
+    private List<PermissionVo> permissions;
 }

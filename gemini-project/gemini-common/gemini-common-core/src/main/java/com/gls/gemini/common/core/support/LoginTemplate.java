@@ -14,7 +14,7 @@ import java.util.TimeZone;
 /**
  * 登录模板
  */
-public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole, P extends IPermission, O extends IOrganization> {
+public interface LoginTemplate<U extends IUser<R, P, O>, R extends IRole<P>, P extends IPermission, O extends IOrganization> {
 
     /**
      * 获取登录用户
