@@ -1,4 +1,4 @@
-package com.gls.gemini.starter.mybatis.support;
+package com.gls.gemini.starter.mybatis.type;
 
 import cn.hutool.core.lang.TypeReference;
 import cn.hutool.core.util.StrUtil;

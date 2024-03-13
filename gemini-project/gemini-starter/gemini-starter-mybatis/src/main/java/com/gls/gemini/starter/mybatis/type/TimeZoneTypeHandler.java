@@ -1,4 +1,4 @@
-package com.gls.gemini.starter.mybatis.support;
+package com.gls.gemini.starter.mybatis.type;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
