@@ -20,6 +20,6 @@ public class RoleVo extends BaseVo implements IRole {
     private String type;
     @Schema(title = "父角色ID", description = "父角色ID")
     private Long parentId;
-    @Schema(title = "权重", description = "权重")
-    private Integer weight;
+    @Schema(title = "排序", description = "排序")
+    private Integer sort;
 }

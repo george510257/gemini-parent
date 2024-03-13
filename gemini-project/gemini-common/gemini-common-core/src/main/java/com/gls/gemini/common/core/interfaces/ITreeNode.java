@@ -41,10 +41,10 @@ public interface ITreeNode extends IDomain {
     Long getParentId();
 
     /**
-     * 获取权重
+     * 获取排序
      *
-     * @return 权重
+     * @return 排序
      */
-    Integer getWeight();
+    Integer getSort();
 
 }

@@ -11,7 +11,7 @@ public class ITreeNodeParser<Node extends ITreeNode> implements NodeParser<Node,
         treeNode.setId(node.getId());
         treeNode.setParentId(node.getParentId());
         treeNode.setName(node.getName());
-        treeNode.setWeight(node.getWeight());
+        treeNode.setWeight(node.getSort());
         treeNode.putExtra("code", node.getCode());
         treeNode.putExtra("description", node.getDescription());
         treeNode.putExtra("type", node.getType());

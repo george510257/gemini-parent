@@ -20,6 +20,6 @@ public class OrganizationVo extends BaseVo implements IOrganization {
     private String type;
     @Schema(title = "父组织ID", description = "父组织ID")
     private Long parentId;
-    @Schema(title = "权重", description = "权重")
-    private Integer weight;
+    @Schema(title = "排序", description = "排序")
+    private Integer sort;
 }
