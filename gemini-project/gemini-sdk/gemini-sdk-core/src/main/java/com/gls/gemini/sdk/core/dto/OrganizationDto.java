@@ -1,6 +1,7 @@
-package com.gls.gemini.sdk.core.vo;
+package com.gls.gemini.sdk.core.dto;
 
 import com.gls.gemini.common.core.interfaces.IOrganization;
+import com.gls.gemini.sdk.core.vo.BaseVo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Schema(title = "组织信息", description = "组织信息")
-public class OrganizationVo extends BaseVo implements IOrganization {
+public class OrganizationDto extends BaseVo implements IOrganization {
 
     @Schema(title = "组织名", description = "组织名")
     private String name;
