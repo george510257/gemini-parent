@@ -25,14 +25,6 @@ public class CommonModule extends SimpleModule {
 
     public CommonModule() {
         super(CommonModule.class.getName(), new Version(1, 0, 0, null, "com.gls.gemini.starter.json", "gemini-starter-json"));
-    }
-
-    @Override
-    public void setupModule(SetupContext context) {
-        // 获取 ObjectMapper 对象
-        ObjectMapper objectMapper = context.getOwner();
-        // 设置默认类型 防止反序列化时出现类型丢失
-        objectMapper.setDefaultTyping(null);
         // ======================= 时间序列化规则 ===============================
         // yyyy-MM-dd HH:mm:ss
         this.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DatePattern.NORM_DATETIME_FORMATTER));
@@ -50,5 +42,13 @@ public class CommonModule extends SimpleModule {
         this.addDeserializer(LocalDate.class, new LocalDateDeserializer(DatePattern.NORM_DATE_FORMATTER));
         // HH:mm:ss
         this.addDeserializer(LocalTime.class, new LocalTimeDeserializer(DatePattern.NORM_TIME_FORMATTER));
+    }
+
+    @Override
+    public void setupModule(SetupContext context) {
+        // 获取 ObjectMapper 对象
+        ObjectMapper objectMapper = context.getOwner();
+        // 设置默认类型 防止反序列化时出现类型丢失
+        objectMapper.setDefaultTyping(null);
     }
 }
