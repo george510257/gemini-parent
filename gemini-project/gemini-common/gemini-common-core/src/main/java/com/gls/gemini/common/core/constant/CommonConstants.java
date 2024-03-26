@@ -57,5 +57,9 @@ public interface CommonConstants {
      * 默认用户密码
      */
     String DEFAULT_USER_PASSWORD = "123456";
+    /**
+     * jwk set uri
+     */
+    String JWK_SET_URI = "/oauth2/jwks";
 
 }
