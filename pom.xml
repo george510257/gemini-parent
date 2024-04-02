@@ -150,10 +150,16 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>0.8.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-annotations-jakarta</artifactId>
                 <version>${swagger-api.version}</version>
-                <scope>compile</scope>
             </dependency>
             <dependency>
                 <groupId>org.redisson</groupId>
