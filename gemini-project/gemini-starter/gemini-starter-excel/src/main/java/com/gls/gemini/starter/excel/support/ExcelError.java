@@ -1,5 +1,6 @@
 package com.gls.gemini.starter.excel.support;
 
+import cn.hutool.extra.validation.BeanValidationResult;
 import lombok.Builder;
 import lombok.Data;
 
@@ -21,5 +22,5 @@ public class ExcelError implements Serializable {
     /**
      * 错误信息
      */
-    private List<String> errors;
+    private List<BeanValidationResult.ErrorMessage> errorMessages;
 }

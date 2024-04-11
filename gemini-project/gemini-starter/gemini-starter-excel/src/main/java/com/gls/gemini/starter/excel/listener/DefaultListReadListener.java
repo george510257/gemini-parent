@@ -1,22 +1,19 @@
 package com.gls.gemini.starter.excel.listener;
 
-import cn.hutool.core.collection.CollUtil;
+import cn.hutool.extra.validation.BeanValidationResult;
+import cn.hutool.extra.validation.ValidationUtil;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.metadata.data.ReadCellData;
 import com.alibaba.excel.util.ConverterUtils;
 import com.gls.gemini.starter.excel.annotation.ExcelLine;
 import com.gls.gemini.starter.excel.support.ExcelError;
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Slf4j
 public class DefaultListReadListener<T> implements ListReadListener<T> {
@@ -50,16 +47,13 @@ public class DefaultListReadListener<T> implements ListReadListener<T> {
         log.info("解析第{}行数据: {}", line, data);
 
         // 校验
-        Set<ConstraintViolation<T>> violations = Validation.buildDefaultValidatorFactory().getValidator().validate(data);
+        BeanValidationResult result = ValidationUtil.warpValidate(data);
 
-        // 校验不通过
-        if (CollUtil.isNotEmpty(violations)) {
-            List<String> messages = violations.stream().map(ConstraintViolation::getMessage).collect(Collectors.toList());
-            log.error("第{}行数据校验不通过: {}", line, messages);
-            errors.add(ExcelError.builder().line(line).errors(messages).build());
+        if (!result.isSuccess()) {
+            log.error("第{}行数据校验不通过: {}", line, result.getErrorMessages());
+            errors.add(ExcelError.builder().line(line).errorMessages(result.getErrorMessages()).build());
             return;
         }
-
         // 校验通过
         // 获取有ExcelLine注解的字段 并且类型为Long 设置行号
         Field[] fields = data.getClass().getDeclaredFields();
