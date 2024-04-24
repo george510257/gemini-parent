@@ -1,174 +1,79 @@
 package com.gls.gemini.starter.data.redis.helper;
 
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.Delegate;
+import cn.hutool.core.collection.CollUtil;
+import jakarta.annotation.Resource;
+import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Redis 帮助类
  */
-@RequiredArgsConstructor
+@Component
 public class RedisHelper {
 
-    /**
-     * 前缀
-     */
-    private final String prefix;
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private RedissonClient redissonClient;
 
     /**
-     * RedisTemplate
-     */
-    @Delegate
-    private final RedisTemplate<String, Object> redisTemplate;
-
-    /**
-     * 获取带前缀的 key
+     * 设置值
      *
-     * @param key key
-     * @return 带前缀的 key
+     * @param key   键
+     * @param field 字段
+     * @param value 值
      */
-    public String getPrefixKey(String key) {
-        return prefix + key;
+    public void putHash(String key, String field, Object value) {
+        redisTemplate.opsForHash().put(key, field, value);
     }
 
     /**
-     * 删除 key
+     * 删除值
      *
-     * @param key key
+     * @param key   键
+     * @param field 字段
      */
-    public void delete(String key) {
-        redisTemplate.delete(getPrefixKey(key));
+    public void deleteHash(String key, String field) {
+        redisTemplate.opsForHash().delete(key, field);
     }
 
     /**
-     * 判断 key 是否存在
+     * 获取值
      *
-     * @param key key
-     * @return 是否存在
-     */
-    public boolean hasKey(String key) {
-        return Boolean.TRUE.equals(redisTemplate.hasKey(getPrefixKey(key)));
-    }
-
-    /**
-     * 设置 key-value
-     *
-     * @param key     key
-     * @param value   value
-     * @param timeout 超时时间
-     */
-    public void set(String key, Object value, long timeout) {
-        redisTemplate.opsForValue().set(getPrefixKey(key), value, timeout);
-    }
-
-    /**
-     * 获取 key-value
-     *
-     * @param key key
-     * @return value
-     */
-    public Object get(String key) {
-        return redisTemplate.opsForValue().get(getPrefixKey(key));
-    }
-
-    /**
-     * 获取 key-value
-     *
-     * @param key key
-     * @param <T> value 类型
-     * @return value
-     */
-    public <T> T get(String key, Class<T> clazz) {
-        return (T) redisTemplate.opsForValue().get(getPrefixKey(key));
-    }
-
-    /**
-     * 设置 key-value
-     *
-     * @param key   key
-     * @param value value
-     */
-    public void set(String key, Object value) {
-        redisTemplate.opsForValue().set(getPrefixKey(key), value);
-    }
-
-    /**
-     * 获取递增值
-     *
-     * @param key key
-     * @return 递增后的值
-     */
-    public Long increment(String key) {
-        return redisTemplate.opsForValue().increment(getPrefixKey(key));
-    }
-
-    /**
-     * 获取递增值
-     *
-     * @param key   key
-     * @param delta 递增值
-     * @return 递增后的值
-     */
-    public Long increment(String key, long delta) {
-        return redisTemplate.opsForValue().increment(getPrefixKey(key), delta);
-    }
-
-    /**
-     * 获取列表
-     *
-     * @param key key
-     * @return 列表
-     */
-    public List<Object> getList(String key) {
-        Long size = redisTemplate.opsForList().size(getPrefixKey(key));
-        if (size == null || size == 0) {
-            return null;
-        }
-        return redisTemplate.opsForList().range(getPrefixKey(key), 0, size);
-    }
-
-    /**
-     * 设置列表
-     *
-     * @param key      key
-     * @param value    value
-     * @param timeout  超时时间
-     * @param timeUnit 时间单位
-     */
-    public void set(String key, Object value, long timeout, TimeUnit timeUnit) {
-        redisTemplate.opsForValue().set(getPrefixKey(key), value, timeout, timeUnit);
-    }
-
-    /**
-     * 删除
-     *
-     * @param key key
-     */
-    public void del(String key) {
-        redisTemplate.delete(getPrefixKey(key));
-    }
-
-    /**
-     * 获取列表
-     *
-     * @param key    key
+     * @param key    键
+     * @param field  字段
      * @param tClass 类型
      * @param <T>    类型
-     * @return 列表
+     * @return 值
      */
-    public <T> List<T> getValues(String key, Class<T> tClass) {
-        Set<String> keys = redisTemplate.keys(getPrefixKey(key));
-        if (keys == null) {
+    public <T> T getHash(String key, String field, Class<T> tClass) {
+        Object value = redisTemplate.opsForHash().get(key, field);
+        if (value == null) {
             return null;
         }
-        List<Object> objects = redisTemplate.opsForValue().multiGet(keys);
-        if (objects == null) {
+        try {
+            return tClass.cast(value);
+        } catch (ClassCastException e) {
             return null;
         }
-        return objects.stream().map(t -> (T) t).toList();
+    }
+
+    /**
+     * 获取所有值
+     *
+     * @param key    键
+     * @param tClass 类型
+     * @param <T>    类型
+     * @return 值
+     */
+    public <T> List<T> valuesHash(String key, Class<T> tClass) {
+        List<Object> values = redisTemplate.opsForHash().values(key);
+        if (CollUtil.isEmpty(values)) {
+            return null;
+        }
+        return values.stream().filter(tClass::isInstance).map(tClass::cast).toList();
     }
 }
