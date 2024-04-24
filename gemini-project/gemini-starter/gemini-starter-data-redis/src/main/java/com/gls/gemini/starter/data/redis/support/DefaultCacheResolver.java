@@ -1,14 +1,14 @@
 package com.gls.gemini.starter.data.redis.support;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.interceptor.AbstractCacheResolver;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 默认缓存解析器
@@ -31,14 +31,13 @@ public class DefaultCacheResolver extends AbstractCacheResolver {
         // 获取类名
         String className = context.getTarget().getClass().getSimpleName();
         // 将类名转换为下划线格式
-        String upperCase = StrUtil.toSymbolCase(className, '-');
+        String upperCase = StrUtil.toSymbolCase(className, '_');
 
         // 获取缓存名称
-        List<String> list = new ArrayList<>();
-        for (String cacheName : context.getOperation().getCacheNames()) {
-            String s = upperCase + ":" + cacheName;
-            list.add(s);
+        Set<String> cacheNames = context.getOperation().getCacheNames();
+        if (CollUtil.isEmpty(cacheNames)) {
+            return CollUtil.newArrayList(upperCase);
         }
-        return list;
+        return cacheNames.stream().map(cacheName -> upperCase + ":" + cacheName).toList();
     }
 }

@@ -24,7 +24,7 @@ public interface BaseService<V extends IDomain> {
      * @param vo 视图
      * @return 返回新增后的视图
      */
-    @CachePut(key = "#result.id", value = "vo")
+    @CachePut(key = "#result.id")
     V insert(V vo);
 
     /**
@@ -34,7 +34,7 @@ public interface BaseService<V extends IDomain> {
      * @param vo 视图
      * @return 返回修改后的视图
      */
-    @CachePut(key = "#result.id", value = "vo")
+    @CachePut(key = "#result.id")
     V update(Long id, V vo);
 
     /**
@@ -43,7 +43,7 @@ public interface BaseService<V extends IDomain> {
      * @param id 主键
      * @return 删除结果
      */
-    @CacheEvict(key = "#id", value = "vo")
+    @CacheEvict(key = "#id")
     Boolean delete(Long id);
 
     /**
@@ -52,7 +52,7 @@ public interface BaseService<V extends IDomain> {
      * @param id 主键
      * @return 查询结果
      */
-    @Cacheable(key = "#id", value = "vo")
+    @Cacheable(key = "#id")
     V get(Long id);
 
     /**
