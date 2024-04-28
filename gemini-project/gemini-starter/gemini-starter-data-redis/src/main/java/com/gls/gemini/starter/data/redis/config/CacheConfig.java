@@ -1,12 +1,17 @@
 package com.gls.gemini.starter.data.redis.config;
 
 import com.gls.gemini.starter.data.redis.constants.RedisProperties;
+import com.gls.gemini.starter.data.redis.support.DefaultCacheResolver;
+import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
+import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.CacheResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -19,6 +24,16 @@ import java.util.stream.Collectors;
 @EnableCaching
 @Configuration
 public class CacheConfig {
+
+    @Bean
+    public CachingConfigurer cachingConfigurer(DefaultCacheResolver defaultCacheResolver) {
+        return new CachingConfigurer() {
+            @Override
+            public CacheResolver cacheResolver() {
+                return defaultCacheResolver;
+            }
+        };
+    }
 
     /**
      * 自定义缓存管理器

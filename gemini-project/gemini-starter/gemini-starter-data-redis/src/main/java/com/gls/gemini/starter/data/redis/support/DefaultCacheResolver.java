@@ -31,12 +31,12 @@ public class DefaultCacheResolver extends AbstractCacheResolver {
         // 获取类名
         String className = context.getTarget().getClass().getSimpleName();
         // 将类名转换为下划线格式
-        String upperCase = StrUtil.toSymbolCase(className, '_');
+        String upperCase = StrUtil.toSymbolCase(className, ':');
 
         // 获取缓存名称
         Set<String> cacheNames = context.getOperation().getCacheNames();
         if (CollUtil.isEmpty(cacheNames)) {
-            return CollUtil.newArrayList(upperCase);
+            return CollUtil.newArrayList(upperCase + ":default");
         }
         return cacheNames.stream().map(cacheName -> upperCase + ":" + cacheName).toList();
     }

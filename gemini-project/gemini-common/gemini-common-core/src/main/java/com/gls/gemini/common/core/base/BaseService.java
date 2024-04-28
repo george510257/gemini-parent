@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @param <V> 基础视图
  */
-@CacheConfig(cacheResolver = "defaultCacheResolver")
+@CacheConfig
 public interface BaseService<V extends IDomain> {
 
     /**
