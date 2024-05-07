@@ -3,7 +3,6 @@ package com.gls.gemini.common.core.base;
 import com.gls.gemini.common.core.domain.PageQuery;
 import com.gls.gemini.common.core.domain.PageResult;
 import com.gls.gemini.common.core.interfaces.IDomain;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,7 +14,6 @@ import java.util.List;
  *
  * @param <V> 基础视图
  */
-@CacheConfig
 public interface BaseService<V extends IDomain> {
 
     /**
