@@ -1,4 +1,4 @@
-package com.gls.gemini.starter.data.redis.aop;
+package com.gls.gemini.starter.data.redis.cache;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -12,17 +12,18 @@ import java.util.concurrent.TimeUnit;
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CacheExpire {
-    /**
-     * 失效时间 默认60秒
-     *
-     * @return 缓存时间
-     */
-    long timeToLive() default 60L;
 
     /**
-     * 单位 默认秒
+     * 过期时间
      *
-     * @return 缓存单位
+     * @return 过期时间
+     */
+    long timeToLive();
+
+    /**
+     * 时间单位
+     *
+     * @return 时间单位
      */
     TimeUnit timeUnit() default TimeUnit.SECONDS;
 }

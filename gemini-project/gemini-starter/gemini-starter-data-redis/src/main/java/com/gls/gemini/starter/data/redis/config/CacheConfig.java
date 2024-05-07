@@ -1,85 +1,24 @@
 package com.gls.gemini.starter.data.redis.config;
 
-import com.gls.gemini.starter.data.redis.constants.RedisProperties;
-import com.gls.gemini.starter.data.redis.support.DefaultCacheResolver;
-import org.springframework.boot.autoconfigure.cache.CacheManagerCustomizer;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
-import org.springframework.boot.autoconfigure.cache.RedisCacheManagerBuilderCustomizer;
+import com.gls.gemini.starter.data.redis.cache.DefaultCacheResolver;
+import jakarta.annotation.Resource;
 import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.CacheResolver;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.RedisSerializer;
-
-import java.util.stream.Collectors;
 
 /**
  * 缓存配置
  */
 @EnableCaching
 @Configuration
-public class CacheConfig {
+public class CacheConfig implements CachingConfigurer {
+    @Resource
+    private DefaultCacheResolver defaultCacheResolver;
 
-    @Bean
-    public CachingConfigurer cachingConfigurer(DefaultCacheResolver defaultCacheResolver) {
-        return new CachingConfigurer() {
-            @Override
-            public CacheResolver cacheResolver() {
-                return defaultCacheResolver;
-            }
-        };
-    }
-
-    /**
-     * 自定义缓存管理器
-     *
-     * @param jsonRedisSerializer json序列化器
-     * @return 自定义缓存管理器
-     */
-    @Bean
-    public RedisCacheConfiguration redisCacheConfiguration(Jackson2JsonRedisSerializer<Object> jsonRedisSerializer,
-                                                           CacheProperties cacheProperties) {
-        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
-        // 设置json序列化器
-        config = config.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(RedisSerializer.string()));
-        config = config.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jsonRedisSerializer));
-
-        CacheProperties.Redis redisProperties = cacheProperties.getRedis();
-        // 设置缓存配置
-        if (redisProperties.getTimeToLive() != null) {
-            config = config.entryTtl(redisProperties.getTimeToLive());
-        }
-        // 设置缓存前缀
-        if (redisProperties.getKeyPrefix() != null) {
-            config = config.prefixCacheNameWith(redisProperties.getKeyPrefix());
-        }
-        // 设置缓存空值
-        if (!redisProperties.isCacheNullValues()) {
-            config = config.disableCachingNullValues();
-        }
-        // 设置使用前缀
-        if (!redisProperties.isUseKeyPrefix()) {
-            config = config.disableKeyPrefix();
-        }
-        return config;
-    }
-
-    /**
-     * 自定义缓存管理器构建器
-     *
-     * @param config          缓存配置
-     * @param redisProperties redis配置
-     * @return 自定义缓存管理器构建器
-     */
-    @Bean
-    public RedisCacheManagerBuilderCustomizer redisCacheManagerBuilderCustomizer(RedisCacheConfiguration config, RedisProperties redisProperties) {
-        return builder -> builder.withInitialCacheConfigurations(redisProperties.getCache().stream().collect(
-                Collectors.toMap(RedisProperties.Cache::getCacheName, cache -> config.entryTtl(cache.getTimeToLive()))));
+    @Override
+    public CacheResolver cacheResolver() {
+        return defaultCacheResolver;
     }
 
 }
