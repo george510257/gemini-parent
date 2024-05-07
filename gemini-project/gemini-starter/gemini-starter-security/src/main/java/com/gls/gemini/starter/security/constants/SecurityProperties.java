@@ -11,15 +11,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".security.ignore")
-public class SecurityIgnoreProperties extends BaseProperties {
+@ConfigurationProperties(prefix = CommonConstants.BASE_PROPERTIES_PREFIX + ".security")
+public class SecurityProperties extends BaseProperties {
     /**
-     * 忽略的 URL (静态资源，不通过过滤器链)
+     * 忽略的 URL 地址
      */
     private String[] ignoreUrls = new String[]{};
 
     /**
-     * 忽略的 URL (非静态资源，通过过滤器链)
+     * csrf 是否启用
      */
-    private String[] ignorePatterns = new String[]{};
+    private boolean csrfEnabled = true;
 }
