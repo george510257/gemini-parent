@@ -40,9 +40,7 @@ public class MybatisConfig {
     @Bean
     @ConditionalOnBean(TypeHandler.class)
     public SqlSessionFactoryBeanCustomizer sqlSessionFactoryBeanCustomizer(List<TypeHandler<?>> typeHandlers) {
-        return (sqlSessionFactoryBean) -> {
-            sqlSessionFactoryBean.setTypeHandlers(typeHandlers.toArray(new TypeHandler<?>[0]));
-        };
+        return sqlSessionFactoryBean -> sqlSessionFactoryBean.setTypeHandlers(typeHandlers.toArray(new TypeHandler<?>[0]));
     }
 
     /**
