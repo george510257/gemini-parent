@@ -38,7 +38,7 @@ public class DefaultRedisCacheManagerBuilderCustomizer implements RedisCacheMana
             builder.withCacheConfiguration(cache.getCacheName(), config.entryTtl(cache.getTimeToLive()));
         }
         // 从注解中读取缓存配置
-        for (Map.Entry<String, Duration> entry : cacheExpireAnnotationProcessor.getCacheExpireMap().entrySet()) {
+        for (Map.Entry<String, Duration> entry : cacheExpireAnnotationProcessor.getCacheExpires().entrySet()) {
             String cacheName = entry.getKey();
             Duration duration = entry.getValue();
             builder.withCacheConfiguration(cacheName, config.entryTtl(duration));
