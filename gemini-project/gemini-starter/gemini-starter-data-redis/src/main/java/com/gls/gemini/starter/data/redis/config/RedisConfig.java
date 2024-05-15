@@ -12,12 +12,14 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 /**
  * Redis 配置类
  */
 
 @Configuration
+@EnableRedisHttpSession(redisNamespace = "gemini:session")
 public class RedisConfig {
 
     /**
@@ -26,7 +28,7 @@ public class RedisConfig {
      * @param jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder 实例
      * @return json序列化器
      */
-    @Bean
+    @Bean("springSessionDefaultRedisSerializer")
     public Jackson2JsonRedisSerializer<Object> jsonRedisSerializer(Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder) {
         ObjectMapper objectMapper = jackson2ObjectMapperBuilder.build();
         // 设置可见度
