@@ -13,7 +13,10 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Map类型处理器
@@ -22,7 +25,7 @@ import java.util.Map;
  * @param <V> value
  */
 @Component
-@MappedTypes(Map.class)
+@MappedTypes({Map.class, LinkedHashMap.class, HashMap.class, TreeMap.class})
 @MappedJdbcTypes(JdbcType.VARCHAR)
 public class MapTypeHandler<K, V> extends BaseTypeHandler<Map<K, V>> {
     /**

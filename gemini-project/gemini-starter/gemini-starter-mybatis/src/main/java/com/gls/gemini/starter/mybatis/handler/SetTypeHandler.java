@@ -11,7 +11,10 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -20,7 +23,7 @@ import java.util.stream.Collectors;
  * @param <V> value
  */
 @Component
-@MappedTypes(Set.class)
+@MappedTypes({Set.class, LinkedHashSet.class, HashSet.class, TreeSet.class})
 @MappedJdbcTypes(JdbcType.VARCHAR)
 public class SetTypeHandler<V> extends BaseTypeHandler<Set<V>> {
     /**

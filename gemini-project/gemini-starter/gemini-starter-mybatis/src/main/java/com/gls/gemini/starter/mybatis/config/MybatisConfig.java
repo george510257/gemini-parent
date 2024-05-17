@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * Mybatis配置
  */
 @Configuration
+@EnableTransactionManagement
 public class MybatisConfig {
     /**
      * 分页插件
@@ -25,7 +27,6 @@ public class MybatisConfig {
      * @return 分页插件
      */
     @Bean
-    @ConditionalOnBean(InnerInterceptor.class)
     public MybatisPlusInterceptor mybatisPlusInterceptor(List<InnerInterceptor> innerInterceptors) {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         innerInterceptors.forEach(interceptor::addInnerInterceptor);

@@ -59,6 +59,24 @@ public class Jackson2Util {
     }
 
     /**
+     * 查找 JsonNode 中的字段值
+     *
+     * @param jsonNode  JsonNode
+     * @param fieldName 字段名
+     * @param valueType 字段值类型
+     * @param mapper    ObjectMapper
+     * @param <T>       字段值类型
+     * @return 字段值
+     */
+    public <T> T findValue(JsonNode jsonNode, String fieldName, Class<T> valueType, ObjectMapper mapper) {
+        if (jsonNode == null) {
+            return null;
+        }
+        JsonNode value = jsonNode.findValue(fieldName);
+        return (value != null && value.isContainerNode()) ? mapper.convertValue(value, valueType) : null;
+    }
+
+    /**
      * 查找 JsonNode 中的对象节点
      *
      * @param jsonNode  JsonNode
@@ -72,4 +90,5 @@ public class Jackson2Util {
         JsonNode value = jsonNode.findValue(fieldName);
         return (value != null && value.isObject()) ? value : null;
     }
+
 }
