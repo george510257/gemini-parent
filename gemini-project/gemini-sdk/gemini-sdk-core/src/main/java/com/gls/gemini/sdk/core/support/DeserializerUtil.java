@@ -4,11 +4,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gls.gemini.sdk.core.vo.BaseVo;
 import com.gls.gemini.starter.json.util.Jackson2Util;
+import lombok.experimental.UtilityClass;
 
 import java.util.Date;
 
+@UtilityClass
 public class DeserializerUtil {
-    public static void setDomain(BaseVo baseVo, JsonNode node, ObjectMapper mapper) {
+
+    public <T extends BaseVo> void setDomain(T t, JsonNode node, ObjectMapper mapper) {
         // 主键
         Long id = Jackson2Util.findValue(node, "id", Long.class, mapper);
         // 租户ID
@@ -29,15 +32,15 @@ public class DeserializerUtil {
         String updateUserName = Jackson2Util.findStringValue(node, "updateUserName");
         // 修改时间
         Date updateTime = Jackson2Util.findValue(node, "updateTime", Date.class, mapper);
-        baseVo.setId(id);
-        baseVo.setTenantId(tenantId);
-        baseVo.setVersion(version);
-        baseVo.setDeleted(deleted);
-        baseVo.setCreateUserId(createUserId);
-        baseVo.setCreateUserName(createUserName);
-        baseVo.setCreateTime(createTime);
-        baseVo.setUpdateUserId(updateUserId);
-        baseVo.setUpdateUserName(updateUserName);
-        baseVo.setUpdateTime(updateTime);
+        t.setId(id);
+        t.setTenantId(tenantId);
+        t.setVersion(version);
+        t.setDeleted(deleted);
+        t.setCreateUserId(createUserId);
+        t.setCreateUserName(createUserName);
+        t.setCreateTime(createTime);
+        t.setUpdateUserId(updateUserId);
+        t.setUpdateUserName(updateUserName);
+        t.setUpdateTime(updateTime);
     }
 }
