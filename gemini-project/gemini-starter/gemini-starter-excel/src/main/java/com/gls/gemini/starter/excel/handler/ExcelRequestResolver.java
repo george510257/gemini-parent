@@ -33,6 +33,9 @@ import java.util.List;
 @Component
 @ConditionalOnBean(RequestMappingHandlerAdapter.class)
 public class ExcelRequestResolver implements HandlerMethodArgumentResolver {
+    /**
+     * 请求映射处理适配器
+     */
     @Resource
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
 
@@ -59,6 +62,16 @@ public class ExcelRequestResolver implements HandlerMethodArgumentResolver {
         return parameter.hasParameterAnnotation(ExcelRequest.class);
     }
 
+    /**
+     * 解析参数
+     *
+     * @param parameter     方法参数
+     * @param mavContainer  模型视图容器
+     * @param webRequest    web请求
+     * @param binderFactory 绑定工厂
+     * @return 解析结果
+     * @throws Exception 异常
+     */
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         // 获取参数类型

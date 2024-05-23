@@ -19,33 +19,70 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 默认List读取监听器
+ *
+ * @param <T> 读取对象
+ */
 @Slf4j
 public class DefaultListReadListener<T> implements ListReadListener<T> {
-
+    /**
+     * 对象列表
+     */
     private final List<T> list = new ArrayList<>();
+    /**
+     * 错误信息
+     */
     private final List<ExcelError> errors = new ArrayList<>();
+    /**
+     * 头信息
+     */
     private final Map<Integer, String> headMap = new HashMap<>();
-    private Long line = 0L;
 
+    /**
+     * 解析异常
+     *
+     * @param exception 异常
+     * @param context   上下文
+     * @throws Exception 异常
+     */
     @Override
     public void onException(Exception exception, AnalysisContext context) throws Exception {
         log.error("解析异常", exception);
     }
 
+    /**
+     * 解析头数据
+     *
+     * @param head    头数据
+     * @param context 上下文
+     */
     @Override
     public void invokeHead(Map<Integer, ReadCellData<?>> head, AnalysisContext context) {
         headMap.putAll(ConverterUtils.convertToStringMap(head, context));
         log.info("解析到一条头数据: {}", headMap);
     }
 
+    /**
+     * 解析额外数据
+     *
+     * @param extra   额外数据
+     * @param context 上下文
+     */
     @Override
     public void extra(CellExtra extra, AnalysisContext context) {
         log.info("解析到一条额外数据: {}", extra);
     }
 
+    /**
+     * 解析数据
+     *
+     * @param data    数据
+     * @param context 上下文
+     */
     @Override
     public void invoke(T data, AnalysisContext context) {
-        line++;
+        Integer line = context.readRowHolder().getRowIndex();
         Map<Integer, Cell> cellMap = context.readRowHolder().getCellMap();
         log.info("解析第{}行数据: {}", line, JSONUtil.toJsonStr(cellMap));
         Field[] fields = data.getClass().getDeclaredFields();
@@ -91,6 +128,12 @@ public class DefaultListReadListener<T> implements ListReadListener<T> {
         list.add(data);
     }
 
+    /**
+     * 获取值
+     *
+     * @param cell 单元格
+     * @return 值
+     */
     private Object getValue(Cell cell) {
         if (cell instanceof ReadCellData<?> readCellData) {
             return switch (readCellData.getType()) {
@@ -103,16 +146,31 @@ public class DefaultListReadListener<T> implements ListReadListener<T> {
         return null;
     }
 
+    /**
+     * 解析完成
+     *
+     * @param context 上下文
+     */
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
         log.info("解析完成");
     }
 
+    /**
+     * 获取对象列表
+     *
+     * @return 对象列表
+     */
     @Override
     public List<T> getList() {
         return list;
     }
 
+    /**
+     * 获取错误信息
+     *
+     * @return 错误信息
+     */
     @Override
     public List<ExcelError> getErrors() {
         return errors;

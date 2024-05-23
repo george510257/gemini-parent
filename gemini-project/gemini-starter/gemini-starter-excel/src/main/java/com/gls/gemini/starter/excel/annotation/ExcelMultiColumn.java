@@ -12,14 +12,14 @@ public @interface ExcelMultiColumn {
     /**
      * 开始列
      *
-     * @return
+     * @return 开始列
      */
     int start() default 0;
 
     /**
      * 结束列
      *
-     * @return
+     * @return 结束列
      */
     int end() default Integer.MAX_VALUE;
 }

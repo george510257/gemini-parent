@@ -33,18 +33,32 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Excel响应处理器
+ */
 @Slf4j
 @Component
 @ConditionalOnBean(RequestMappingHandlerAdapter.class)
 public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
+    /**
+     * Excel配置
+     */
     @Resource
     private ExcelProperties excelProperties;
-
+    /**
+     * 请求映射处理适配器
+     */
     @Resource
     private RequestMappingHandlerAdapter requestMappingHandlerAdapter;
+    /**
+     * 转换器列表
+     */
     @Resource
     private List<Converter<?>> converters;
 
+    /**
+     * 初始化
+     */
     @PostConstruct
     public void init() {
         // 添加自定义的Excel返回值处理器
@@ -57,11 +71,26 @@ public class ExcelResponseHandler implements HandlerMethodReturnValueHandler {
         requestMappingHandlerAdapter.setReturnValueHandlers(newReturnValueHandlers);
     }
 
+    /**
+     * 是否支持返回值类型
+     *
+     * @param returnType 返回值类型
+     * @return 是否支持
+     */
     @Override
     public boolean supportsReturnType(MethodParameter returnType) {
         return returnType.hasMethodAnnotation(ExcelResponse.class);
     }
 
+    /**
+     * 处理返回值
+     *
+     * @param returnValue  返回值
+     * @param returnType   返回值类型
+     * @param mavContainer 模型视图容器
+     * @param webRequest   web请求
+     * @throws Exception 异常
+     */
     @Override
     public void handleReturnValue(Object returnValue, MethodParameter returnType, ModelAndViewContainer mavContainer, NativeWebRequest webRequest) throws Exception {
         // 设置请求已处理

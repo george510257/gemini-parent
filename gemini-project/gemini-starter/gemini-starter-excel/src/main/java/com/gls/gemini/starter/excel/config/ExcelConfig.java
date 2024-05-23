@@ -4,6 +4,9 @@ import com.alibaba.excel.converters.longconverter.LongStringConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Excel配置类
+ */
 @Configuration
 public class ExcelConfig {
 

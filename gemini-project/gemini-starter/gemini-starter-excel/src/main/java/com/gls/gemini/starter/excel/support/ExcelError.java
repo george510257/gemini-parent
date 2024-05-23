@@ -13,12 +13,10 @@ import java.util.List;
 @Data
 @Builder
 public class ExcelError implements Serializable {
-
     /**
      * 行号
      */
-    private Long line;
-
+    private Integer line;
     /**
      * 错误信息
      */
