@@ -87,8 +87,8 @@ public class DefaultListReadListener<T> implements ListReadListener<T> {
         log.info("解析第{}行数据: {}", line, JSONUtil.toJsonStr(cellMap));
         Field[] fields = data.getClass().getDeclaredFields();
         for (Field field : fields) {
-            // 获取有ExcelLine注解的字段 并且类型为Long 设置行号
-            if (field.isAnnotationPresent(ExcelLine.class) && field.getType().isAssignableFrom(Long.class)) {
+            // 获取有ExcelLine注解的字段 并且类型为Integer 设置行号
+            if (field.isAnnotationPresent(ExcelLine.class) && field.getType().isAssignableFrom(Integer.class)) {
                 try {
                     field.setAccessible(true);
                     field.set(data, line);
@@ -96,6 +96,7 @@ public class DefaultListReadListener<T> implements ListReadListener<T> {
                     log.error("设置行号失败", e);
                 }
             }
+            // 获取有ExcelMultiColumn注解的字段 并且类型为Map 设置多列
             if (field.isAnnotationPresent(ExcelMultiColumn.class) && field.getType().isAssignableFrom(Map.class)) {
                 Map<String, Object> map = new HashMap<>();
                 ExcelMultiColumn excelMultiColumn = field.getAnnotation(ExcelMultiColumn.class);

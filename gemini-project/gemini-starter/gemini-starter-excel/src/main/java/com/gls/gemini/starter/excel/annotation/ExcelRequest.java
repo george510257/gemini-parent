@@ -33,7 +33,7 @@ public @interface ExcelRequest {
      *
      * @return 默认跳过
      */
-    boolean ignoreEmptyRow() default false;
+    boolean ignoreEmptyRow() default true;
 
     /**
      * 读取的监听器类
