@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.gls.gemini</groupId>
@@ -19,33 +19,37 @@
         <module>gemini-project</module>
     </modules>
     <properties>
-        <java.version>21</java.version>
-        <spring-boot.version>3.2.2</spring-boot.version>
         <revision>0.0.1-SNAPSHOT</revision>
-        <hilla.version>2.5.5</hilla.version>
-        <sentry.version>7.3.0</sentry.version>
-        <solace-spring-cloud.version>3.1.0</solace-spring-cloud.version>
-        <spring-boot-admin.version>3.2.1</spring-boot-admin.version>
-        <spring-cloud-azure.version>5.8.0</spring-cloud-azure.version>
-        <spring-cloud-gcp.version>5.0.1</spring-cloud-gcp.version>
-        <spring-cloud-services.version>4.1.0</spring-cloud-services.version>
-        <spring-cloud.version>2023.0.0</spring-cloud.version>
-        <spring-modulith.version>1.1.2</spring-modulith.version>
-        <spring-shell.version>3.2.0</spring-shell.version>
-        <timefold-solver.version>1.6.0</timefold-solver.version>
-        <vaadin.version>24.3.3</vaadin.version>
 
-        <spring-cloud-alibaba.version>2023.0.0.0-RC1</spring-cloud-alibaba.version>
-        <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
-        <swagger-api.version>2.2.20</swagger-api.version>
-        <redisson.version>3.26.0</redisson.version>
+        <java.version>21</java.version>
+        <hilla.version>2.5.5</hilla.version>
+        <netflix-dgs.version>8.7.1</netflix-dgs.version>
+        <sentry.version>7.3.0</sentry.version>
+        <solace-spring-cloud.version>4.0.0</solace-spring-cloud.version>
+        <spring-ai.version>1.0.0-M1</spring-ai.version>
+        <spring-boot-admin.version>3.2.3</spring-boot-admin.version>
+        <spring-cloud-azure.version>5.12.0</spring-cloud-azure.version>
+        <spring-cloud-gcp.version>5.4.1</spring-cloud-gcp.version>
+        <spring-cloud-services.version>4.1.0</spring-cloud-services.version>
+        <spring-cloud.version>2023.0.2</spring-cloud.version>
+        <spring-modulith.version>1.1.5</spring-modulith.version>
+        <spring-shell.version>3.2.5</spring-shell.version>
+        <timefold-solver.version>1.10.0</timefold-solver.version>
+        <vaadin.version>24.3.12</vaadin.version>
+
+        <spring-boot.version>3.2.6</spring-boot.version>
+        <optaplanner.version>9.44.0.Final</optaplanner.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
+        <springdoc-openapi.version>2.5.0</springdoc-openapi.version>
+        <swagger-api.version>2.2.21</swagger-api.version>
+        <redisson.version>3.31.0</redisson.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <hutool.version>5.8.25</hutool.version>
+        <hutool.version>5.8.28</hutool.version>
         <dynamic-datasource.version>4.3.0</dynamic-datasource.version>
-        <mybatis-plus.version>3.5.5</mybatis-plus.version>
-        <xxl-job.version>2.4.0</xxl-job.version>
+        <mybatis-plus.version>3.5.6</mybatis-plus.version>
+        <xxl-job.version>2.4.1</xxl-job.version>
         <aliyun-sdk-oss.version>3.17.4</aliyun-sdk-oss.version>
-        <easyexcel.version>3.3.3</easyexcel.version>
+        <easyexcel.version>3.3.4</easyexcel.version>
 
         <flatten-maven-plugin.version>1.5.0</flatten-maven-plugin.version>
     </properties>
@@ -73,9 +77,9 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>ai.timefold.solver</groupId>
-                <artifactId>timefold-solver-bom</artifactId>
-                <version>${timefold-solver.version}</version>
+                <groupId>com.google.cloud</groupId>
+                <artifactId>spring-cloud-gcp-dependencies</artifactId>
+                <version>${spring-cloud-gcp.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -87,30 +91,9 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>io.sentry</groupId>
-                <artifactId>sentry-bom</artifactId>
-                <version>${sentry.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.cloud</groupId>
-                <artifactId>spring-cloud-gcp-dependencies</artifactId>
-                <version>${spring-cloud-gcp.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.shell</groupId>
-                <artifactId>spring-shell-dependencies</artifactId>
-                <version>${spring-shell.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.pivotal.spring.cloud</groupId>
-                <artifactId>spring-cloud-services-dependencies</artifactId>
-                <version>${spring-cloud-services.version}</version>
+                <groupId>dev.hilla</groupId>
+                <artifactId>hilla-bom</artifactId>
+                <version>${hilla.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -122,9 +105,44 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>dev.hilla</groupId>
-                <artifactId>hilla-bom</artifactId>
-                <version>${hilla.version}</version>
+                <groupId>com.netflix.graphql.dgs</groupId>
+                <artifactId>graphql-dgs-platform-dependencies</artifactId>
+                <version>${netflix-dgs.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.pivotal.spring.cloud</groupId>
+                <artifactId>spring-cloud-services-dependencies</artifactId>
+                <version>${spring-cloud-services.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.sentry</groupId>
+                <artifactId>sentry-bom</artifactId>
+                <version>${sentry.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>${spring-ai.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.shell</groupId>
+                <artifactId>spring-shell-dependencies</artifactId>
+                <version>${spring-shell.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>ai.timefold.solver</groupId>
+                <artifactId>timefold-solver-bom</artifactId>
+                <version>${timefold-solver.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -132,6 +150,14 @@
                 <groupId>com.vaadin</groupId>
                 <artifactId>vaadin-bom</artifactId>
                 <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.optaplanner</groupId>
+                <artifactId>optaplanner-bom</artifactId>
+                <version>${optaplanner.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -146,13 +172,6 @@
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi</artifactId>
                 <version>${springdoc-openapi.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.ai</groupId>
-                <artifactId>spring-ai-bom</artifactId>
-                <version>0.8.1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
