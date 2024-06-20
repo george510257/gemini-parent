@@ -1,6 +1,6 @@
 package com.gls.gemini.starter.openapi;
 
-import com.gls.gemini.starter.openapi.constants.OpenApiProperties;
+import com.gls.gemini.starter.openapi.properties.OpenApiProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
 package com.gls.gemini.starter.openapi.config;
 
-import com.gls.gemini.starter.openapi.constants.OpenApiProperties;
-import com.gls.gemini.starter.openapi.support.OpenApiConverter;
+import com.gls.gemini.starter.openapi.converter.OpenApiConverter;
+import com.gls.gemini.starter.openapi.properties.OpenApiProperties;
 import io.swagger.v3.oas.models.OpenAPI;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
