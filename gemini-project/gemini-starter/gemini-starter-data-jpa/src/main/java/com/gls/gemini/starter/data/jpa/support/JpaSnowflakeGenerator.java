@@ -1,7 +1,6 @@
 package com.gls.gemini.starter.data.jpa.support;
 
-import cn.hutool.core.lang.Snowflake;
-import cn.hutool.extra.spring.SpringUtil;
+import cn.hutool.core.util.IdUtil;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
@@ -19,6 +18,6 @@ public class JpaSnowflakeGenerator implements IdentifierGenerator {
      */
     @Override
     public Object generate(SharedSessionContractImplementor session, Object object) {
-        return SpringUtil.getBean(Snowflake.class).nextId();
+        return IdUtil.getSnowflakeNextId();
     }
 }
