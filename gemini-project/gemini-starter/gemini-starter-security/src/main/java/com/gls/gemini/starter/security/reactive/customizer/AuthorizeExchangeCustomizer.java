@@ -20,7 +20,9 @@ public class AuthorizeExchangeCustomizer implements Customizer<ServerHttpSecurit
     @Override
     public void customize(ServerHttpSecurity.AuthorizeExchangeSpec spec) {
         // 忽略配置的url
-        spec.pathMatchers(securityProperties.getIgnoreUrls()).permitAll();
+        if (securityProperties.getIgnoreUrls() != null) {
+            spec.pathMatchers(securityProperties.getIgnoreUrls()).permitAll();
+        }
         // 其他请求需要认证
         spec.anyExchange().authenticated();
     }

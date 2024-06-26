@@ -17,7 +17,9 @@ public class AuthorizeHttpRequestsCustomizer implements Customizer<AuthorizeHttp
     @Override
     public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
         // 配置请求授权 - 忽略请求
-        registry.requestMatchers(securityProperties.getIgnoreUrls()).permitAll();
+        if (securityProperties.getIgnoreUrls() != null) {
+            registry.requestMatchers(securityProperties.getIgnoreUrls()).permitAll();
+        }
         // 配置请求授权 - 其他请求
         registry.anyRequest().permitAll();
     }

@@ -16,7 +16,7 @@ public class SecurityProperties extends BaseProperties {
     /**
      * 忽略的 URL 地址
      */
-    private String[] ignoreUrls = new String[]{};
+    private String[] ignoreUrls;
 
     /**
      * csrf 是否启用
