@@ -15,6 +15,8 @@ public class DefaultWebSecurityCustomizer implements WebSecurityCustomizer {
 
     @Override
     public void customize(WebSecurity web) {
-        web.ignoring().requestMatchers(securityProperties.getIgnoreUrls());
+        if (securityProperties.getIgnoreUrls() != null) {
+            web.ignoring().requestMatchers(securityProperties.getIgnoreUrls());
+        }
     }
 }
