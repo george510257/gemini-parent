@@ -22,4 +22,8 @@ public class SecurityProperties extends BaseProperties {
      * csrf 是否启用
      */
     private boolean csrfEnabled = true;
+    /**
+     * jwkSetUri
+     */
+    private String jwkSetUri;
 }

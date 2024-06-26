@@ -2,10 +2,12 @@ package com.gls.gemini.starter.security.reactive;
 
 import com.gls.gemini.common.core.constant.CommonConstants;
 import com.gls.gemini.starter.security.constants.SecurityConstants;
+import com.gls.gemini.starter.security.constants.SecurityProperties;
 import com.gls.gemini.starter.security.reactive.customizer.AuthorizeExchangeCustomizer;
 import com.gls.gemini.starter.security.reactive.customizer.CsrfCustomizer;
 import com.gls.gemini.starter.security.reactive.customizer.ExceptionHandlingCustomizer;
 import com.gls.gemini.starter.security.reactive.customizer.OAuth2ResourceServerCustomizer;
+import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -22,35 +24,44 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @EnableWebFluxSecurity
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 public class ResourceServerConfig {
+    @Resource
+    private ServerHttpSecurity serverHttpSecurity;
+    @Resource
+    private DiscoveryClient discoveryClient;
+    @Resource
+    private AuthorizeExchangeCustomizer authorizeExchangeCustomizer;
+    @Resource
+    private CsrfCustomizer csrfCustomizer;
+    @Resource
+    private OAuth2ResourceServerCustomizer oauth2ResourceServerCustomizer;
+    @Resource
+    private ExceptionHandlingCustomizer exceptionHandlingCustomizer;
+    @Resource
+    private SecurityProperties securityProperties;
 
     @Bean
     @Order
-    public SecurityWebFilterChain defaultSecurityFilterChain(ServerHttpSecurity http,
-                                                             AuthorizeExchangeCustomizer authorizeExchangeCustomizer,
-                                                             CsrfCustomizer csrfCustomizer,
-                                                             OAuth2ResourceServerCustomizer oauth2ResourceServerCustomizer,
-                                                             ExceptionHandlingCustomizer exceptionHandlingCustomizer) {
+    public SecurityWebFilterChain defaultSecurityFilterChain() {
         // 配置请求授权
-        http.authorizeExchange(authorizeExchangeCustomizer);
+        serverHttpSecurity.authorizeExchange(authorizeExchangeCustomizer);
         // 关闭csrf
-        http.csrf(csrfCustomizer);
+        serverHttpSecurity.csrf(csrfCustomizer);
         // 配置资源服务器
-        http.oauth2ResourceServer(oauth2ResourceServerCustomizer);
+        serverHttpSecurity.oauth2ResourceServer(oauth2ResourceServerCustomizer);
         // 配置异常处理
-        http.exceptionHandling(exceptionHandlingCustomizer);
+        serverHttpSecurity.exceptionHandling(exceptionHandlingCustomizer);
         // 返回http安全
-        return http.build();
+        return serverHttpSecurity.build();
     }
 
     /**
      * jwt解码器
      *
-     * @param discoveryClient 服务发现客户端
      * @return jwt解码器
      */
     @Bean
     @ConditionalOnMissingBean
-    public ReactiveJwtDecoder reactiveJwtDecoder(DiscoveryClient discoveryClient) {
+    public ReactiveJwtDecoder reactiveJwtDecoder() {
         String jwkSetUri = discoveryClient.getServices().stream()
                 // 获取uaa服务id
                 .filter(serviceId -> serviceId.contains(CommonConstants.UAA_SERVICE_ID))
@@ -61,7 +72,7 @@ public class ResourceServerConfig {
                 // 获取任意一个
                 .findAny()
                 // 获取不到则返回空字符串
-                .orElse("");
+                .orElse(securityProperties.getJwkSetUri());
         return new NimbusReactiveJwtDecoder(jwkSetUri);
     }
 

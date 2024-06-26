@@ -2,7 +2,9 @@ package com.gls.gemini.starter.security.servlet;
 
 import com.gls.gemini.common.core.constant.CommonConstants;
 import com.gls.gemini.starter.security.constants.SecurityConstants;
+import com.gls.gemini.starter.security.constants.SecurityProperties;
 import com.gls.gemini.starter.security.servlet.customizer.*;
+import jakarta.annotation.Resource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -22,45 +24,54 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class ResourceServerConfig {
+    @Resource
+    private HttpSecurity httpSecurity;
+    @Resource
+    private DiscoveryClient discoveryClient;
+    @Resource
+    private AuthorizeHttpRequestsCustomizer authorizeHttpRequestsCustomizer;
+    @Resource
+    private CsrfCustomizer csrfCustomizer;
+    @Resource
+    private OAuth2ResourceServerCustomizer oauth2ResourceServerCustomizer;
+    @Resource
+    private SessionManagementCustomizer sessionManagementCustomizer;
+    @Resource
+    private ExceptionHandlingCustomizer exceptionHandlingCustomizer;
+    @Resource
+    private SecurityProperties securityProperties;
 
     /**
      * 默认安全过滤链
      *
-     * @param http HTTP安全
      * @return 安全过滤链
      * @throws Exception 异常
      */
     @Bean
     @Order
-    public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http,
-                                                      AuthorizeHttpRequestsCustomizer authorizeHttpRequestsCustomizer,
-                                                      CsrfCustomizer csrfCustomizer,
-                                                      OAuth2ResourceServerCustomizer oauth2ResourceServerCustomizer,
-                                                      SessionManagementCustomizer sessionManagementCustomizer,
-                                                      ExceptionHandlingCustomizer exceptionHandlingCustomizer) throws Exception {
+    public SecurityFilterChain apiSecurityFilterChain() throws Exception {
         // 配置请求授权
-        http.authorizeHttpRequests(authorizeHttpRequestsCustomizer);
+        httpSecurity.authorizeHttpRequests(authorizeHttpRequestsCustomizer);
         // 关闭csrf
-        http.csrf(csrfCustomizer);
+        httpSecurity.csrf(csrfCustomizer);
         // 配置资源服务器
-        http.oauth2ResourceServer(oauth2ResourceServerCustomizer);
+        httpSecurity.oauth2ResourceServer(oauth2ResourceServerCustomizer);
         // 配置session管理
-        http.sessionManagement(sessionManagementCustomizer);
+        httpSecurity.sessionManagement(sessionManagementCustomizer);
         // 配置异常处理
-        http.exceptionHandling(exceptionHandlingCustomizer);
+        httpSecurity.exceptionHandling(exceptionHandlingCustomizer);
         // 返回http安全
-        return http.build();
+        return httpSecurity.build();
     }
 
     /**
      * jwt 解码器
      *
-     * @param discoveryClient 服务发现客户端
      * @return jwt 解码器
      */
     @Bean
     @ConditionalOnMissingBean
-    public JwtDecoder jwtDecoder(DiscoveryClient discoveryClient) {
+    public JwtDecoder jwtDecoder() {
         String jwkSetUri = discoveryClient.getServices().stream()
                 // 过滤服务ID
                 .filter(serviceId -> serviceId.contains(CommonConstants.UAA_SERVICE_ID))
@@ -71,7 +82,7 @@ public class ResourceServerConfig {
                 // 获取任意一个
                 .findAny()
                 // 获取不到则返回空字符串
-                .orElse("");
+                .orElse(securityProperties.getJwkSetUri());
         return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
     }
 
