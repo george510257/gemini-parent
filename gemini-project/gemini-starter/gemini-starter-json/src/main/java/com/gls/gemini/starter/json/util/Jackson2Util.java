@@ -55,7 +55,7 @@ public class Jackson2Util {
             return null;
         }
         JsonNode value = jsonNode.findValue(fieldName);
-        return (value != null && !value.isContainerNode()) ? mapper.convertValue(value, valueTypeReference) : null;
+        return (value != null) ? mapper.convertValue(value, valueTypeReference) : null;
     }
 
     /**
@@ -73,7 +73,7 @@ public class Jackson2Util {
             return null;
         }
         JsonNode value = jsonNode.findValue(fieldName);
-        return (value != null && !value.isContainerNode()) ? mapper.convertValue(value, valueType) : null;
+        return (value != null) ? mapper.convertValue(value, valueType) : null;
     }
 
     /**
