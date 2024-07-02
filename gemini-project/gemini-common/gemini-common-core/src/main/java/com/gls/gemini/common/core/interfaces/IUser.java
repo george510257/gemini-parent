@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.stream.Collectors;
 
 /**
  * 用户信息
@@ -103,7 +104,11 @@ public interface IUser<R extends IRole<P>, P extends IPermission, O extends IOrg
         if (CollUtil.isEmpty(this.getRoles())) {
             return null;
         }
-        return this.getRoles().stream().map(IRole::getPermissions).flatMap(Collection::stream).distinct().toList();
+        return this.getRoles().stream()
+                .map(IRole::getPermissions)
+                .flatMap(Collection::stream)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     /**
