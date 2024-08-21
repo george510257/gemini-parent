@@ -13,3 +13,11 @@ gemini-parent
 ├── gemini-sdk -- SDK基础模块
 ├── gemini-starter -- 启动器
 ```
+
+## 行为准则
+
+https://opensource.guide/starting-a-project/#establishing-a-code-of-conduct
+
+## 贡献指南
+
+https://opensource.guide/starting-a-project/#writing-your-contributing-guidelines
